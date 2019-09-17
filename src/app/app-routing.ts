@@ -6,7 +6,7 @@ import { VerticalLayoutComponent }   from './Layouts/VerticalLayout/VerticalLayo
 
 export const AppRoutes: Routes = [{
       path: '',
-      redirectTo: 'dashboard',
+      redirectTo: 'programs',
       pathMatch: 'full',
    },
    {
@@ -94,6 +94,10 @@ export const AppRoutes: Routes = [{
          {
             path: 'video-player',
             loadChildren: './VideoPlayer/VideoPlayer.module#VideoPlayerModule'
+         },
+         {
+            path: 'programs',
+            loadChildren: './Programs/Programs.module#ProgramsModule'
          }
       ]
    },
