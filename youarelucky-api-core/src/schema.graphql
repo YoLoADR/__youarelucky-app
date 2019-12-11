@@ -13,6 +13,34 @@ type Query {
     first: Int
     orderBy: UserOrderByInput
   ): Feed!
+
+  getProspects(
+    filter: String
+    skip: Int
+    first: Int
+    orderBy: UserOrderByInput
+  ): FeedProspect!
+
+  getApplicants(
+    filter: String
+    skip: Int
+    first: Int
+    orderBy: UserOrderByInput
+  ): FeedApplicant!
+
+  getPartners(
+    filter: String
+    skip: Int
+    first: Int
+    orderBy: UserOrderByInput
+  ): FeedPartner!
+
+  getCustomers(
+    filter: String
+    skip: Int
+    first: Int
+    orderBy: UserOrderByInput
+  ): FeedCustomer!
 }
 
 # post: Permet aux utilisateurs authentifiés de créer un nouveau lien
@@ -54,6 +82,162 @@ type Mutation {
 
   deleteUser(email: String!): User
 
+  postProspect(
+    name: String!
+    email: String!
+    lastName: String
+    firstName: String
+    createdAt: DateTime!
+    description: String
+    mobile: String
+    profile_image: String
+    lead_source: String
+    profession: String
+    refferalBonus: String
+    outcome: String
+    recording: Boolean
+    call_length: String
+    my_emotions: String
+    call_conclusion: String
+  ): Prospect
+
+  updateProspect(
+    name: String
+    email: String!
+    lastName: String
+    firstName: String
+    description: String
+    mobile: String
+    profile_image: String
+    lead_source: String
+    profession: String
+    refferalBonus: String
+    outcome: String
+    recording: Boolean
+    call_length: String
+    my_emotions: String
+    call_conclusion: String
+  ): Prospect
+
+  deleteProspect(email: String!): Prospect
+
+  postApplicant(
+    name: String!
+    email: String!
+    lastName: String
+    firstName: String
+    createdAt: DateTime!
+    description: String
+    mobile: String
+    profile_image: String
+    lead_source: String
+    profession: String
+    refferalBonus: String
+    outcome: String
+    recording: Boolean
+    call_length: String
+    my_emotions: String
+    call_conclusion: String
+  ): Applicant
+
+  updateApplicant(
+    name: String
+    email: String!
+    lastName: String
+    firstName: String
+    description: String
+    mobile: String
+    profile_image: String
+    lead_source: String
+    profession: String
+    refferalBonus: String
+    outcome: String
+    recording: Boolean
+    call_length: String
+    my_emotions: String
+    call_conclusion: String
+  ): Applicant
+
+  deleteApplicant(email: String!): Applicant
+
+  postPartner(
+    name: String!
+    email: String!
+    lastName: String
+    firstName: String
+    createdAt: DateTime!
+    description: String
+    mobile: String
+    profile_image: String
+    lead_source: String
+    profession: String
+    refferalBonus: String
+    outcome: String
+    recording: Boolean
+    call_length: String
+    my_emotions: String
+    call_conclusion: String
+  ): Partner
+
+  updatePartner(
+    name: String
+    email: String!
+    lastName: String
+    firstName: String
+    description: String
+    mobile: String
+    profile_image: String
+    lead_source: String
+    profession: String
+    refferalBonus: String
+    outcome: String
+    recording: Boolean
+    call_length: String
+    my_emotions: String
+    call_conclusion: String
+  ): Partner
+
+  deletePartner(email: String!): Partner
+
+  postCustomer(
+    name: String!
+    email: String!
+    lastName: String
+    firstName: String
+    createdAt: DateTime!
+    description: String
+    mobile: String
+    profile_image: String
+    lead_source: String
+    profession: String
+    refferalBonus: String
+    outcome: String
+    recording: Boolean
+    call_length: String
+    my_emotions: String
+    call_conclusion: String
+  ): Customer
+
+  updateCustomer(
+    name: String
+    email: String!
+    lastName: String
+    firstName: String
+    description: String
+    mobile: String
+    profile_image: String
+    lead_source: String
+    profession: String
+    refferalBonus: String
+    outcome: String
+    recording: Boolean
+    call_length: String
+    my_emotions: String
+    call_conclusion: String
+  ): Customer
+
+  deleteCustomer(email: String!): Customer
+
   signup(email: String!, password: String!, name: String!): AuthPayload
   login(email: String!, password: String!): AuthPayload
 }
@@ -66,6 +250,26 @@ type AuthPayload {
 # Récupère tous les liens du backend, notez que cette requête autorise également les arguments de filtrage, de tri et de pagination
 type Feed {
   users: [User!]!
+  count: Int!
+}
+
+type FeedProspect {
+  prospects: [Prospect!]!
+  count: Int!
+}
+
+type FeedApplicant {
+  applicants: [Applicant!]!
+  count: Int!
+}
+
+type FeedPartner {
+  partners: [Partner!]!
+  count: Int!
+}
+
+type FeedCustomer {
+  customers: [Customer!]!
   count: Int!
 }
 
@@ -87,6 +291,89 @@ type User {
   profession: String
 }
 
+type Prospect {
+  id: ID!
+  name: String!
+  email: String!
+  lastName: String
+  firstName: String
+  createdAt: DateTime!
+  description: String
+  mobile: String
+  profile_image: String
+  lead_source: String
+  profession: String
+  refferalBonus: String
+  outcome: String
+  recording: Boolean
+  call_length: String
+  my_emotions: String
+  call_conclusion: String
+}
+
+type Applicant {
+  id: ID!
+  name: String!
+  email: String!
+  lastName: String
+  firstName: String
+  createdAt: DateTime!
+  description: String
+  mobile: String
+  profile_image: String
+  lead_source: String
+  refferalBonus: String
+  profession: String
+  refferalBonus: String
+  outcome: String
+  recording: Boolean
+  call_length: String
+  my_emotions: String
+  call_conclusion: String
+}
+
+type Partner {
+  id: ID!
+  name: String!
+  email: String!
+  lastName: String
+  firstName: String
+  createdAt: DateTime!
+  description: String
+  mobile: String
+  profile_image: String
+  lead_source: String
+  refferalBonus: String
+  profession: String
+  refferalBonus: String
+  outcome: String
+  recording: Boolean
+  call_length: String
+  my_emotions: String
+  call_conclusion: String
+}
+
+type Customer {
+  id: ID!
+  name: String!
+  email: String!
+  lastName: String
+  firstName: String
+  createdAt: DateTime!
+  description: String
+  mobile: String
+  profile_image: String
+  lead_source: String
+  refferalBonus: String
+  profession: String
+  refferalBonus: String
+  outcome: String
+  recording: Boolean
+  call_length: String
+  my_emotions: String
+  call_conclusion: String
+}
+
 type Reward {
   id: ID!
   amount: String
@@ -99,6 +386,26 @@ enum UserOrderByInput {
   description_DESC
   url_ASC
   url_DESC
+  createdAt_ASC
+  createdAt_DESC
+}
+
+enum ProspectOrderByInput {
+  createdAt_ASC
+  createdAt_DESC
+}
+
+enum ApplicantOrderByInput {
+  createdAt_ASC
+  createdAt_DESC
+}
+
+enum PartnerOrderByInput {
+  createdAt_ASC
+  createdAt_DESC
+}
+
+enum CustomerOrderByInput {
   createdAt_ASC
   createdAt_DESC
 }

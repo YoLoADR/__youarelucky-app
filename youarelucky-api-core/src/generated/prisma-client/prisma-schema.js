@@ -7,6 +7,10 @@ module.exports = {
   count: Int!
 }
 
+type AggregateCustomer {
+  count: Int!
+}
+
 type AggregatePartner {
   count: Int!
 }
@@ -427,6 +431,410 @@ type BatchPayload {
   count: Long!
 }
 
+type Customer {
+  id: ID!
+  name: String!
+  lastName: String
+  firstName: String
+  email: String!
+  createdAt: DateTime!
+  call_length: String
+  description: String
+  updatedAt: DateTime
+  mobile: String
+  profile_image: String
+  lead_source: String
+  refferalBonus: String
+  profession: String
+  outcome: String
+  recording: Boolean
+  my_emotions: String
+  call_conclusion: String
+}
+
+type CustomerConnection {
+  pageInfo: PageInfo!
+  edges: [CustomerEdge]!
+  aggregate: AggregateCustomer!
+}
+
+input CustomerCreateInput {
+  id: ID
+  name: String!
+  lastName: String
+  firstName: String
+  email: String!
+  call_length: String
+  description: String
+  mobile: String
+  profile_image: String
+  lead_source: String
+  refferalBonus: String
+  profession: String
+  outcome: String
+  recording: Boolean
+  my_emotions: String
+  call_conclusion: String
+}
+
+type CustomerEdge {
+  node: Customer!
+  cursor: String!
+}
+
+enum CustomerOrderByInput {
+  id_ASC
+  id_DESC
+  name_ASC
+  name_DESC
+  lastName_ASC
+  lastName_DESC
+  firstName_ASC
+  firstName_DESC
+  email_ASC
+  email_DESC
+  createdAt_ASC
+  createdAt_DESC
+  call_length_ASC
+  call_length_DESC
+  description_ASC
+  description_DESC
+  updatedAt_ASC
+  updatedAt_DESC
+  mobile_ASC
+  mobile_DESC
+  profile_image_ASC
+  profile_image_DESC
+  lead_source_ASC
+  lead_source_DESC
+  refferalBonus_ASC
+  refferalBonus_DESC
+  profession_ASC
+  profession_DESC
+  outcome_ASC
+  outcome_DESC
+  recording_ASC
+  recording_DESC
+  my_emotions_ASC
+  my_emotions_DESC
+  call_conclusion_ASC
+  call_conclusion_DESC
+}
+
+type CustomerPreviousValues {
+  id: ID!
+  name: String!
+  lastName: String
+  firstName: String
+  email: String!
+  createdAt: DateTime!
+  call_length: String
+  description: String
+  updatedAt: DateTime
+  mobile: String
+  profile_image: String
+  lead_source: String
+  refferalBonus: String
+  profession: String
+  outcome: String
+  recording: Boolean
+  my_emotions: String
+  call_conclusion: String
+}
+
+type CustomerSubscriptionPayload {
+  mutation: MutationType!
+  node: Customer
+  updatedFields: [String!]
+  previousValues: CustomerPreviousValues
+}
+
+input CustomerSubscriptionWhereInput {
+  mutation_in: [MutationType!]
+  updatedFields_contains: String
+  updatedFields_contains_every: [String!]
+  updatedFields_contains_some: [String!]
+  node: CustomerWhereInput
+  AND: [CustomerSubscriptionWhereInput!]
+  OR: [CustomerSubscriptionWhereInput!]
+  NOT: [CustomerSubscriptionWhereInput!]
+}
+
+input CustomerUpdateInput {
+  name: String
+  lastName: String
+  firstName: String
+  email: String
+  call_length: String
+  description: String
+  mobile: String
+  profile_image: String
+  lead_source: String
+  refferalBonus: String
+  profession: String
+  outcome: String
+  recording: Boolean
+  my_emotions: String
+  call_conclusion: String
+}
+
+input CustomerUpdateManyMutationInput {
+  name: String
+  lastName: String
+  firstName: String
+  email: String
+  call_length: String
+  description: String
+  mobile: String
+  profile_image: String
+  lead_source: String
+  refferalBonus: String
+  profession: String
+  outcome: String
+  recording: Boolean
+  my_emotions: String
+  call_conclusion: String
+}
+
+input CustomerWhereInput {
+  id: ID
+  id_not: ID
+  id_in: [ID!]
+  id_not_in: [ID!]
+  id_lt: ID
+  id_lte: ID
+  id_gt: ID
+  id_gte: ID
+  id_contains: ID
+  id_not_contains: ID
+  id_starts_with: ID
+  id_not_starts_with: ID
+  id_ends_with: ID
+  id_not_ends_with: ID
+  name: String
+  name_not: String
+  name_in: [String!]
+  name_not_in: [String!]
+  name_lt: String
+  name_lte: String
+  name_gt: String
+  name_gte: String
+  name_contains: String
+  name_not_contains: String
+  name_starts_with: String
+  name_not_starts_with: String
+  name_ends_with: String
+  name_not_ends_with: String
+  lastName: String
+  lastName_not: String
+  lastName_in: [String!]
+  lastName_not_in: [String!]
+  lastName_lt: String
+  lastName_lte: String
+  lastName_gt: String
+  lastName_gte: String
+  lastName_contains: String
+  lastName_not_contains: String
+  lastName_starts_with: String
+  lastName_not_starts_with: String
+  lastName_ends_with: String
+  lastName_not_ends_with: String
+  firstName: String
+  firstName_not: String
+  firstName_in: [String!]
+  firstName_not_in: [String!]
+  firstName_lt: String
+  firstName_lte: String
+  firstName_gt: String
+  firstName_gte: String
+  firstName_contains: String
+  firstName_not_contains: String
+  firstName_starts_with: String
+  firstName_not_starts_with: String
+  firstName_ends_with: String
+  firstName_not_ends_with: String
+  email: String
+  email_not: String
+  email_in: [String!]
+  email_not_in: [String!]
+  email_lt: String
+  email_lte: String
+  email_gt: String
+  email_gte: String
+  email_contains: String
+  email_not_contains: String
+  email_starts_with: String
+  email_not_starts_with: String
+  email_ends_with: String
+  email_not_ends_with: String
+  createdAt: DateTime
+  createdAt_not: DateTime
+  createdAt_in: [DateTime!]
+  createdAt_not_in: [DateTime!]
+  createdAt_lt: DateTime
+  createdAt_lte: DateTime
+  createdAt_gt: DateTime
+  createdAt_gte: DateTime
+  call_length: String
+  call_length_not: String
+  call_length_in: [String!]
+  call_length_not_in: [String!]
+  call_length_lt: String
+  call_length_lte: String
+  call_length_gt: String
+  call_length_gte: String
+  call_length_contains: String
+  call_length_not_contains: String
+  call_length_starts_with: String
+  call_length_not_starts_with: String
+  call_length_ends_with: String
+  call_length_not_ends_with: String
+  description: String
+  description_not: String
+  description_in: [String!]
+  description_not_in: [String!]
+  description_lt: String
+  description_lte: String
+  description_gt: String
+  description_gte: String
+  description_contains: String
+  description_not_contains: String
+  description_starts_with: String
+  description_not_starts_with: String
+  description_ends_with: String
+  description_not_ends_with: String
+  updatedAt: DateTime
+  updatedAt_not: DateTime
+  updatedAt_in: [DateTime!]
+  updatedAt_not_in: [DateTime!]
+  updatedAt_lt: DateTime
+  updatedAt_lte: DateTime
+  updatedAt_gt: DateTime
+  updatedAt_gte: DateTime
+  mobile: String
+  mobile_not: String
+  mobile_in: [String!]
+  mobile_not_in: [String!]
+  mobile_lt: String
+  mobile_lte: String
+  mobile_gt: String
+  mobile_gte: String
+  mobile_contains: String
+  mobile_not_contains: String
+  mobile_starts_with: String
+  mobile_not_starts_with: String
+  mobile_ends_with: String
+  mobile_not_ends_with: String
+  profile_image: String
+  profile_image_not: String
+  profile_image_in: [String!]
+  profile_image_not_in: [String!]
+  profile_image_lt: String
+  profile_image_lte: String
+  profile_image_gt: String
+  profile_image_gte: String
+  profile_image_contains: String
+  profile_image_not_contains: String
+  profile_image_starts_with: String
+  profile_image_not_starts_with: String
+  profile_image_ends_with: String
+  profile_image_not_ends_with: String
+  lead_source: String
+  lead_source_not: String
+  lead_source_in: [String!]
+  lead_source_not_in: [String!]
+  lead_source_lt: String
+  lead_source_lte: String
+  lead_source_gt: String
+  lead_source_gte: String
+  lead_source_contains: String
+  lead_source_not_contains: String
+  lead_source_starts_with: String
+  lead_source_not_starts_with: String
+  lead_source_ends_with: String
+  lead_source_not_ends_with: String
+  refferalBonus: String
+  refferalBonus_not: String
+  refferalBonus_in: [String!]
+  refferalBonus_not_in: [String!]
+  refferalBonus_lt: String
+  refferalBonus_lte: String
+  refferalBonus_gt: String
+  refferalBonus_gte: String
+  refferalBonus_contains: String
+  refferalBonus_not_contains: String
+  refferalBonus_starts_with: String
+  refferalBonus_not_starts_with: String
+  refferalBonus_ends_with: String
+  refferalBonus_not_ends_with: String
+  profession: String
+  profession_not: String
+  profession_in: [String!]
+  profession_not_in: [String!]
+  profession_lt: String
+  profession_lte: String
+  profession_gt: String
+  profession_gte: String
+  profession_contains: String
+  profession_not_contains: String
+  profession_starts_with: String
+  profession_not_starts_with: String
+  profession_ends_with: String
+  profession_not_ends_with: String
+  outcome: String
+  outcome_not: String
+  outcome_in: [String!]
+  outcome_not_in: [String!]
+  outcome_lt: String
+  outcome_lte: String
+  outcome_gt: String
+  outcome_gte: String
+  outcome_contains: String
+  outcome_not_contains: String
+  outcome_starts_with: String
+  outcome_not_starts_with: String
+  outcome_ends_with: String
+  outcome_not_ends_with: String
+  recording: Boolean
+  recording_not: Boolean
+  my_emotions: String
+  my_emotions_not: String
+  my_emotions_in: [String!]
+  my_emotions_not_in: [String!]
+  my_emotions_lt: String
+  my_emotions_lte: String
+  my_emotions_gt: String
+  my_emotions_gte: String
+  my_emotions_contains: String
+  my_emotions_not_contains: String
+  my_emotions_starts_with: String
+  my_emotions_not_starts_with: String
+  my_emotions_ends_with: String
+  my_emotions_not_ends_with: String
+  call_conclusion: String
+  call_conclusion_not: String
+  call_conclusion_in: [String!]
+  call_conclusion_not_in: [String!]
+  call_conclusion_lt: String
+  call_conclusion_lte: String
+  call_conclusion_gt: String
+  call_conclusion_gte: String
+  call_conclusion_contains: String
+  call_conclusion_not_contains: String
+  call_conclusion_starts_with: String
+  call_conclusion_not_starts_with: String
+  call_conclusion_ends_with: String
+  call_conclusion_not_ends_with: String
+  AND: [CustomerWhereInput!]
+  OR: [CustomerWhereInput!]
+  NOT: [CustomerWhereInput!]
+}
+
+input CustomerWhereUniqueInput {
+  id: ID
+  email: String
+}
+
 scalar DateTime
 
 scalar Long
@@ -438,6 +846,12 @@ type Mutation {
   upsertApplicant(where: ApplicantWhereUniqueInput!, create: ApplicantCreateInput!, update: ApplicantUpdateInput!): Applicant!
   deleteApplicant(where: ApplicantWhereUniqueInput!): Applicant
   deleteManyApplicants(where: ApplicantWhereInput): BatchPayload!
+  createCustomer(data: CustomerCreateInput!): Customer!
+  updateCustomer(data: CustomerUpdateInput!, where: CustomerWhereUniqueInput!): Customer
+  updateManyCustomers(data: CustomerUpdateManyMutationInput!, where: CustomerWhereInput): BatchPayload!
+  upsertCustomer(where: CustomerWhereUniqueInput!, create: CustomerCreateInput!, update: CustomerUpdateInput!): Customer!
+  deleteCustomer(where: CustomerWhereUniqueInput!): Customer
+  deleteManyCustomers(where: CustomerWhereInput): BatchPayload!
   createPartner(data: PartnerCreateInput!): Partner!
   updatePartner(data: PartnerUpdateInput!, where: PartnerWhereUniqueInput!): Partner
   updateManyPartners(data: PartnerUpdateManyMutationInput!, where: PartnerWhereInput): BatchPayload!
@@ -1287,6 +1701,9 @@ type Query {
   applicant(where: ApplicantWhereUniqueInput!): Applicant
   applicants(where: ApplicantWhereInput, orderBy: ApplicantOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Applicant]!
   applicantsConnection(where: ApplicantWhereInput, orderBy: ApplicantOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): ApplicantConnection!
+  customer(where: CustomerWhereUniqueInput!): Customer
+  customers(where: CustomerWhereInput, orderBy: CustomerOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Customer]!
+  customersConnection(where: CustomerWhereInput, orderBy: CustomerOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): CustomerConnection!
   partner(where: PartnerWhereUniqueInput!): Partner
   partners(where: PartnerWhereInput, orderBy: PartnerOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Partner]!
   partnersConnection(where: PartnerWhereInput, orderBy: PartnerOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): PartnerConnection!
@@ -1301,6 +1718,7 @@ type Query {
 
 type Subscription {
   applicant(where: ApplicantSubscriptionWhereInput): ApplicantSubscriptionPayload
+  customer(where: CustomerSubscriptionWhereInput): CustomerSubscriptionPayload
   partner(where: PartnerSubscriptionWhereInput): PartnerSubscriptionPayload
   prospect(where: ProspectSubscriptionWhereInput): ProspectSubscriptionPayload
   user(where: UserSubscriptionWhereInput): UserSubscriptionPayload

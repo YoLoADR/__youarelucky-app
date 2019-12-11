@@ -26,8 +26,124 @@ async function getUsers(parent, args, context, info) {
   };
 }
 
+async function getProspects(parent, args, context, info) {
+  // Si "argument de filtre" on construit un ~ WHERE en SQL
+  const where = args.filter
+    ? {
+        OR: [
+          { description_contains: args.filter },
+          { url_contains: args.filter }
+        ]
+      }
+    : {};
+  const prospect = await context.prisma.prospect({
+    where,
+    skip: args.skip,
+    first: args.first,
+    orderBy: args.orderBy
+  });
+  const count = await context.prisma
+    .prospectConnection({
+      where
+    })
+    .aggregate()
+    .count();
+  return {
+    prospect,
+    count
+  };
+}
+
+async function getApplicants(parent, args, context, info) {
+  // Si "argument de filtre" on construit un ~ WHERE en SQL
+  const where = args.filter
+    ? {
+        OR: [
+          { description_contains: args.filter },
+          { url_contains: args.filter }
+        ]
+      }
+    : {};
+  const applicant = await context.prisma.applicant({
+    where,
+    skip: args.skip,
+    first: args.first,
+    orderBy: args.orderBy
+  });
+  const count = await context.prisma
+    .applicantConnection({
+      where
+    })
+    .aggregate()
+    .count();
+  return {
+    applicant,
+    count
+  };
+}
+
+async function getPartners(parent, args, context, info) {
+  // Si "argument de filtre" on construit un ~ WHERE en SQL
+  const where = args.filter
+    ? {
+        OR: [
+          { description_contains: args.filter },
+          { url_contains: args.filter }
+        ]
+      }
+    : {};
+  const partner = await context.prisma.partner({
+    where,
+    skip: args.skip,
+    first: args.first,
+    orderBy: args.orderBy
+  });
+  const count = await context.prisma
+    .partnerConnection({
+      where
+    })
+    .aggregate()
+    .count();
+  return {
+    partner,
+    count
+  };
+}
+
+async function getCustomers(parent, args, context, info) {
+  // Si "argument de filtre" on construit un ~ WHERE en SQL
+  const where = args.filter
+    ? {
+        OR: [
+          { description_contains: args.filter },
+          { url_contains: args.filter }
+        ]
+      }
+    : {};
+  const customer = await context.prisma.customer({
+    where,
+    skip: args.skip,
+    first: args.first,
+    orderBy: args.orderBy
+  });
+  const count = await context.prisma
+    .customerConnection({
+      where
+    })
+    .aggregate()
+    .count();
+  return {
+    customer,
+    count
+  };
+}
+
 module.exports = {
-  getUsers
+  getUsers,
+  getProspects,
+  getApplicants,
+  getPartners,
+  getCustomers
 };
 
 // Vous utilisez d’abord les arguments de filtrage, d’ordre et de pagination fournis pour extraire un certain nombre d’ Linkéléments.

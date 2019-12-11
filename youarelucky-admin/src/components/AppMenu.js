@@ -9,7 +9,7 @@ import {
 import { Link } from "react-router-dom";
 import { useDispatch } from "react-redux";
 
-import logo from "../assets/image-logo@3x.png";
+import logo from "../assets/youarelucky-logo_1.png";
 import DashboardIcon from "@material-ui/icons/Dashboard";
 import CarIcon from "@material-ui/icons/DirectionsCar";
 import ListIcon from "@material-ui/icons/ListAlt";

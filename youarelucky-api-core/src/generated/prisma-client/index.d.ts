@@ -17,6 +17,7 @@ export type Maybe<T> = T | undefined | null;
 
 export interface Exists {
   applicant: (where?: ApplicantWhereInput) => Promise<boolean>;
+  customer: (where?: CustomerWhereInput) => Promise<boolean>;
   partner: (where?: PartnerWhereInput) => Promise<boolean>;
   prospect: (where?: ProspectWhereInput) => Promise<boolean>;
   user: (where?: UserWhereInput) => Promise<boolean>;
@@ -60,6 +61,25 @@ export interface Prisma {
     first?: Int;
     last?: Int;
   }) => ApplicantConnectionPromise;
+  customer: (where: CustomerWhereUniqueInput) => CustomerNullablePromise;
+  customers: (args?: {
+    where?: CustomerWhereInput;
+    orderBy?: CustomerOrderByInput;
+    skip?: Int;
+    after?: String;
+    before?: String;
+    first?: Int;
+    last?: Int;
+  }) => FragmentableArray<Customer>;
+  customersConnection: (args?: {
+    where?: CustomerWhereInput;
+    orderBy?: CustomerOrderByInput;
+    skip?: Int;
+    after?: String;
+    before?: String;
+    first?: Int;
+    last?: Int;
+  }) => CustomerConnectionPromise;
   partner: (where: PartnerWhereUniqueInput) => PartnerNullablePromise;
   partners: (args?: {
     where?: PartnerWhereInput;
@@ -139,6 +159,22 @@ export interface Prisma {
   }) => ApplicantPromise;
   deleteApplicant: (where: ApplicantWhereUniqueInput) => ApplicantPromise;
   deleteManyApplicants: (where?: ApplicantWhereInput) => BatchPayloadPromise;
+  createCustomer: (data: CustomerCreateInput) => CustomerPromise;
+  updateCustomer: (args: {
+    data: CustomerUpdateInput;
+    where: CustomerWhereUniqueInput;
+  }) => CustomerPromise;
+  updateManyCustomers: (args: {
+    data: CustomerUpdateManyMutationInput;
+    where?: CustomerWhereInput;
+  }) => BatchPayloadPromise;
+  upsertCustomer: (args: {
+    where: CustomerWhereUniqueInput;
+    create: CustomerCreateInput;
+    update: CustomerUpdateInput;
+  }) => CustomerPromise;
+  deleteCustomer: (where: CustomerWhereUniqueInput) => CustomerPromise;
+  deleteManyCustomers: (where?: CustomerWhereInput) => BatchPayloadPromise;
   createPartner: (data: PartnerCreateInput) => PartnerPromise;
   updatePartner: (args: {
     data: PartnerUpdateInput;
@@ -199,6 +235,9 @@ export interface Subscription {
   applicant: (
     where?: ApplicantSubscriptionWhereInput
   ) => ApplicantSubscriptionPayloadSubscription;
+  customer: (
+    where?: CustomerSubscriptionWhereInput
+  ) => CustomerSubscriptionPayloadSubscription;
   partner: (
     where?: PartnerSubscriptionWhereInput
   ) => PartnerSubscriptionPayloadSubscription;
@@ -218,7 +257,7 @@ export interface ClientConstructor<T> {
  * Types
  */
 
-export type PartnerOrderByInput =
+export type ApplicantOrderByInput =
   | "id_ASC"
   | "id_DESC"
   | "name_ASC"
@@ -256,41 +295,45 @@ export type PartnerOrderByInput =
   | "call_conclusion_ASC"
   | "call_conclusion_DESC";
 
-export type UserOrderByInput =
+export type CustomerOrderByInput =
   | "id_ASC"
   | "id_DESC"
   | "name_ASC"
   | "name_DESC"
-  | "email_ASC"
-  | "email_DESC"
-  | "createdAt_ASC"
-  | "createdAt_DESC"
-  | "description_ASC"
-  | "description_DESC"
-  | "password_ASC"
-  | "password_DESC"
-  | "usertype_ASC"
-  | "usertype_DESC"
-  | "isAdmin_ASC"
-  | "isAdmin_DESC"
   | "lastName_ASC"
   | "lastName_DESC"
   | "firstName_ASC"
   | "firstName_DESC"
+  | "email_ASC"
+  | "email_DESC"
+  | "createdAt_ASC"
+  | "createdAt_DESC"
+  | "call_length_ASC"
+  | "call_length_DESC"
+  | "description_ASC"
+  | "description_DESC"
   | "updatedAt_ASC"
   | "updatedAt_DESC"
   | "mobile_ASC"
   | "mobile_DESC"
   | "profile_image_ASC"
   | "profile_image_DESC"
-  | "approved_ASC"
-  | "approved_DESC"
+  | "lead_source_ASC"
+  | "lead_source_DESC"
   | "refferalBonus_ASC"
   | "refferalBonus_DESC"
   | "profession_ASC"
-  | "profession_DESC";
+  | "profession_DESC"
+  | "outcome_ASC"
+  | "outcome_DESC"
+  | "recording_ASC"
+  | "recording_DESC"
+  | "my_emotions_ASC"
+  | "my_emotions_DESC"
+  | "call_conclusion_ASC"
+  | "call_conclusion_DESC";
 
-export type ApplicantOrderByInput =
+export type PartnerOrderByInput =
   | "id_ASC"
   | "id_DESC"
   | "name_ASC"
@@ -368,121 +411,46 @@ export type ProspectOrderByInput =
 
 export type MutationType = "CREATED" | "UPDATED" | "DELETED";
 
-export interface ProspectCreateInput {
-  id?: Maybe<ID_Input>;
-  name: String;
-  lastName?: Maybe<String>;
-  firstName?: Maybe<String>;
-  email: String;
-  call_length?: Maybe<String>;
-  description?: Maybe<String>;
-  mobile?: Maybe<String>;
-  profile_image?: Maybe<String>;
-  lead_source?: Maybe<String>;
-  refferalBonus?: Maybe<String>;
-  profession?: Maybe<String>;
-  outcome?: Maybe<String>;
-  recording?: Maybe<Boolean>;
-  my_emotions?: Maybe<String>;
-  call_conclusion?: Maybe<String>;
-}
+export type UserOrderByInput =
+  | "id_ASC"
+  | "id_DESC"
+  | "name_ASC"
+  | "name_DESC"
+  | "email_ASC"
+  | "email_DESC"
+  | "createdAt_ASC"
+  | "createdAt_DESC"
+  | "description_ASC"
+  | "description_DESC"
+  | "password_ASC"
+  | "password_DESC"
+  | "usertype_ASC"
+  | "usertype_DESC"
+  | "isAdmin_ASC"
+  | "isAdmin_DESC"
+  | "lastName_ASC"
+  | "lastName_DESC"
+  | "firstName_ASC"
+  | "firstName_DESC"
+  | "updatedAt_ASC"
+  | "updatedAt_DESC"
+  | "mobile_ASC"
+  | "mobile_DESC"
+  | "profile_image_ASC"
+  | "profile_image_DESC"
+  | "approved_ASC"
+  | "approved_DESC"
+  | "refferalBonus_ASC"
+  | "refferalBonus_DESC"
+  | "profession_ASC"
+  | "profession_DESC";
 
 export type ApplicantWhereUniqueInput = AtLeastOne<{
   id: Maybe<ID_Input>;
   email?: Maybe<String>;
 }>;
 
-export interface PartnerUpdateInput {
-  name?: Maybe<String>;
-  lastName?: Maybe<String>;
-  firstName?: Maybe<String>;
-  email?: Maybe<String>;
-  call_length?: Maybe<String>;
-  description?: Maybe<String>;
-  mobile?: Maybe<String>;
-  profile_image?: Maybe<String>;
-  lead_source?: Maybe<String>;
-  refferalBonus?: Maybe<String>;
-  profession?: Maybe<String>;
-  outcome?: Maybe<String>;
-  recording?: Maybe<Boolean>;
-  my_emotions?: Maybe<String>;
-  call_conclusion?: Maybe<String>;
-}
-
-export interface ProspectSubscriptionWhereInput {
-  mutation_in?: Maybe<MutationType[] | MutationType>;
-  updatedFields_contains?: Maybe<String>;
-  updatedFields_contains_every?: Maybe<String[] | String>;
-  updatedFields_contains_some?: Maybe<String[] | String>;
-  node?: Maybe<ProspectWhereInput>;
-  AND?: Maybe<
-    ProspectSubscriptionWhereInput[] | ProspectSubscriptionWhereInput
-  >;
-  OR?: Maybe<ProspectSubscriptionWhereInput[] | ProspectSubscriptionWhereInput>;
-  NOT?: Maybe<
-    ProspectSubscriptionWhereInput[] | ProspectSubscriptionWhereInput
-  >;
-}
-
-export type ProspectWhereUniqueInput = AtLeastOne<{
-  id: Maybe<ID_Input>;
-  email?: Maybe<String>;
-}>;
-
-export interface ApplicantSubscriptionWhereInput {
-  mutation_in?: Maybe<MutationType[] | MutationType>;
-  updatedFields_contains?: Maybe<String>;
-  updatedFields_contains_every?: Maybe<String[] | String>;
-  updatedFields_contains_some?: Maybe<String[] | String>;
-  node?: Maybe<ApplicantWhereInput>;
-  AND?: Maybe<
-    ApplicantSubscriptionWhereInput[] | ApplicantSubscriptionWhereInput
-  >;
-  OR?: Maybe<
-    ApplicantSubscriptionWhereInput[] | ApplicantSubscriptionWhereInput
-  >;
-  NOT?: Maybe<
-    ApplicantSubscriptionWhereInput[] | ApplicantSubscriptionWhereInput
-  >;
-}
-
-export interface PartnerCreateInput {
-  id?: Maybe<ID_Input>;
-  name: String;
-  lastName?: Maybe<String>;
-  firstName?: Maybe<String>;
-  email: String;
-  call_length?: Maybe<String>;
-  description?: Maybe<String>;
-  mobile?: Maybe<String>;
-  profile_image?: Maybe<String>;
-  lead_source?: Maybe<String>;
-  refferalBonus?: Maybe<String>;
-  profession?: Maybe<String>;
-  outcome?: Maybe<String>;
-  recording?: Maybe<Boolean>;
-  my_emotions?: Maybe<String>;
-  call_conclusion?: Maybe<String>;
-}
-
-export interface UserUpdateInput {
-  name?: Maybe<String>;
-  email?: Maybe<String>;
-  description?: Maybe<String>;
-  password?: Maybe<String>;
-  usertype?: Maybe<String>;
-  isAdmin?: Maybe<Boolean>;
-  lastName?: Maybe<String>;
-  firstName?: Maybe<String>;
-  mobile?: Maybe<String>;
-  profile_image?: Maybe<String>;
-  approved?: Maybe<Boolean>;
-  refferalBonus?: Maybe<String>;
-  profession?: Maybe<String>;
-}
-
-export interface ProspectWhereInput {
+export interface PartnerWhereInput {
   id?: Maybe<ID_Input>;
   id_not?: Maybe<ID_Input>;
   id_in?: Maybe<ID_Input[] | ID_Input>;
@@ -711,16 +679,211 @@ export interface ProspectWhereInput {
   call_conclusion_not_starts_with?: Maybe<String>;
   call_conclusion_ends_with?: Maybe<String>;
   call_conclusion_not_ends_with?: Maybe<String>;
-  AND?: Maybe<ProspectWhereInput[] | ProspectWhereInput>;
-  OR?: Maybe<ProspectWhereInput[] | ProspectWhereInput>;
-  NOT?: Maybe<ProspectWhereInput[] | ProspectWhereInput>;
+  AND?: Maybe<PartnerWhereInput[] | PartnerWhereInput>;
+  OR?: Maybe<PartnerWhereInput[] | PartnerWhereInput>;
+  NOT?: Maybe<PartnerWhereInput[] | PartnerWhereInput>;
 }
 
-export interface ProspectUpdateManyMutationInput {
+export interface UserWhereInput {
+  id?: Maybe<ID_Input>;
+  id_not?: Maybe<ID_Input>;
+  id_in?: Maybe<ID_Input[] | ID_Input>;
+  id_not_in?: Maybe<ID_Input[] | ID_Input>;
+  id_lt?: Maybe<ID_Input>;
+  id_lte?: Maybe<ID_Input>;
+  id_gt?: Maybe<ID_Input>;
+  id_gte?: Maybe<ID_Input>;
+  id_contains?: Maybe<ID_Input>;
+  id_not_contains?: Maybe<ID_Input>;
+  id_starts_with?: Maybe<ID_Input>;
+  id_not_starts_with?: Maybe<ID_Input>;
+  id_ends_with?: Maybe<ID_Input>;
+  id_not_ends_with?: Maybe<ID_Input>;
   name?: Maybe<String>;
+  name_not?: Maybe<String>;
+  name_in?: Maybe<String[] | String>;
+  name_not_in?: Maybe<String[] | String>;
+  name_lt?: Maybe<String>;
+  name_lte?: Maybe<String>;
+  name_gt?: Maybe<String>;
+  name_gte?: Maybe<String>;
+  name_contains?: Maybe<String>;
+  name_not_contains?: Maybe<String>;
+  name_starts_with?: Maybe<String>;
+  name_not_starts_with?: Maybe<String>;
+  name_ends_with?: Maybe<String>;
+  name_not_ends_with?: Maybe<String>;
+  email?: Maybe<String>;
+  email_not?: Maybe<String>;
+  email_in?: Maybe<String[] | String>;
+  email_not_in?: Maybe<String[] | String>;
+  email_lt?: Maybe<String>;
+  email_lte?: Maybe<String>;
+  email_gt?: Maybe<String>;
+  email_gte?: Maybe<String>;
+  email_contains?: Maybe<String>;
+  email_not_contains?: Maybe<String>;
+  email_starts_with?: Maybe<String>;
+  email_not_starts_with?: Maybe<String>;
+  email_ends_with?: Maybe<String>;
+  email_not_ends_with?: Maybe<String>;
+  createdAt?: Maybe<DateTimeInput>;
+  createdAt_not?: Maybe<DateTimeInput>;
+  createdAt_in?: Maybe<DateTimeInput[] | DateTimeInput>;
+  createdAt_not_in?: Maybe<DateTimeInput[] | DateTimeInput>;
+  createdAt_lt?: Maybe<DateTimeInput>;
+  createdAt_lte?: Maybe<DateTimeInput>;
+  createdAt_gt?: Maybe<DateTimeInput>;
+  createdAt_gte?: Maybe<DateTimeInput>;
+  description?: Maybe<String>;
+  description_not?: Maybe<String>;
+  description_in?: Maybe<String[] | String>;
+  description_not_in?: Maybe<String[] | String>;
+  description_lt?: Maybe<String>;
+  description_lte?: Maybe<String>;
+  description_gt?: Maybe<String>;
+  description_gte?: Maybe<String>;
+  description_contains?: Maybe<String>;
+  description_not_contains?: Maybe<String>;
+  description_starts_with?: Maybe<String>;
+  description_not_starts_with?: Maybe<String>;
+  description_ends_with?: Maybe<String>;
+  description_not_ends_with?: Maybe<String>;
+  password?: Maybe<String>;
+  password_not?: Maybe<String>;
+  password_in?: Maybe<String[] | String>;
+  password_not_in?: Maybe<String[] | String>;
+  password_lt?: Maybe<String>;
+  password_lte?: Maybe<String>;
+  password_gt?: Maybe<String>;
+  password_gte?: Maybe<String>;
+  password_contains?: Maybe<String>;
+  password_not_contains?: Maybe<String>;
+  password_starts_with?: Maybe<String>;
+  password_not_starts_with?: Maybe<String>;
+  password_ends_with?: Maybe<String>;
+  password_not_ends_with?: Maybe<String>;
+  usertype?: Maybe<String>;
+  usertype_not?: Maybe<String>;
+  usertype_in?: Maybe<String[] | String>;
+  usertype_not_in?: Maybe<String[] | String>;
+  usertype_lt?: Maybe<String>;
+  usertype_lte?: Maybe<String>;
+  usertype_gt?: Maybe<String>;
+  usertype_gte?: Maybe<String>;
+  usertype_contains?: Maybe<String>;
+  usertype_not_contains?: Maybe<String>;
+  usertype_starts_with?: Maybe<String>;
+  usertype_not_starts_with?: Maybe<String>;
+  usertype_ends_with?: Maybe<String>;
+  usertype_not_ends_with?: Maybe<String>;
+  isAdmin?: Maybe<Boolean>;
+  isAdmin_not?: Maybe<Boolean>;
+  lastName?: Maybe<String>;
+  lastName_not?: Maybe<String>;
+  lastName_in?: Maybe<String[] | String>;
+  lastName_not_in?: Maybe<String[] | String>;
+  lastName_lt?: Maybe<String>;
+  lastName_lte?: Maybe<String>;
+  lastName_gt?: Maybe<String>;
+  lastName_gte?: Maybe<String>;
+  lastName_contains?: Maybe<String>;
+  lastName_not_contains?: Maybe<String>;
+  lastName_starts_with?: Maybe<String>;
+  lastName_not_starts_with?: Maybe<String>;
+  lastName_ends_with?: Maybe<String>;
+  lastName_not_ends_with?: Maybe<String>;
+  firstName?: Maybe<String>;
+  firstName_not?: Maybe<String>;
+  firstName_in?: Maybe<String[] | String>;
+  firstName_not_in?: Maybe<String[] | String>;
+  firstName_lt?: Maybe<String>;
+  firstName_lte?: Maybe<String>;
+  firstName_gt?: Maybe<String>;
+  firstName_gte?: Maybe<String>;
+  firstName_contains?: Maybe<String>;
+  firstName_not_contains?: Maybe<String>;
+  firstName_starts_with?: Maybe<String>;
+  firstName_not_starts_with?: Maybe<String>;
+  firstName_ends_with?: Maybe<String>;
+  firstName_not_ends_with?: Maybe<String>;
+  updatedAt?: Maybe<DateTimeInput>;
+  updatedAt_not?: Maybe<DateTimeInput>;
+  updatedAt_in?: Maybe<DateTimeInput[] | DateTimeInput>;
+  updatedAt_not_in?: Maybe<DateTimeInput[] | DateTimeInput>;
+  updatedAt_lt?: Maybe<DateTimeInput>;
+  updatedAt_lte?: Maybe<DateTimeInput>;
+  updatedAt_gt?: Maybe<DateTimeInput>;
+  updatedAt_gte?: Maybe<DateTimeInput>;
+  mobile?: Maybe<String>;
+  mobile_not?: Maybe<String>;
+  mobile_in?: Maybe<String[] | String>;
+  mobile_not_in?: Maybe<String[] | String>;
+  mobile_lt?: Maybe<String>;
+  mobile_lte?: Maybe<String>;
+  mobile_gt?: Maybe<String>;
+  mobile_gte?: Maybe<String>;
+  mobile_contains?: Maybe<String>;
+  mobile_not_contains?: Maybe<String>;
+  mobile_starts_with?: Maybe<String>;
+  mobile_not_starts_with?: Maybe<String>;
+  mobile_ends_with?: Maybe<String>;
+  mobile_not_ends_with?: Maybe<String>;
+  profile_image?: Maybe<String>;
+  profile_image_not?: Maybe<String>;
+  profile_image_in?: Maybe<String[] | String>;
+  profile_image_not_in?: Maybe<String[] | String>;
+  profile_image_lt?: Maybe<String>;
+  profile_image_lte?: Maybe<String>;
+  profile_image_gt?: Maybe<String>;
+  profile_image_gte?: Maybe<String>;
+  profile_image_contains?: Maybe<String>;
+  profile_image_not_contains?: Maybe<String>;
+  profile_image_starts_with?: Maybe<String>;
+  profile_image_not_starts_with?: Maybe<String>;
+  profile_image_ends_with?: Maybe<String>;
+  profile_image_not_ends_with?: Maybe<String>;
+  approved?: Maybe<Boolean>;
+  approved_not?: Maybe<Boolean>;
+  refferalBonus?: Maybe<String>;
+  refferalBonus_not?: Maybe<String>;
+  refferalBonus_in?: Maybe<String[] | String>;
+  refferalBonus_not_in?: Maybe<String[] | String>;
+  refferalBonus_lt?: Maybe<String>;
+  refferalBonus_lte?: Maybe<String>;
+  refferalBonus_gt?: Maybe<String>;
+  refferalBonus_gte?: Maybe<String>;
+  refferalBonus_contains?: Maybe<String>;
+  refferalBonus_not_contains?: Maybe<String>;
+  refferalBonus_starts_with?: Maybe<String>;
+  refferalBonus_not_starts_with?: Maybe<String>;
+  refferalBonus_ends_with?: Maybe<String>;
+  refferalBonus_not_ends_with?: Maybe<String>;
+  profession?: Maybe<String>;
+  profession_not?: Maybe<String>;
+  profession_in?: Maybe<String[] | String>;
+  profession_not_in?: Maybe<String[] | String>;
+  profession_lt?: Maybe<String>;
+  profession_lte?: Maybe<String>;
+  profession_gt?: Maybe<String>;
+  profession_gte?: Maybe<String>;
+  profession_contains?: Maybe<String>;
+  profession_not_contains?: Maybe<String>;
+  profession_starts_with?: Maybe<String>;
+  profession_not_starts_with?: Maybe<String>;
+  profession_ends_with?: Maybe<String>;
+  profession_not_ends_with?: Maybe<String>;
+  AND?: Maybe<UserWhereInput[] | UserWhereInput>;
+  OR?: Maybe<UserWhereInput[] | UserWhereInput>;
+  NOT?: Maybe<UserWhereInput[] | UserWhereInput>;
+}
+
+export interface ProspectCreateInput {
+  id?: Maybe<ID_Input>;
+  name: String;
   lastName?: Maybe<String>;
   firstName?: Maybe<String>;
-  email?: Maybe<String>;
+  email: String;
   call_length?: Maybe<String>;
   description?: Maybe<String>;
   mobile?: Maybe<String>;
@@ -968,7 +1131,7 @@ export interface ApplicantWhereInput {
   NOT?: Maybe<ApplicantWhereInput[] | ApplicantWhereInput>;
 }
 
-export interface ProspectUpdateInput {
+export interface PartnerUpdateManyMutationInput {
   name?: Maybe<String>;
   lastName?: Maybe<String>;
   firstName?: Maybe<String>;
@@ -986,36 +1149,22 @@ export interface ProspectUpdateInput {
   call_conclusion?: Maybe<String>;
 }
 
-export interface ApplicantUpdateManyMutationInput {
-  name?: Maybe<String>;
-  lastName?: Maybe<String>;
-  firstName?: Maybe<String>;
-  email?: Maybe<String>;
-  call_length?: Maybe<String>;
-  description?: Maybe<String>;
-  mobile?: Maybe<String>;
-  profile_image?: Maybe<String>;
-  lead_source?: Maybe<String>;
-  refferalBonus?: Maybe<String>;
-  profession?: Maybe<String>;
-  outcome?: Maybe<String>;
-  recording?: Maybe<Boolean>;
-  my_emotions?: Maybe<String>;
-  call_conclusion?: Maybe<String>;
-}
-
-export interface UserSubscriptionWhereInput {
+export interface ProspectSubscriptionWhereInput {
   mutation_in?: Maybe<MutationType[] | MutationType>;
   updatedFields_contains?: Maybe<String>;
   updatedFields_contains_every?: Maybe<String[] | String>;
   updatedFields_contains_some?: Maybe<String[] | String>;
-  node?: Maybe<UserWhereInput>;
-  AND?: Maybe<UserSubscriptionWhereInput[] | UserSubscriptionWhereInput>;
-  OR?: Maybe<UserSubscriptionWhereInput[] | UserSubscriptionWhereInput>;
-  NOT?: Maybe<UserSubscriptionWhereInput[] | UserSubscriptionWhereInput>;
+  node?: Maybe<ProspectWhereInput>;
+  AND?: Maybe<
+    ProspectSubscriptionWhereInput[] | ProspectSubscriptionWhereInput
+  >;
+  OR?: Maybe<ProspectSubscriptionWhereInput[] | ProspectSubscriptionWhereInput>;
+  NOT?: Maybe<
+    ProspectSubscriptionWhereInput[] | ProspectSubscriptionWhereInput
+  >;
 }
 
-export interface ApplicantUpdateInput {
+export interface PartnerUpdateInput {
   name?: Maybe<String>;
   lastName?: Maybe<String>;
   firstName?: Maybe<String>;
@@ -1033,7 +1182,79 @@ export interface ApplicantUpdateInput {
   call_conclusion?: Maybe<String>;
 }
 
-export interface PartnerUpdateManyMutationInput {
+export interface CustomerSubscriptionWhereInput {
+  mutation_in?: Maybe<MutationType[] | MutationType>;
+  updatedFields_contains?: Maybe<String>;
+  updatedFields_contains_every?: Maybe<String[] | String>;
+  updatedFields_contains_some?: Maybe<String[] | String>;
+  node?: Maybe<CustomerWhereInput>;
+  AND?: Maybe<
+    CustomerSubscriptionWhereInput[] | CustomerSubscriptionWhereInput
+  >;
+  OR?: Maybe<CustomerSubscriptionWhereInput[] | CustomerSubscriptionWhereInput>;
+  NOT?: Maybe<
+    CustomerSubscriptionWhereInput[] | CustomerSubscriptionWhereInput
+  >;
+}
+
+export interface PartnerCreateInput {
+  id?: Maybe<ID_Input>;
+  name: String;
+  lastName?: Maybe<String>;
+  firstName?: Maybe<String>;
+  email: String;
+  call_length?: Maybe<String>;
+  description?: Maybe<String>;
+  mobile?: Maybe<String>;
+  profile_image?: Maybe<String>;
+  lead_source?: Maybe<String>;
+  refferalBonus?: Maybe<String>;
+  profession?: Maybe<String>;
+  outcome?: Maybe<String>;
+  recording?: Maybe<Boolean>;
+  my_emotions?: Maybe<String>;
+  call_conclusion?: Maybe<String>;
+}
+
+export interface ApplicantSubscriptionWhereInput {
+  mutation_in?: Maybe<MutationType[] | MutationType>;
+  updatedFields_contains?: Maybe<String>;
+  updatedFields_contains_every?: Maybe<String[] | String>;
+  updatedFields_contains_some?: Maybe<String[] | String>;
+  node?: Maybe<ApplicantWhereInput>;
+  AND?: Maybe<
+    ApplicantSubscriptionWhereInput[] | ApplicantSubscriptionWhereInput
+  >;
+  OR?: Maybe<
+    ApplicantSubscriptionWhereInput[] | ApplicantSubscriptionWhereInput
+  >;
+  NOT?: Maybe<
+    ApplicantSubscriptionWhereInput[] | ApplicantSubscriptionWhereInput
+  >;
+}
+
+export type ProspectWhereUniqueInput = AtLeastOne<{
+  id: Maybe<ID_Input>;
+  email?: Maybe<String>;
+}>;
+
+export interface UserUpdateManyMutationInput {
+  name?: Maybe<String>;
+  email?: Maybe<String>;
+  description?: Maybe<String>;
+  password?: Maybe<String>;
+  usertype?: Maybe<String>;
+  isAdmin?: Maybe<Boolean>;
+  lastName?: Maybe<String>;
+  firstName?: Maybe<String>;
+  mobile?: Maybe<String>;
+  profile_image?: Maybe<String>;
+  approved?: Maybe<Boolean>;
+  refferalBonus?: Maybe<String>;
+  profession?: Maybe<String>;
+}
+
+export interface CustomerUpdateManyMutationInput {
   name?: Maybe<String>;
   lastName?: Maybe<String>;
   firstName?: Maybe<String>;
@@ -1068,257 +1289,7 @@ export interface UserCreateInput {
   profession?: Maybe<String>;
 }
 
-export interface UserWhereInput {
-  id?: Maybe<ID_Input>;
-  id_not?: Maybe<ID_Input>;
-  id_in?: Maybe<ID_Input[] | ID_Input>;
-  id_not_in?: Maybe<ID_Input[] | ID_Input>;
-  id_lt?: Maybe<ID_Input>;
-  id_lte?: Maybe<ID_Input>;
-  id_gt?: Maybe<ID_Input>;
-  id_gte?: Maybe<ID_Input>;
-  id_contains?: Maybe<ID_Input>;
-  id_not_contains?: Maybe<ID_Input>;
-  id_starts_with?: Maybe<ID_Input>;
-  id_not_starts_with?: Maybe<ID_Input>;
-  id_ends_with?: Maybe<ID_Input>;
-  id_not_ends_with?: Maybe<ID_Input>;
-  name?: Maybe<String>;
-  name_not?: Maybe<String>;
-  name_in?: Maybe<String[] | String>;
-  name_not_in?: Maybe<String[] | String>;
-  name_lt?: Maybe<String>;
-  name_lte?: Maybe<String>;
-  name_gt?: Maybe<String>;
-  name_gte?: Maybe<String>;
-  name_contains?: Maybe<String>;
-  name_not_contains?: Maybe<String>;
-  name_starts_with?: Maybe<String>;
-  name_not_starts_with?: Maybe<String>;
-  name_ends_with?: Maybe<String>;
-  name_not_ends_with?: Maybe<String>;
-  email?: Maybe<String>;
-  email_not?: Maybe<String>;
-  email_in?: Maybe<String[] | String>;
-  email_not_in?: Maybe<String[] | String>;
-  email_lt?: Maybe<String>;
-  email_lte?: Maybe<String>;
-  email_gt?: Maybe<String>;
-  email_gte?: Maybe<String>;
-  email_contains?: Maybe<String>;
-  email_not_contains?: Maybe<String>;
-  email_starts_with?: Maybe<String>;
-  email_not_starts_with?: Maybe<String>;
-  email_ends_with?: Maybe<String>;
-  email_not_ends_with?: Maybe<String>;
-  createdAt?: Maybe<DateTimeInput>;
-  createdAt_not?: Maybe<DateTimeInput>;
-  createdAt_in?: Maybe<DateTimeInput[] | DateTimeInput>;
-  createdAt_not_in?: Maybe<DateTimeInput[] | DateTimeInput>;
-  createdAt_lt?: Maybe<DateTimeInput>;
-  createdAt_lte?: Maybe<DateTimeInput>;
-  createdAt_gt?: Maybe<DateTimeInput>;
-  createdAt_gte?: Maybe<DateTimeInput>;
-  description?: Maybe<String>;
-  description_not?: Maybe<String>;
-  description_in?: Maybe<String[] | String>;
-  description_not_in?: Maybe<String[] | String>;
-  description_lt?: Maybe<String>;
-  description_lte?: Maybe<String>;
-  description_gt?: Maybe<String>;
-  description_gte?: Maybe<String>;
-  description_contains?: Maybe<String>;
-  description_not_contains?: Maybe<String>;
-  description_starts_with?: Maybe<String>;
-  description_not_starts_with?: Maybe<String>;
-  description_ends_with?: Maybe<String>;
-  description_not_ends_with?: Maybe<String>;
-  password?: Maybe<String>;
-  password_not?: Maybe<String>;
-  password_in?: Maybe<String[] | String>;
-  password_not_in?: Maybe<String[] | String>;
-  password_lt?: Maybe<String>;
-  password_lte?: Maybe<String>;
-  password_gt?: Maybe<String>;
-  password_gte?: Maybe<String>;
-  password_contains?: Maybe<String>;
-  password_not_contains?: Maybe<String>;
-  password_starts_with?: Maybe<String>;
-  password_not_starts_with?: Maybe<String>;
-  password_ends_with?: Maybe<String>;
-  password_not_ends_with?: Maybe<String>;
-  usertype?: Maybe<String>;
-  usertype_not?: Maybe<String>;
-  usertype_in?: Maybe<String[] | String>;
-  usertype_not_in?: Maybe<String[] | String>;
-  usertype_lt?: Maybe<String>;
-  usertype_lte?: Maybe<String>;
-  usertype_gt?: Maybe<String>;
-  usertype_gte?: Maybe<String>;
-  usertype_contains?: Maybe<String>;
-  usertype_not_contains?: Maybe<String>;
-  usertype_starts_with?: Maybe<String>;
-  usertype_not_starts_with?: Maybe<String>;
-  usertype_ends_with?: Maybe<String>;
-  usertype_not_ends_with?: Maybe<String>;
-  isAdmin?: Maybe<Boolean>;
-  isAdmin_not?: Maybe<Boolean>;
-  lastName?: Maybe<String>;
-  lastName_not?: Maybe<String>;
-  lastName_in?: Maybe<String[] | String>;
-  lastName_not_in?: Maybe<String[] | String>;
-  lastName_lt?: Maybe<String>;
-  lastName_lte?: Maybe<String>;
-  lastName_gt?: Maybe<String>;
-  lastName_gte?: Maybe<String>;
-  lastName_contains?: Maybe<String>;
-  lastName_not_contains?: Maybe<String>;
-  lastName_starts_with?: Maybe<String>;
-  lastName_not_starts_with?: Maybe<String>;
-  lastName_ends_with?: Maybe<String>;
-  lastName_not_ends_with?: Maybe<String>;
-  firstName?: Maybe<String>;
-  firstName_not?: Maybe<String>;
-  firstName_in?: Maybe<String[] | String>;
-  firstName_not_in?: Maybe<String[] | String>;
-  firstName_lt?: Maybe<String>;
-  firstName_lte?: Maybe<String>;
-  firstName_gt?: Maybe<String>;
-  firstName_gte?: Maybe<String>;
-  firstName_contains?: Maybe<String>;
-  firstName_not_contains?: Maybe<String>;
-  firstName_starts_with?: Maybe<String>;
-  firstName_not_starts_with?: Maybe<String>;
-  firstName_ends_with?: Maybe<String>;
-  firstName_not_ends_with?: Maybe<String>;
-  updatedAt?: Maybe<DateTimeInput>;
-  updatedAt_not?: Maybe<DateTimeInput>;
-  updatedAt_in?: Maybe<DateTimeInput[] | DateTimeInput>;
-  updatedAt_not_in?: Maybe<DateTimeInput[] | DateTimeInput>;
-  updatedAt_lt?: Maybe<DateTimeInput>;
-  updatedAt_lte?: Maybe<DateTimeInput>;
-  updatedAt_gt?: Maybe<DateTimeInput>;
-  updatedAt_gte?: Maybe<DateTimeInput>;
-  mobile?: Maybe<String>;
-  mobile_not?: Maybe<String>;
-  mobile_in?: Maybe<String[] | String>;
-  mobile_not_in?: Maybe<String[] | String>;
-  mobile_lt?: Maybe<String>;
-  mobile_lte?: Maybe<String>;
-  mobile_gt?: Maybe<String>;
-  mobile_gte?: Maybe<String>;
-  mobile_contains?: Maybe<String>;
-  mobile_not_contains?: Maybe<String>;
-  mobile_starts_with?: Maybe<String>;
-  mobile_not_starts_with?: Maybe<String>;
-  mobile_ends_with?: Maybe<String>;
-  mobile_not_ends_with?: Maybe<String>;
-  profile_image?: Maybe<String>;
-  profile_image_not?: Maybe<String>;
-  profile_image_in?: Maybe<String[] | String>;
-  profile_image_not_in?: Maybe<String[] | String>;
-  profile_image_lt?: Maybe<String>;
-  profile_image_lte?: Maybe<String>;
-  profile_image_gt?: Maybe<String>;
-  profile_image_gte?: Maybe<String>;
-  profile_image_contains?: Maybe<String>;
-  profile_image_not_contains?: Maybe<String>;
-  profile_image_starts_with?: Maybe<String>;
-  profile_image_not_starts_with?: Maybe<String>;
-  profile_image_ends_with?: Maybe<String>;
-  profile_image_not_ends_with?: Maybe<String>;
-  approved?: Maybe<Boolean>;
-  approved_not?: Maybe<Boolean>;
-  refferalBonus?: Maybe<String>;
-  refferalBonus_not?: Maybe<String>;
-  refferalBonus_in?: Maybe<String[] | String>;
-  refferalBonus_not_in?: Maybe<String[] | String>;
-  refferalBonus_lt?: Maybe<String>;
-  refferalBonus_lte?: Maybe<String>;
-  refferalBonus_gt?: Maybe<String>;
-  refferalBonus_gte?: Maybe<String>;
-  refferalBonus_contains?: Maybe<String>;
-  refferalBonus_not_contains?: Maybe<String>;
-  refferalBonus_starts_with?: Maybe<String>;
-  refferalBonus_not_starts_with?: Maybe<String>;
-  refferalBonus_ends_with?: Maybe<String>;
-  refferalBonus_not_ends_with?: Maybe<String>;
-  profession?: Maybe<String>;
-  profession_not?: Maybe<String>;
-  profession_in?: Maybe<String[] | String>;
-  profession_not_in?: Maybe<String[] | String>;
-  profession_lt?: Maybe<String>;
-  profession_lte?: Maybe<String>;
-  profession_gt?: Maybe<String>;
-  profession_gte?: Maybe<String>;
-  profession_contains?: Maybe<String>;
-  profession_not_contains?: Maybe<String>;
-  profession_starts_with?: Maybe<String>;
-  profession_not_starts_with?: Maybe<String>;
-  profession_ends_with?: Maybe<String>;
-  profession_not_ends_with?: Maybe<String>;
-  AND?: Maybe<UserWhereInput[] | UserWhereInput>;
-  OR?: Maybe<UserWhereInput[] | UserWhereInput>;
-  NOT?: Maybe<UserWhereInput[] | UserWhereInput>;
-}
-
-export type UserWhereUniqueInput = AtLeastOne<{
-  id: Maybe<ID_Input>;
-  email?: Maybe<String>;
-}>;
-
-export interface ApplicantCreateInput {
-  id?: Maybe<ID_Input>;
-  name: String;
-  lastName?: Maybe<String>;
-  firstName?: Maybe<String>;
-  email: String;
-  call_length?: Maybe<String>;
-  description?: Maybe<String>;
-  mobile?: Maybe<String>;
-  profile_image?: Maybe<String>;
-  lead_source?: Maybe<String>;
-  refferalBonus?: Maybe<String>;
-  profession?: Maybe<String>;
-  outcome?: Maybe<String>;
-  recording?: Maybe<Boolean>;
-  my_emotions?: Maybe<String>;
-  call_conclusion?: Maybe<String>;
-}
-
-export type PartnerWhereUniqueInput = AtLeastOne<{
-  id: Maybe<ID_Input>;
-  email?: Maybe<String>;
-}>;
-
-export interface UserUpdateManyMutationInput {
-  name?: Maybe<String>;
-  email?: Maybe<String>;
-  description?: Maybe<String>;
-  password?: Maybe<String>;
-  usertype?: Maybe<String>;
-  isAdmin?: Maybe<Boolean>;
-  lastName?: Maybe<String>;
-  firstName?: Maybe<String>;
-  mobile?: Maybe<String>;
-  profile_image?: Maybe<String>;
-  approved?: Maybe<Boolean>;
-  refferalBonus?: Maybe<String>;
-  profession?: Maybe<String>;
-}
-
-export interface PartnerSubscriptionWhereInput {
-  mutation_in?: Maybe<MutationType[] | MutationType>;
-  updatedFields_contains?: Maybe<String>;
-  updatedFields_contains_every?: Maybe<String[] | String>;
-  updatedFields_contains_some?: Maybe<String[] | String>;
-  node?: Maybe<PartnerWhereInput>;
-  AND?: Maybe<PartnerSubscriptionWhereInput[] | PartnerSubscriptionWhereInput>;
-  OR?: Maybe<PartnerSubscriptionWhereInput[] | PartnerSubscriptionWhereInput>;
-  NOT?: Maybe<PartnerSubscriptionWhereInput[] | PartnerSubscriptionWhereInput>;
-}
-
-export interface PartnerWhereInput {
+export interface ProspectWhereInput {
   id?: Maybe<ID_Input>;
   id_not?: Maybe<ID_Input>;
   id_in?: Maybe<ID_Input[] | ID_Input>;
@@ -1547,52 +1518,446 @@ export interface PartnerWhereInput {
   call_conclusion_not_starts_with?: Maybe<String>;
   call_conclusion_ends_with?: Maybe<String>;
   call_conclusion_not_ends_with?: Maybe<String>;
-  AND?: Maybe<PartnerWhereInput[] | PartnerWhereInput>;
-  OR?: Maybe<PartnerWhereInput[] | PartnerWhereInput>;
-  NOT?: Maybe<PartnerWhereInput[] | PartnerWhereInput>;
+  AND?: Maybe<ProspectWhereInput[] | ProspectWhereInput>;
+  OR?: Maybe<ProspectWhereInput[] | ProspectWhereInput>;
+  NOT?: Maybe<ProspectWhereInput[] | ProspectWhereInput>;
+}
+
+export type PartnerWhereUniqueInput = AtLeastOne<{
+  id: Maybe<ID_Input>;
+  email?: Maybe<String>;
+}>;
+
+export interface CustomerUpdateInput {
+  name?: Maybe<String>;
+  lastName?: Maybe<String>;
+  firstName?: Maybe<String>;
+  email?: Maybe<String>;
+  call_length?: Maybe<String>;
+  description?: Maybe<String>;
+  mobile?: Maybe<String>;
+  profile_image?: Maybe<String>;
+  lead_source?: Maybe<String>;
+  refferalBonus?: Maybe<String>;
+  profession?: Maybe<String>;
+  outcome?: Maybe<String>;
+  recording?: Maybe<Boolean>;
+  my_emotions?: Maybe<String>;
+  call_conclusion?: Maybe<String>;
+}
+
+export interface UserSubscriptionWhereInput {
+  mutation_in?: Maybe<MutationType[] | MutationType>;
+  updatedFields_contains?: Maybe<String>;
+  updatedFields_contains_every?: Maybe<String[] | String>;
+  updatedFields_contains_some?: Maybe<String[] | String>;
+  node?: Maybe<UserWhereInput>;
+  AND?: Maybe<UserSubscriptionWhereInput[] | UserSubscriptionWhereInput>;
+  OR?: Maybe<UserSubscriptionWhereInput[] | UserSubscriptionWhereInput>;
+  NOT?: Maybe<UserSubscriptionWhereInput[] | UserSubscriptionWhereInput>;
+}
+
+export interface CustomerCreateInput {
+  id?: Maybe<ID_Input>;
+  name: String;
+  lastName?: Maybe<String>;
+  firstName?: Maybe<String>;
+  email: String;
+  call_length?: Maybe<String>;
+  description?: Maybe<String>;
+  mobile?: Maybe<String>;
+  profile_image?: Maybe<String>;
+  lead_source?: Maybe<String>;
+  refferalBonus?: Maybe<String>;
+  profession?: Maybe<String>;
+  outcome?: Maybe<String>;
+  recording?: Maybe<Boolean>;
+  my_emotions?: Maybe<String>;
+  call_conclusion?: Maybe<String>;
+}
+
+export type CustomerWhereUniqueInput = AtLeastOne<{
+  id: Maybe<ID_Input>;
+  email?: Maybe<String>;
+}>;
+
+export interface UserUpdateInput {
+  name?: Maybe<String>;
+  email?: Maybe<String>;
+  description?: Maybe<String>;
+  password?: Maybe<String>;
+  usertype?: Maybe<String>;
+  isAdmin?: Maybe<Boolean>;
+  lastName?: Maybe<String>;
+  firstName?: Maybe<String>;
+  mobile?: Maybe<String>;
+  profile_image?: Maybe<String>;
+  approved?: Maybe<Boolean>;
+  refferalBonus?: Maybe<String>;
+  profession?: Maybe<String>;
+}
+
+export interface ApplicantCreateInput {
+  id?: Maybe<ID_Input>;
+  name: String;
+  lastName?: Maybe<String>;
+  firstName?: Maybe<String>;
+  email: String;
+  call_length?: Maybe<String>;
+  description?: Maybe<String>;
+  mobile?: Maybe<String>;
+  profile_image?: Maybe<String>;
+  lead_source?: Maybe<String>;
+  refferalBonus?: Maybe<String>;
+  profession?: Maybe<String>;
+  outcome?: Maybe<String>;
+  recording?: Maybe<Boolean>;
+  my_emotions?: Maybe<String>;
+  call_conclusion?: Maybe<String>;
+}
+
+export type UserWhereUniqueInput = AtLeastOne<{
+  id: Maybe<ID_Input>;
+  email?: Maybe<String>;
+}>;
+
+export interface ApplicantUpdateInput {
+  name?: Maybe<String>;
+  lastName?: Maybe<String>;
+  firstName?: Maybe<String>;
+  email?: Maybe<String>;
+  call_length?: Maybe<String>;
+  description?: Maybe<String>;
+  mobile?: Maybe<String>;
+  profile_image?: Maybe<String>;
+  lead_source?: Maybe<String>;
+  refferalBonus?: Maybe<String>;
+  profession?: Maybe<String>;
+  outcome?: Maybe<String>;
+  recording?: Maybe<Boolean>;
+  my_emotions?: Maybe<String>;
+  call_conclusion?: Maybe<String>;
+}
+
+export interface ApplicantUpdateManyMutationInput {
+  name?: Maybe<String>;
+  lastName?: Maybe<String>;
+  firstName?: Maybe<String>;
+  email?: Maybe<String>;
+  call_length?: Maybe<String>;
+  description?: Maybe<String>;
+  mobile?: Maybe<String>;
+  profile_image?: Maybe<String>;
+  lead_source?: Maybe<String>;
+  refferalBonus?: Maybe<String>;
+  profession?: Maybe<String>;
+  outcome?: Maybe<String>;
+  recording?: Maybe<Boolean>;
+  my_emotions?: Maybe<String>;
+  call_conclusion?: Maybe<String>;
+}
+
+export interface ProspectUpdateManyMutationInput {
+  name?: Maybe<String>;
+  lastName?: Maybe<String>;
+  firstName?: Maybe<String>;
+  email?: Maybe<String>;
+  call_length?: Maybe<String>;
+  description?: Maybe<String>;
+  mobile?: Maybe<String>;
+  profile_image?: Maybe<String>;
+  lead_source?: Maybe<String>;
+  refferalBonus?: Maybe<String>;
+  profession?: Maybe<String>;
+  outcome?: Maybe<String>;
+  recording?: Maybe<Boolean>;
+  my_emotions?: Maybe<String>;
+  call_conclusion?: Maybe<String>;
+}
+
+export interface CustomerWhereInput {
+  id?: Maybe<ID_Input>;
+  id_not?: Maybe<ID_Input>;
+  id_in?: Maybe<ID_Input[] | ID_Input>;
+  id_not_in?: Maybe<ID_Input[] | ID_Input>;
+  id_lt?: Maybe<ID_Input>;
+  id_lte?: Maybe<ID_Input>;
+  id_gt?: Maybe<ID_Input>;
+  id_gte?: Maybe<ID_Input>;
+  id_contains?: Maybe<ID_Input>;
+  id_not_contains?: Maybe<ID_Input>;
+  id_starts_with?: Maybe<ID_Input>;
+  id_not_starts_with?: Maybe<ID_Input>;
+  id_ends_with?: Maybe<ID_Input>;
+  id_not_ends_with?: Maybe<ID_Input>;
+  name?: Maybe<String>;
+  name_not?: Maybe<String>;
+  name_in?: Maybe<String[] | String>;
+  name_not_in?: Maybe<String[] | String>;
+  name_lt?: Maybe<String>;
+  name_lte?: Maybe<String>;
+  name_gt?: Maybe<String>;
+  name_gte?: Maybe<String>;
+  name_contains?: Maybe<String>;
+  name_not_contains?: Maybe<String>;
+  name_starts_with?: Maybe<String>;
+  name_not_starts_with?: Maybe<String>;
+  name_ends_with?: Maybe<String>;
+  name_not_ends_with?: Maybe<String>;
+  lastName?: Maybe<String>;
+  lastName_not?: Maybe<String>;
+  lastName_in?: Maybe<String[] | String>;
+  lastName_not_in?: Maybe<String[] | String>;
+  lastName_lt?: Maybe<String>;
+  lastName_lte?: Maybe<String>;
+  lastName_gt?: Maybe<String>;
+  lastName_gte?: Maybe<String>;
+  lastName_contains?: Maybe<String>;
+  lastName_not_contains?: Maybe<String>;
+  lastName_starts_with?: Maybe<String>;
+  lastName_not_starts_with?: Maybe<String>;
+  lastName_ends_with?: Maybe<String>;
+  lastName_not_ends_with?: Maybe<String>;
+  firstName?: Maybe<String>;
+  firstName_not?: Maybe<String>;
+  firstName_in?: Maybe<String[] | String>;
+  firstName_not_in?: Maybe<String[] | String>;
+  firstName_lt?: Maybe<String>;
+  firstName_lte?: Maybe<String>;
+  firstName_gt?: Maybe<String>;
+  firstName_gte?: Maybe<String>;
+  firstName_contains?: Maybe<String>;
+  firstName_not_contains?: Maybe<String>;
+  firstName_starts_with?: Maybe<String>;
+  firstName_not_starts_with?: Maybe<String>;
+  firstName_ends_with?: Maybe<String>;
+  firstName_not_ends_with?: Maybe<String>;
+  email?: Maybe<String>;
+  email_not?: Maybe<String>;
+  email_in?: Maybe<String[] | String>;
+  email_not_in?: Maybe<String[] | String>;
+  email_lt?: Maybe<String>;
+  email_lte?: Maybe<String>;
+  email_gt?: Maybe<String>;
+  email_gte?: Maybe<String>;
+  email_contains?: Maybe<String>;
+  email_not_contains?: Maybe<String>;
+  email_starts_with?: Maybe<String>;
+  email_not_starts_with?: Maybe<String>;
+  email_ends_with?: Maybe<String>;
+  email_not_ends_with?: Maybe<String>;
+  createdAt?: Maybe<DateTimeInput>;
+  createdAt_not?: Maybe<DateTimeInput>;
+  createdAt_in?: Maybe<DateTimeInput[] | DateTimeInput>;
+  createdAt_not_in?: Maybe<DateTimeInput[] | DateTimeInput>;
+  createdAt_lt?: Maybe<DateTimeInput>;
+  createdAt_lte?: Maybe<DateTimeInput>;
+  createdAt_gt?: Maybe<DateTimeInput>;
+  createdAt_gte?: Maybe<DateTimeInput>;
+  call_length?: Maybe<String>;
+  call_length_not?: Maybe<String>;
+  call_length_in?: Maybe<String[] | String>;
+  call_length_not_in?: Maybe<String[] | String>;
+  call_length_lt?: Maybe<String>;
+  call_length_lte?: Maybe<String>;
+  call_length_gt?: Maybe<String>;
+  call_length_gte?: Maybe<String>;
+  call_length_contains?: Maybe<String>;
+  call_length_not_contains?: Maybe<String>;
+  call_length_starts_with?: Maybe<String>;
+  call_length_not_starts_with?: Maybe<String>;
+  call_length_ends_with?: Maybe<String>;
+  call_length_not_ends_with?: Maybe<String>;
+  description?: Maybe<String>;
+  description_not?: Maybe<String>;
+  description_in?: Maybe<String[] | String>;
+  description_not_in?: Maybe<String[] | String>;
+  description_lt?: Maybe<String>;
+  description_lte?: Maybe<String>;
+  description_gt?: Maybe<String>;
+  description_gte?: Maybe<String>;
+  description_contains?: Maybe<String>;
+  description_not_contains?: Maybe<String>;
+  description_starts_with?: Maybe<String>;
+  description_not_starts_with?: Maybe<String>;
+  description_ends_with?: Maybe<String>;
+  description_not_ends_with?: Maybe<String>;
+  updatedAt?: Maybe<DateTimeInput>;
+  updatedAt_not?: Maybe<DateTimeInput>;
+  updatedAt_in?: Maybe<DateTimeInput[] | DateTimeInput>;
+  updatedAt_not_in?: Maybe<DateTimeInput[] | DateTimeInput>;
+  updatedAt_lt?: Maybe<DateTimeInput>;
+  updatedAt_lte?: Maybe<DateTimeInput>;
+  updatedAt_gt?: Maybe<DateTimeInput>;
+  updatedAt_gte?: Maybe<DateTimeInput>;
+  mobile?: Maybe<String>;
+  mobile_not?: Maybe<String>;
+  mobile_in?: Maybe<String[] | String>;
+  mobile_not_in?: Maybe<String[] | String>;
+  mobile_lt?: Maybe<String>;
+  mobile_lte?: Maybe<String>;
+  mobile_gt?: Maybe<String>;
+  mobile_gte?: Maybe<String>;
+  mobile_contains?: Maybe<String>;
+  mobile_not_contains?: Maybe<String>;
+  mobile_starts_with?: Maybe<String>;
+  mobile_not_starts_with?: Maybe<String>;
+  mobile_ends_with?: Maybe<String>;
+  mobile_not_ends_with?: Maybe<String>;
+  profile_image?: Maybe<String>;
+  profile_image_not?: Maybe<String>;
+  profile_image_in?: Maybe<String[] | String>;
+  profile_image_not_in?: Maybe<String[] | String>;
+  profile_image_lt?: Maybe<String>;
+  profile_image_lte?: Maybe<String>;
+  profile_image_gt?: Maybe<String>;
+  profile_image_gte?: Maybe<String>;
+  profile_image_contains?: Maybe<String>;
+  profile_image_not_contains?: Maybe<String>;
+  profile_image_starts_with?: Maybe<String>;
+  profile_image_not_starts_with?: Maybe<String>;
+  profile_image_ends_with?: Maybe<String>;
+  profile_image_not_ends_with?: Maybe<String>;
+  lead_source?: Maybe<String>;
+  lead_source_not?: Maybe<String>;
+  lead_source_in?: Maybe<String[] | String>;
+  lead_source_not_in?: Maybe<String[] | String>;
+  lead_source_lt?: Maybe<String>;
+  lead_source_lte?: Maybe<String>;
+  lead_source_gt?: Maybe<String>;
+  lead_source_gte?: Maybe<String>;
+  lead_source_contains?: Maybe<String>;
+  lead_source_not_contains?: Maybe<String>;
+  lead_source_starts_with?: Maybe<String>;
+  lead_source_not_starts_with?: Maybe<String>;
+  lead_source_ends_with?: Maybe<String>;
+  lead_source_not_ends_with?: Maybe<String>;
+  refferalBonus?: Maybe<String>;
+  refferalBonus_not?: Maybe<String>;
+  refferalBonus_in?: Maybe<String[] | String>;
+  refferalBonus_not_in?: Maybe<String[] | String>;
+  refferalBonus_lt?: Maybe<String>;
+  refferalBonus_lte?: Maybe<String>;
+  refferalBonus_gt?: Maybe<String>;
+  refferalBonus_gte?: Maybe<String>;
+  refferalBonus_contains?: Maybe<String>;
+  refferalBonus_not_contains?: Maybe<String>;
+  refferalBonus_starts_with?: Maybe<String>;
+  refferalBonus_not_starts_with?: Maybe<String>;
+  refferalBonus_ends_with?: Maybe<String>;
+  refferalBonus_not_ends_with?: Maybe<String>;
+  profession?: Maybe<String>;
+  profession_not?: Maybe<String>;
+  profession_in?: Maybe<String[] | String>;
+  profession_not_in?: Maybe<String[] | String>;
+  profession_lt?: Maybe<String>;
+  profession_lte?: Maybe<String>;
+  profession_gt?: Maybe<String>;
+  profession_gte?: Maybe<String>;
+  profession_contains?: Maybe<String>;
+  profession_not_contains?: Maybe<String>;
+  profession_starts_with?: Maybe<String>;
+  profession_not_starts_with?: Maybe<String>;
+  profession_ends_with?: Maybe<String>;
+  profession_not_ends_with?: Maybe<String>;
+  outcome?: Maybe<String>;
+  outcome_not?: Maybe<String>;
+  outcome_in?: Maybe<String[] | String>;
+  outcome_not_in?: Maybe<String[] | String>;
+  outcome_lt?: Maybe<String>;
+  outcome_lte?: Maybe<String>;
+  outcome_gt?: Maybe<String>;
+  outcome_gte?: Maybe<String>;
+  outcome_contains?: Maybe<String>;
+  outcome_not_contains?: Maybe<String>;
+  outcome_starts_with?: Maybe<String>;
+  outcome_not_starts_with?: Maybe<String>;
+  outcome_ends_with?: Maybe<String>;
+  outcome_not_ends_with?: Maybe<String>;
+  recording?: Maybe<Boolean>;
+  recording_not?: Maybe<Boolean>;
+  my_emotions?: Maybe<String>;
+  my_emotions_not?: Maybe<String>;
+  my_emotions_in?: Maybe<String[] | String>;
+  my_emotions_not_in?: Maybe<String[] | String>;
+  my_emotions_lt?: Maybe<String>;
+  my_emotions_lte?: Maybe<String>;
+  my_emotions_gt?: Maybe<String>;
+  my_emotions_gte?: Maybe<String>;
+  my_emotions_contains?: Maybe<String>;
+  my_emotions_not_contains?: Maybe<String>;
+  my_emotions_starts_with?: Maybe<String>;
+  my_emotions_not_starts_with?: Maybe<String>;
+  my_emotions_ends_with?: Maybe<String>;
+  my_emotions_not_ends_with?: Maybe<String>;
+  call_conclusion?: Maybe<String>;
+  call_conclusion_not?: Maybe<String>;
+  call_conclusion_in?: Maybe<String[] | String>;
+  call_conclusion_not_in?: Maybe<String[] | String>;
+  call_conclusion_lt?: Maybe<String>;
+  call_conclusion_lte?: Maybe<String>;
+  call_conclusion_gt?: Maybe<String>;
+  call_conclusion_gte?: Maybe<String>;
+  call_conclusion_contains?: Maybe<String>;
+  call_conclusion_not_contains?: Maybe<String>;
+  call_conclusion_starts_with?: Maybe<String>;
+  call_conclusion_not_starts_with?: Maybe<String>;
+  call_conclusion_ends_with?: Maybe<String>;
+  call_conclusion_not_ends_with?: Maybe<String>;
+  AND?: Maybe<CustomerWhereInput[] | CustomerWhereInput>;
+  OR?: Maybe<CustomerWhereInput[] | CustomerWhereInput>;
+  NOT?: Maybe<CustomerWhereInput[] | CustomerWhereInput>;
+}
+
+export interface PartnerSubscriptionWhereInput {
+  mutation_in?: Maybe<MutationType[] | MutationType>;
+  updatedFields_contains?: Maybe<String>;
+  updatedFields_contains_every?: Maybe<String[] | String>;
+  updatedFields_contains_some?: Maybe<String[] | String>;
+  node?: Maybe<PartnerWhereInput>;
+  AND?: Maybe<PartnerSubscriptionWhereInput[] | PartnerSubscriptionWhereInput>;
+  OR?: Maybe<PartnerSubscriptionWhereInput[] | PartnerSubscriptionWhereInput>;
+  NOT?: Maybe<PartnerSubscriptionWhereInput[] | PartnerSubscriptionWhereInput>;
+}
+
+export interface ProspectUpdateInput {
+  name?: Maybe<String>;
+  lastName?: Maybe<String>;
+  firstName?: Maybe<String>;
+  email?: Maybe<String>;
+  call_length?: Maybe<String>;
+  description?: Maybe<String>;
+  mobile?: Maybe<String>;
+  profile_image?: Maybe<String>;
+  lead_source?: Maybe<String>;
+  refferalBonus?: Maybe<String>;
+  profession?: Maybe<String>;
+  outcome?: Maybe<String>;
+  recording?: Maybe<Boolean>;
+  my_emotions?: Maybe<String>;
+  call_conclusion?: Maybe<String>;
 }
 
 export interface NodeNode {
   id: ID_Output;
 }
 
-export interface UserConnection {
-  pageInfo: PageInfo;
-  edges: UserEdge[];
-}
-
-export interface UserConnectionPromise
-  extends Promise<UserConnection>,
-    Fragmentable {
-  pageInfo: <T = PageInfoPromise>() => T;
-  edges: <T = FragmentableArray<UserEdge>>() => T;
-  aggregate: <T = AggregateUserPromise>() => T;
-}
-
-export interface UserConnectionSubscription
-  extends Promise<AsyncIterator<UserConnection>>,
-    Fragmentable {
-  pageInfo: <T = PageInfoSubscription>() => T;
-  edges: <T = Promise<AsyncIterator<UserEdgeSubscription>>>() => T;
-  aggregate: <T = AggregateUserSubscription>() => T;
-}
-
-export interface ApplicantEdge {
-  node: Applicant;
+export interface CustomerEdge {
+  node: Customer;
   cursor: String;
 }
 
-export interface ApplicantEdgePromise
-  extends Promise<ApplicantEdge>,
+export interface CustomerEdgePromise
+  extends Promise<CustomerEdge>,
     Fragmentable {
-  node: <T = ApplicantPromise>() => T;
+  node: <T = CustomerPromise>() => T;
   cursor: () => Promise<String>;
 }
 
-export interface ApplicantEdgeSubscription
-  extends Promise<AsyncIterator<ApplicantEdge>>,
+export interface CustomerEdgeSubscription
+  extends Promise<AsyncIterator<CustomerEdge>>,
     Fragmentable {
-  node: <T = ApplicantSubscription>() => T;
+  node: <T = CustomerSubscription>() => T;
   cursor: () => Promise<AsyncIterator<String>>;
 }
 
@@ -1657,27 +2022,88 @@ export interface UserPreviousValuesSubscription
   profession: () => Promise<AsyncIterator<String>>;
 }
 
-export interface PageInfo {
-  hasNextPage: Boolean;
-  hasPreviousPage: Boolean;
-  startCursor?: String;
-  endCursor?: String;
+export interface CustomerConnection {
+  pageInfo: PageInfo;
+  edges: CustomerEdge[];
 }
 
-export interface PageInfoPromise extends Promise<PageInfo>, Fragmentable {
-  hasNextPage: () => Promise<Boolean>;
-  hasPreviousPage: () => Promise<Boolean>;
-  startCursor: () => Promise<String>;
-  endCursor: () => Promise<String>;
-}
-
-export interface PageInfoSubscription
-  extends Promise<AsyncIterator<PageInfo>>,
+export interface CustomerConnectionPromise
+  extends Promise<CustomerConnection>,
     Fragmentable {
-  hasNextPage: () => Promise<AsyncIterator<Boolean>>;
-  hasPreviousPage: () => Promise<AsyncIterator<Boolean>>;
-  startCursor: () => Promise<AsyncIterator<String>>;
-  endCursor: () => Promise<AsyncIterator<String>>;
+  pageInfo: <T = PageInfoPromise>() => T;
+  edges: <T = FragmentableArray<CustomerEdge>>() => T;
+  aggregate: <T = AggregateCustomerPromise>() => T;
+}
+
+export interface CustomerConnectionSubscription
+  extends Promise<AsyncIterator<CustomerConnection>>,
+    Fragmentable {
+  pageInfo: <T = PageInfoSubscription>() => T;
+  edges: <T = Promise<AsyncIterator<CustomerEdgeSubscription>>>() => T;
+  aggregate: <T = AggregateCustomerSubscription>() => T;
+}
+
+export interface UserEdge {
+  node: User;
+  cursor: String;
+}
+
+export interface UserEdgePromise extends Promise<UserEdge>, Fragmentable {
+  node: <T = UserPromise>() => T;
+  cursor: () => Promise<String>;
+}
+
+export interface UserEdgeSubscription
+  extends Promise<AsyncIterator<UserEdge>>,
+    Fragmentable {
+  node: <T = UserSubscription>() => T;
+  cursor: () => Promise<AsyncIterator<String>>;
+}
+
+export interface UserConnection {
+  pageInfo: PageInfo;
+  edges: UserEdge[];
+}
+
+export interface UserConnectionPromise
+  extends Promise<UserConnection>,
+    Fragmentable {
+  pageInfo: <T = PageInfoPromise>() => T;
+  edges: <T = FragmentableArray<UserEdge>>() => T;
+  aggregate: <T = AggregateUserPromise>() => T;
+}
+
+export interface UserConnectionSubscription
+  extends Promise<AsyncIterator<UserConnection>>,
+    Fragmentable {
+  pageInfo: <T = PageInfoSubscription>() => T;
+  edges: <T = Promise<AsyncIterator<UserEdgeSubscription>>>() => T;
+  aggregate: <T = AggregateUserSubscription>() => T;
+}
+
+export interface ProspectSubscriptionPayload {
+  mutation: MutationType;
+  node: Prospect;
+  updatedFields: String[];
+  previousValues: ProspectPreviousValues;
+}
+
+export interface ProspectSubscriptionPayloadPromise
+  extends Promise<ProspectSubscriptionPayload>,
+    Fragmentable {
+  mutation: () => Promise<MutationType>;
+  node: <T = ProspectPromise>() => T;
+  updatedFields: () => Promise<String[]>;
+  previousValues: <T = ProspectPreviousValuesPromise>() => T;
+}
+
+export interface ProspectSubscriptionPayloadSubscription
+  extends Promise<AsyncIterator<ProspectSubscriptionPayload>>,
+    Fragmentable {
+  mutation: () => Promise<AsyncIterator<MutationType>>;
+  node: <T = ProspectSubscription>() => T;
+  updatedFields: () => Promise<AsyncIterator<String[]>>;
+  previousValues: <T = ProspectPreviousValuesSubscription>() => T;
 }
 
 export interface AggregateUser {
@@ -1696,41 +2122,23 @@ export interface AggregateUserSubscription
   count: () => Promise<AsyncIterator<Int>>;
 }
 
-export interface ApplicantConnection {
-  pageInfo: PageInfo;
-  edges: ApplicantEdge[];
+export interface ProspectEdge {
+  node: Prospect;
+  cursor: String;
 }
 
-export interface ApplicantConnectionPromise
-  extends Promise<ApplicantConnection>,
+export interface ProspectEdgePromise
+  extends Promise<ProspectEdge>,
     Fragmentable {
-  pageInfo: <T = PageInfoPromise>() => T;
-  edges: <T = FragmentableArray<ApplicantEdge>>() => T;
-  aggregate: <T = AggregateApplicantPromise>() => T;
+  node: <T = ProspectPromise>() => T;
+  cursor: () => Promise<String>;
 }
 
-export interface ApplicantConnectionSubscription
-  extends Promise<AsyncIterator<ApplicantConnection>>,
+export interface ProspectEdgeSubscription
+  extends Promise<AsyncIterator<ProspectEdge>>,
     Fragmentable {
-  pageInfo: <T = PageInfoSubscription>() => T;
-  edges: <T = Promise<AsyncIterator<ApplicantEdgeSubscription>>>() => T;
-  aggregate: <T = AggregateApplicantSubscription>() => T;
-}
-
-export interface AggregateProspect {
-  count: Int;
-}
-
-export interface AggregateProspectPromise
-  extends Promise<AggregateProspect>,
-    Fragmentable {
-  count: () => Promise<Int>;
-}
-
-export interface AggregateProspectSubscription
-  extends Promise<AsyncIterator<AggregateProspect>>,
-    Fragmentable {
-  count: () => Promise<AsyncIterator<Int>>;
+  node: <T = ProspectSubscription>() => T;
+  cursor: () => Promise<AsyncIterator<String>>;
 }
 
 export interface User {
@@ -1811,6 +2219,119 @@ export interface UserNullablePromise
   approved: () => Promise<Boolean>;
   refferalBonus: () => Promise<String>;
   profession: () => Promise<String>;
+}
+
+export interface UserSubscriptionPayload {
+  mutation: MutationType;
+  node: User;
+  updatedFields: String[];
+  previousValues: UserPreviousValues;
+}
+
+export interface UserSubscriptionPayloadPromise
+  extends Promise<UserSubscriptionPayload>,
+    Fragmentable {
+  mutation: () => Promise<MutationType>;
+  node: <T = UserPromise>() => T;
+  updatedFields: () => Promise<String[]>;
+  previousValues: <T = UserPreviousValuesPromise>() => T;
+}
+
+export interface UserSubscriptionPayloadSubscription
+  extends Promise<AsyncIterator<UserSubscriptionPayload>>,
+    Fragmentable {
+  mutation: () => Promise<AsyncIterator<MutationType>>;
+  node: <T = UserSubscription>() => T;
+  updatedFields: () => Promise<AsyncIterator<String[]>>;
+  previousValues: <T = UserPreviousValuesSubscription>() => T;
+}
+
+export interface Customer {
+  id: ID_Output;
+  name: String;
+  lastName?: String;
+  firstName?: String;
+  email: String;
+  createdAt: DateTimeOutput;
+  call_length?: String;
+  description?: String;
+  updatedAt?: DateTimeOutput;
+  mobile?: String;
+  profile_image?: String;
+  lead_source?: String;
+  refferalBonus?: String;
+  profession?: String;
+  outcome?: String;
+  recording?: Boolean;
+  my_emotions?: String;
+  call_conclusion?: String;
+}
+
+export interface CustomerPromise extends Promise<Customer>, Fragmentable {
+  id: () => Promise<ID_Output>;
+  name: () => Promise<String>;
+  lastName: () => Promise<String>;
+  firstName: () => Promise<String>;
+  email: () => Promise<String>;
+  createdAt: () => Promise<DateTimeOutput>;
+  call_length: () => Promise<String>;
+  description: () => Promise<String>;
+  updatedAt: () => Promise<DateTimeOutput>;
+  mobile: () => Promise<String>;
+  profile_image: () => Promise<String>;
+  lead_source: () => Promise<String>;
+  refferalBonus: () => Promise<String>;
+  profession: () => Promise<String>;
+  outcome: () => Promise<String>;
+  recording: () => Promise<Boolean>;
+  my_emotions: () => Promise<String>;
+  call_conclusion: () => Promise<String>;
+}
+
+export interface CustomerSubscription
+  extends Promise<AsyncIterator<Customer>>,
+    Fragmentable {
+  id: () => Promise<AsyncIterator<ID_Output>>;
+  name: () => Promise<AsyncIterator<String>>;
+  lastName: () => Promise<AsyncIterator<String>>;
+  firstName: () => Promise<AsyncIterator<String>>;
+  email: () => Promise<AsyncIterator<String>>;
+  createdAt: () => Promise<AsyncIterator<DateTimeOutput>>;
+  call_length: () => Promise<AsyncIterator<String>>;
+  description: () => Promise<AsyncIterator<String>>;
+  updatedAt: () => Promise<AsyncIterator<DateTimeOutput>>;
+  mobile: () => Promise<AsyncIterator<String>>;
+  profile_image: () => Promise<AsyncIterator<String>>;
+  lead_source: () => Promise<AsyncIterator<String>>;
+  refferalBonus: () => Promise<AsyncIterator<String>>;
+  profession: () => Promise<AsyncIterator<String>>;
+  outcome: () => Promise<AsyncIterator<String>>;
+  recording: () => Promise<AsyncIterator<Boolean>>;
+  my_emotions: () => Promise<AsyncIterator<String>>;
+  call_conclusion: () => Promise<AsyncIterator<String>>;
+}
+
+export interface CustomerNullablePromise
+  extends Promise<Customer | null>,
+    Fragmentable {
+  id: () => Promise<ID_Output>;
+  name: () => Promise<String>;
+  lastName: () => Promise<String>;
+  firstName: () => Promise<String>;
+  email: () => Promise<String>;
+  createdAt: () => Promise<DateTimeOutput>;
+  call_length: () => Promise<String>;
+  description: () => Promise<String>;
+  updatedAt: () => Promise<DateTimeOutput>;
+  mobile: () => Promise<String>;
+  profile_image: () => Promise<String>;
+  lead_source: () => Promise<String>;
+  refferalBonus: () => Promise<String>;
+  profession: () => Promise<String>;
+  outcome: () => Promise<String>;
+  recording: () => Promise<Boolean>;
+  my_emotions: () => Promise<String>;
+  call_conclusion: () => Promise<String>;
 }
 
 export interface Applicant {
@@ -1901,150 +2422,6 @@ export interface ApplicantNullablePromise
   call_conclusion: () => Promise<String>;
 }
 
-export interface ProspectEdge {
-  node: Prospect;
-  cursor: String;
-}
-
-export interface ProspectEdgePromise
-  extends Promise<ProspectEdge>,
-    Fragmentable {
-  node: <T = ProspectPromise>() => T;
-  cursor: () => Promise<String>;
-}
-
-export interface ProspectEdgeSubscription
-  extends Promise<AsyncIterator<ProspectEdge>>,
-    Fragmentable {
-  node: <T = ProspectSubscription>() => T;
-  cursor: () => Promise<AsyncIterator<String>>;
-}
-
-export interface ProspectConnection {
-  pageInfo: PageInfo;
-  edges: ProspectEdge[];
-}
-
-export interface ProspectConnectionPromise
-  extends Promise<ProspectConnection>,
-    Fragmentable {
-  pageInfo: <T = PageInfoPromise>() => T;
-  edges: <T = FragmentableArray<ProspectEdge>>() => T;
-  aggregate: <T = AggregateProspectPromise>() => T;
-}
-
-export interface ProspectConnectionSubscription
-  extends Promise<AsyncIterator<ProspectConnection>>,
-    Fragmentable {
-  pageInfo: <T = PageInfoSubscription>() => T;
-  edges: <T = Promise<AsyncIterator<ProspectEdgeSubscription>>>() => T;
-  aggregate: <T = AggregateProspectSubscription>() => T;
-}
-
-export interface BatchPayload {
-  count: Long;
-}
-
-export interface BatchPayloadPromise
-  extends Promise<BatchPayload>,
-    Fragmentable {
-  count: () => Promise<Long>;
-}
-
-export interface BatchPayloadSubscription
-  extends Promise<AsyncIterator<BatchPayload>>,
-    Fragmentable {
-  count: () => Promise<AsyncIterator<Long>>;
-}
-
-export interface Prospect {
-  id: ID_Output;
-  name: String;
-  lastName?: String;
-  firstName?: String;
-  email: String;
-  createdAt: DateTimeOutput;
-  call_length?: String;
-  description?: String;
-  updatedAt?: DateTimeOutput;
-  mobile?: String;
-  profile_image?: String;
-  lead_source?: String;
-  refferalBonus?: String;
-  profession?: String;
-  outcome?: String;
-  recording?: Boolean;
-  my_emotions?: String;
-  call_conclusion?: String;
-}
-
-export interface ProspectPromise extends Promise<Prospect>, Fragmentable {
-  id: () => Promise<ID_Output>;
-  name: () => Promise<String>;
-  lastName: () => Promise<String>;
-  firstName: () => Promise<String>;
-  email: () => Promise<String>;
-  createdAt: () => Promise<DateTimeOutput>;
-  call_length: () => Promise<String>;
-  description: () => Promise<String>;
-  updatedAt: () => Promise<DateTimeOutput>;
-  mobile: () => Promise<String>;
-  profile_image: () => Promise<String>;
-  lead_source: () => Promise<String>;
-  refferalBonus: () => Promise<String>;
-  profession: () => Promise<String>;
-  outcome: () => Promise<String>;
-  recording: () => Promise<Boolean>;
-  my_emotions: () => Promise<String>;
-  call_conclusion: () => Promise<String>;
-}
-
-export interface ProspectSubscription
-  extends Promise<AsyncIterator<Prospect>>,
-    Fragmentable {
-  id: () => Promise<AsyncIterator<ID_Output>>;
-  name: () => Promise<AsyncIterator<String>>;
-  lastName: () => Promise<AsyncIterator<String>>;
-  firstName: () => Promise<AsyncIterator<String>>;
-  email: () => Promise<AsyncIterator<String>>;
-  createdAt: () => Promise<AsyncIterator<DateTimeOutput>>;
-  call_length: () => Promise<AsyncIterator<String>>;
-  description: () => Promise<AsyncIterator<String>>;
-  updatedAt: () => Promise<AsyncIterator<DateTimeOutput>>;
-  mobile: () => Promise<AsyncIterator<String>>;
-  profile_image: () => Promise<AsyncIterator<String>>;
-  lead_source: () => Promise<AsyncIterator<String>>;
-  refferalBonus: () => Promise<AsyncIterator<String>>;
-  profession: () => Promise<AsyncIterator<String>>;
-  outcome: () => Promise<AsyncIterator<String>>;
-  recording: () => Promise<AsyncIterator<Boolean>>;
-  my_emotions: () => Promise<AsyncIterator<String>>;
-  call_conclusion: () => Promise<AsyncIterator<String>>;
-}
-
-export interface ProspectNullablePromise
-  extends Promise<Prospect | null>,
-    Fragmentable {
-  id: () => Promise<ID_Output>;
-  name: () => Promise<String>;
-  lastName: () => Promise<String>;
-  firstName: () => Promise<String>;
-  email: () => Promise<String>;
-  createdAt: () => Promise<DateTimeOutput>;
-  call_length: () => Promise<String>;
-  description: () => Promise<String>;
-  updatedAt: () => Promise<DateTimeOutput>;
-  mobile: () => Promise<String>;
-  profile_image: () => Promise<String>;
-  lead_source: () => Promise<String>;
-  refferalBonus: () => Promise<String>;
-  profession: () => Promise<String>;
-  outcome: () => Promise<String>;
-  recording: () => Promise<Boolean>;
-  my_emotions: () => Promise<String>;
-  call_conclusion: () => Promise<String>;
-}
-
 export interface ProspectPreviousValues {
   id: ID_Output;
   name: String;
@@ -2112,21 +2489,20 @@ export interface ProspectPreviousValuesSubscription
   call_conclusion: () => Promise<AsyncIterator<String>>;
 }
 
-export interface PartnerEdge {
-  node: Partner;
-  cursor: String;
+export interface AggregatePartner {
+  count: Int;
 }
 
-export interface PartnerEdgePromise extends Promise<PartnerEdge>, Fragmentable {
-  node: <T = PartnerPromise>() => T;
-  cursor: () => Promise<String>;
-}
-
-export interface PartnerEdgeSubscription
-  extends Promise<AsyncIterator<PartnerEdge>>,
+export interface AggregatePartnerPromise
+  extends Promise<AggregatePartner>,
     Fragmentable {
-  node: <T = PartnerSubscription>() => T;
-  cursor: () => Promise<AsyncIterator<String>>;
+  count: () => Promise<Int>;
+}
+
+export interface AggregatePartnerSubscription
+  extends Promise<AsyncIterator<AggregatePartner>>,
+    Fragmentable {
+  count: () => Promise<AsyncIterator<Int>>;
 }
 
 export interface ApplicantSubscriptionPayload {
@@ -2152,6 +2528,94 @@ export interface ApplicantSubscriptionPayloadSubscription
   node: <T = ApplicantSubscription>() => T;
   updatedFields: () => Promise<AsyncIterator<String[]>>;
   previousValues: <T = ApplicantPreviousValuesSubscription>() => T;
+}
+
+export interface PartnerConnection {
+  pageInfo: PageInfo;
+  edges: PartnerEdge[];
+}
+
+export interface PartnerConnectionPromise
+  extends Promise<PartnerConnection>,
+    Fragmentable {
+  pageInfo: <T = PageInfoPromise>() => T;
+  edges: <T = FragmentableArray<PartnerEdge>>() => T;
+  aggregate: <T = AggregatePartnerPromise>() => T;
+}
+
+export interface PartnerConnectionSubscription
+  extends Promise<AsyncIterator<PartnerConnection>>,
+    Fragmentable {
+  pageInfo: <T = PageInfoSubscription>() => T;
+  edges: <T = Promise<AsyncIterator<PartnerEdgeSubscription>>>() => T;
+  aggregate: <T = AggregatePartnerSubscription>() => T;
+}
+
+export interface ApplicantPreviousValues {
+  id: ID_Output;
+  name: String;
+  lastName?: String;
+  firstName?: String;
+  email: String;
+  createdAt: DateTimeOutput;
+  call_length?: String;
+  description?: String;
+  updatedAt?: DateTimeOutput;
+  mobile?: String;
+  profile_image?: String;
+  lead_source?: String;
+  refferalBonus?: String;
+  profession?: String;
+  outcome?: String;
+  recording?: Boolean;
+  my_emotions?: String;
+  call_conclusion?: String;
+}
+
+export interface ApplicantPreviousValuesPromise
+  extends Promise<ApplicantPreviousValues>,
+    Fragmentable {
+  id: () => Promise<ID_Output>;
+  name: () => Promise<String>;
+  lastName: () => Promise<String>;
+  firstName: () => Promise<String>;
+  email: () => Promise<String>;
+  createdAt: () => Promise<DateTimeOutput>;
+  call_length: () => Promise<String>;
+  description: () => Promise<String>;
+  updatedAt: () => Promise<DateTimeOutput>;
+  mobile: () => Promise<String>;
+  profile_image: () => Promise<String>;
+  lead_source: () => Promise<String>;
+  refferalBonus: () => Promise<String>;
+  profession: () => Promise<String>;
+  outcome: () => Promise<String>;
+  recording: () => Promise<Boolean>;
+  my_emotions: () => Promise<String>;
+  call_conclusion: () => Promise<String>;
+}
+
+export interface ApplicantPreviousValuesSubscription
+  extends Promise<AsyncIterator<ApplicantPreviousValues>>,
+    Fragmentable {
+  id: () => Promise<AsyncIterator<ID_Output>>;
+  name: () => Promise<AsyncIterator<String>>;
+  lastName: () => Promise<AsyncIterator<String>>;
+  firstName: () => Promise<AsyncIterator<String>>;
+  email: () => Promise<AsyncIterator<String>>;
+  createdAt: () => Promise<AsyncIterator<DateTimeOutput>>;
+  call_length: () => Promise<AsyncIterator<String>>;
+  description: () => Promise<AsyncIterator<String>>;
+  updatedAt: () => Promise<AsyncIterator<DateTimeOutput>>;
+  mobile: () => Promise<AsyncIterator<String>>;
+  profile_image: () => Promise<AsyncIterator<String>>;
+  lead_source: () => Promise<AsyncIterator<String>>;
+  refferalBonus: () => Promise<AsyncIterator<String>>;
+  profession: () => Promise<AsyncIterator<String>>;
+  outcome: () => Promise<AsyncIterator<String>>;
+  recording: () => Promise<AsyncIterator<Boolean>>;
+  my_emotions: () => Promise<AsyncIterator<String>>;
+  call_conclusion: () => Promise<AsyncIterator<String>>;
 }
 
 export interface Partner {
@@ -2242,21 +2706,189 @@ export interface PartnerNullablePromise
   call_conclusion: () => Promise<String>;
 }
 
-export interface UserEdge {
-  node: User;
+export interface AggregateApplicant {
+  count: Int;
+}
+
+export interface AggregateApplicantPromise
+  extends Promise<AggregateApplicant>,
+    Fragmentable {
+  count: () => Promise<Int>;
+}
+
+export interface AggregateApplicantSubscription
+  extends Promise<AsyncIterator<AggregateApplicant>>,
+    Fragmentable {
+  count: () => Promise<AsyncIterator<Int>>;
+}
+
+export interface AggregateProspect {
+  count: Int;
+}
+
+export interface AggregateProspectPromise
+  extends Promise<AggregateProspect>,
+    Fragmentable {
+  count: () => Promise<Int>;
+}
+
+export interface AggregateProspectSubscription
+  extends Promise<AsyncIterator<AggregateProspect>>,
+    Fragmentable {
+  count: () => Promise<AsyncIterator<Int>>;
+}
+
+export interface CustomerSubscriptionPayload {
+  mutation: MutationType;
+  node: Customer;
+  updatedFields: String[];
+  previousValues: CustomerPreviousValues;
+}
+
+export interface CustomerSubscriptionPayloadPromise
+  extends Promise<CustomerSubscriptionPayload>,
+    Fragmentable {
+  mutation: () => Promise<MutationType>;
+  node: <T = CustomerPromise>() => T;
+  updatedFields: () => Promise<String[]>;
+  previousValues: <T = CustomerPreviousValuesPromise>() => T;
+}
+
+export interface CustomerSubscriptionPayloadSubscription
+  extends Promise<AsyncIterator<CustomerSubscriptionPayload>>,
+    Fragmentable {
+  mutation: () => Promise<AsyncIterator<MutationType>>;
+  node: <T = CustomerSubscription>() => T;
+  updatedFields: () => Promise<AsyncIterator<String[]>>;
+  previousValues: <T = CustomerPreviousValuesSubscription>() => T;
+}
+
+export interface ProspectConnection {
+  pageInfo: PageInfo;
+  edges: ProspectEdge[];
+}
+
+export interface ProspectConnectionPromise
+  extends Promise<ProspectConnection>,
+    Fragmentable {
+  pageInfo: <T = PageInfoPromise>() => T;
+  edges: <T = FragmentableArray<ProspectEdge>>() => T;
+  aggregate: <T = AggregateProspectPromise>() => T;
+}
+
+export interface ProspectConnectionSubscription
+  extends Promise<AsyncIterator<ProspectConnection>>,
+    Fragmentable {
+  pageInfo: <T = PageInfoSubscription>() => T;
+  edges: <T = Promise<AsyncIterator<ProspectEdgeSubscription>>>() => T;
+  aggregate: <T = AggregateProspectSubscription>() => T;
+}
+
+export interface CustomerPreviousValues {
+  id: ID_Output;
+  name: String;
+  lastName?: String;
+  firstName?: String;
+  email: String;
+  createdAt: DateTimeOutput;
+  call_length?: String;
+  description?: String;
+  updatedAt?: DateTimeOutput;
+  mobile?: String;
+  profile_image?: String;
+  lead_source?: String;
+  refferalBonus?: String;
+  profession?: String;
+  outcome?: String;
+  recording?: Boolean;
+  my_emotions?: String;
+  call_conclusion?: String;
+}
+
+export interface CustomerPreviousValuesPromise
+  extends Promise<CustomerPreviousValues>,
+    Fragmentable {
+  id: () => Promise<ID_Output>;
+  name: () => Promise<String>;
+  lastName: () => Promise<String>;
+  firstName: () => Promise<String>;
+  email: () => Promise<String>;
+  createdAt: () => Promise<DateTimeOutput>;
+  call_length: () => Promise<String>;
+  description: () => Promise<String>;
+  updatedAt: () => Promise<DateTimeOutput>;
+  mobile: () => Promise<String>;
+  profile_image: () => Promise<String>;
+  lead_source: () => Promise<String>;
+  refferalBonus: () => Promise<String>;
+  profession: () => Promise<String>;
+  outcome: () => Promise<String>;
+  recording: () => Promise<Boolean>;
+  my_emotions: () => Promise<String>;
+  call_conclusion: () => Promise<String>;
+}
+
+export interface CustomerPreviousValuesSubscription
+  extends Promise<AsyncIterator<CustomerPreviousValues>>,
+    Fragmentable {
+  id: () => Promise<AsyncIterator<ID_Output>>;
+  name: () => Promise<AsyncIterator<String>>;
+  lastName: () => Promise<AsyncIterator<String>>;
+  firstName: () => Promise<AsyncIterator<String>>;
+  email: () => Promise<AsyncIterator<String>>;
+  createdAt: () => Promise<AsyncIterator<DateTimeOutput>>;
+  call_length: () => Promise<AsyncIterator<String>>;
+  description: () => Promise<AsyncIterator<String>>;
+  updatedAt: () => Promise<AsyncIterator<DateTimeOutput>>;
+  mobile: () => Promise<AsyncIterator<String>>;
+  profile_image: () => Promise<AsyncIterator<String>>;
+  lead_source: () => Promise<AsyncIterator<String>>;
+  refferalBonus: () => Promise<AsyncIterator<String>>;
+  profession: () => Promise<AsyncIterator<String>>;
+  outcome: () => Promise<AsyncIterator<String>>;
+  recording: () => Promise<AsyncIterator<Boolean>>;
+  my_emotions: () => Promise<AsyncIterator<String>>;
+  call_conclusion: () => Promise<AsyncIterator<String>>;
+}
+
+export interface PartnerEdge {
+  node: Partner;
   cursor: String;
 }
 
-export interface UserEdgePromise extends Promise<UserEdge>, Fragmentable {
-  node: <T = UserPromise>() => T;
+export interface PartnerEdgePromise extends Promise<PartnerEdge>, Fragmentable {
+  node: <T = PartnerPromise>() => T;
   cursor: () => Promise<String>;
 }
 
-export interface UserEdgeSubscription
-  extends Promise<AsyncIterator<UserEdge>>,
+export interface PartnerEdgeSubscription
+  extends Promise<AsyncIterator<PartnerEdge>>,
     Fragmentable {
-  node: <T = UserSubscription>() => T;
+  node: <T = PartnerSubscription>() => T;
   cursor: () => Promise<AsyncIterator<String>>;
+}
+
+export interface PageInfo {
+  hasNextPage: Boolean;
+  hasPreviousPage: Boolean;
+  startCursor?: String;
+  endCursor?: String;
+}
+
+export interface PageInfoPromise extends Promise<PageInfo>, Fragmentable {
+  hasNextPage: () => Promise<Boolean>;
+  hasPreviousPage: () => Promise<Boolean>;
+  startCursor: () => Promise<String>;
+  endCursor: () => Promise<String>;
+}
+
+export interface PageInfoSubscription
+  extends Promise<AsyncIterator<PageInfo>>,
+    Fragmentable {
+  hasNextPage: () => Promise<AsyncIterator<Boolean>>;
+  hasPreviousPage: () => Promise<AsyncIterator<Boolean>>;
+  startCursor: () => Promise<AsyncIterator<String>>;
+  endCursor: () => Promise<AsyncIterator<String>>;
 }
 
 export interface PartnerPreviousValues {
@@ -2351,32 +2983,47 @@ export interface PartnerSubscriptionPayloadSubscription
   previousValues: <T = PartnerPreviousValuesSubscription>() => T;
 }
 
-export interface ProspectSubscriptionPayload {
-  mutation: MutationType;
-  node: Prospect;
-  updatedFields: String[];
-  previousValues: ProspectPreviousValues;
+export interface ApplicantEdge {
+  node: Applicant;
+  cursor: String;
 }
 
-export interface ProspectSubscriptionPayloadPromise
-  extends Promise<ProspectSubscriptionPayload>,
+export interface ApplicantEdgePromise
+  extends Promise<ApplicantEdge>,
     Fragmentable {
-  mutation: () => Promise<MutationType>;
-  node: <T = ProspectPromise>() => T;
-  updatedFields: () => Promise<String[]>;
-  previousValues: <T = ProspectPreviousValuesPromise>() => T;
+  node: <T = ApplicantPromise>() => T;
+  cursor: () => Promise<String>;
 }
 
-export interface ProspectSubscriptionPayloadSubscription
-  extends Promise<AsyncIterator<ProspectSubscriptionPayload>>,
+export interface ApplicantEdgeSubscription
+  extends Promise<AsyncIterator<ApplicantEdge>>,
     Fragmentable {
-  mutation: () => Promise<AsyncIterator<MutationType>>;
-  node: <T = ProspectSubscription>() => T;
-  updatedFields: () => Promise<AsyncIterator<String[]>>;
-  previousValues: <T = ProspectPreviousValuesSubscription>() => T;
+  node: <T = ApplicantSubscription>() => T;
+  cursor: () => Promise<AsyncIterator<String>>;
 }
 
-export interface ApplicantPreviousValues {
+export interface ApplicantConnection {
+  pageInfo: PageInfo;
+  edges: ApplicantEdge[];
+}
+
+export interface ApplicantConnectionPromise
+  extends Promise<ApplicantConnection>,
+    Fragmentable {
+  pageInfo: <T = PageInfoPromise>() => T;
+  edges: <T = FragmentableArray<ApplicantEdge>>() => T;
+  aggregate: <T = AggregateApplicantPromise>() => T;
+}
+
+export interface ApplicantConnectionSubscription
+  extends Promise<AsyncIterator<ApplicantConnection>>,
+    Fragmentable {
+  pageInfo: <T = PageInfoSubscription>() => T;
+  edges: <T = Promise<AsyncIterator<ApplicantEdgeSubscription>>>() => T;
+  aggregate: <T = AggregateApplicantSubscription>() => T;
+}
+
+export interface Prospect {
   id: ID_Output;
   name: String;
   lastName?: String;
@@ -2397,9 +3044,7 @@ export interface ApplicantPreviousValues {
   call_conclusion?: String;
 }
 
-export interface ApplicantPreviousValuesPromise
-  extends Promise<ApplicantPreviousValues>,
-    Fragmentable {
+export interface ProspectPromise extends Promise<Prospect>, Fragmentable {
   id: () => Promise<ID_Output>;
   name: () => Promise<String>;
   lastName: () => Promise<String>;
@@ -2420,8 +3065,8 @@ export interface ApplicantPreviousValuesPromise
   call_conclusion: () => Promise<String>;
 }
 
-export interface ApplicantPreviousValuesSubscription
-  extends Promise<AsyncIterator<ApplicantPreviousValues>>,
+export interface ProspectSubscription
+  extends Promise<AsyncIterator<Prospect>>,
     Fragmentable {
   id: () => Promise<AsyncIterator<ID_Output>>;
   name: () => Promise<AsyncIterator<String>>;
@@ -2443,88 +3088,65 @@ export interface ApplicantPreviousValuesSubscription
   call_conclusion: () => Promise<AsyncIterator<String>>;
 }
 
-export interface UserSubscriptionPayload {
-  mutation: MutationType;
-  node: User;
-  updatedFields: String[];
-  previousValues: UserPreviousValues;
-}
-
-export interface UserSubscriptionPayloadPromise
-  extends Promise<UserSubscriptionPayload>,
+export interface ProspectNullablePromise
+  extends Promise<Prospect | null>,
     Fragmentable {
-  mutation: () => Promise<MutationType>;
-  node: <T = UserPromise>() => T;
-  updatedFields: () => Promise<String[]>;
-  previousValues: <T = UserPreviousValuesPromise>() => T;
+  id: () => Promise<ID_Output>;
+  name: () => Promise<String>;
+  lastName: () => Promise<String>;
+  firstName: () => Promise<String>;
+  email: () => Promise<String>;
+  createdAt: () => Promise<DateTimeOutput>;
+  call_length: () => Promise<String>;
+  description: () => Promise<String>;
+  updatedAt: () => Promise<DateTimeOutput>;
+  mobile: () => Promise<String>;
+  profile_image: () => Promise<String>;
+  lead_source: () => Promise<String>;
+  refferalBonus: () => Promise<String>;
+  profession: () => Promise<String>;
+  outcome: () => Promise<String>;
+  recording: () => Promise<Boolean>;
+  my_emotions: () => Promise<String>;
+  call_conclusion: () => Promise<String>;
 }
 
-export interface UserSubscriptionPayloadSubscription
-  extends Promise<AsyncIterator<UserSubscriptionPayload>>,
+export interface BatchPayload {
+  count: Long;
+}
+
+export interface BatchPayloadPromise
+  extends Promise<BatchPayload>,
     Fragmentable {
-  mutation: () => Promise<AsyncIterator<MutationType>>;
-  node: <T = UserSubscription>() => T;
-  updatedFields: () => Promise<AsyncIterator<String[]>>;
-  previousValues: <T = UserPreviousValuesSubscription>() => T;
+  count: () => Promise<Long>;
 }
 
-export interface AggregateApplicant {
+export interface BatchPayloadSubscription
+  extends Promise<AsyncIterator<BatchPayload>>,
+    Fragmentable {
+  count: () => Promise<AsyncIterator<Long>>;
+}
+
+export interface AggregateCustomer {
   count: Int;
 }
 
-export interface AggregateApplicantPromise
-  extends Promise<AggregateApplicant>,
+export interface AggregateCustomerPromise
+  extends Promise<AggregateCustomer>,
     Fragmentable {
   count: () => Promise<Int>;
 }
 
-export interface AggregateApplicantSubscription
-  extends Promise<AsyncIterator<AggregateApplicant>>,
-    Fragmentable {
-  count: () => Promise<AsyncIterator<Int>>;
-}
-
-export interface PartnerConnection {
-  pageInfo: PageInfo;
-  edges: PartnerEdge[];
-}
-
-export interface PartnerConnectionPromise
-  extends Promise<PartnerConnection>,
-    Fragmentable {
-  pageInfo: <T = PageInfoPromise>() => T;
-  edges: <T = FragmentableArray<PartnerEdge>>() => T;
-  aggregate: <T = AggregatePartnerPromise>() => T;
-}
-
-export interface PartnerConnectionSubscription
-  extends Promise<AsyncIterator<PartnerConnection>>,
-    Fragmentable {
-  pageInfo: <T = PageInfoSubscription>() => T;
-  edges: <T = Promise<AsyncIterator<PartnerEdgeSubscription>>>() => T;
-  aggregate: <T = AggregatePartnerSubscription>() => T;
-}
-
-export interface AggregatePartner {
-  count: Int;
-}
-
-export interface AggregatePartnerPromise
-  extends Promise<AggregatePartner>,
-    Fragmentable {
-  count: () => Promise<Int>;
-}
-
-export interface AggregatePartnerSubscription
-  extends Promise<AsyncIterator<AggregatePartner>>,
+export interface AggregateCustomerSubscription
+  extends Promise<AsyncIterator<AggregateCustomer>>,
     Fragmentable {
   count: () => Promise<AsyncIterator<Int>>;
 }
 
 /*
-The `Int` scalar type represents non-fractional signed whole numeric values. Int can represent values between -(2^31) and 2^31 - 1.
+The `Boolean` scalar type represents `true` or `false`.
 */
-export type Int = number;
+export type Boolean = boolean;
 
 /*
 The `ID` scalar type represents a unique identifier, often used to refetch an object or as key for a cache. The ID type appears in a JSON response as a String; however, it is not intended to be human-readable. When expected as an input type, any string (such as `"4"`) or integer (such as `4`) input value will be accepted as an ID.
@@ -2532,17 +3154,12 @@ The `ID` scalar type represents a unique identifier, often used to refetch an ob
 export type ID_Input = string | number;
 export type ID_Output = string;
 
+/*
+The `Int` scalar type represents non-fractional signed whole numeric values. Int can represent values between -(2^31) and 2^31 - 1.
+*/
+export type Int = number;
+
 export type Long = string;
-
-/*
-The `String` scalar type represents textual data, represented as UTF-8 character sequences. The String type is most often used by GraphQL to represent free-form human-readable text.
-*/
-export type String = string;
-
-/*
-The `Boolean` scalar type represents `true` or `false`.
-*/
-export type Boolean = boolean;
 
 /*
 DateTime scalar input type, allowing Date
@@ -2553,6 +3170,11 @@ export type DateTimeInput = Date | string;
 DateTime scalar output type, which is always a string
 */
 export type DateTimeOutput = string;
+
+/*
+The `String` scalar type represents textual data, represented as UTF-8 character sequences. The String type is most often used by GraphQL to represent free-form human-readable text.
+*/
+export type String = string;
 
 /**
  * Model Metadata
@@ -2573,6 +3195,10 @@ export const models: Model[] = [
   },
   {
     name: "Partner",
+    embedded: false
+  },
+  {
+    name: "Customer",
     embedded: false
   }
 ];

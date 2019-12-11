@@ -25,7 +25,6 @@ type Prospect {
   firstName: String
   email: String! @unique  
   createdAt: DateTime! @createdAt
-  call_length: String
   description: String
   updatedAt: DateTime @updatedAt
   mobile: String
@@ -35,6 +34,7 @@ type Prospect {
   profession: String
   outcome: String
   recording: Boolean
+  call_length: String
   my_emotions: String
   call_conclusion: String
 }
@@ -63,6 +63,27 @@ type Applicant {
 
 
 type Partner {
+  id: ID! @id
+  name: String!
+  lastName: String
+  firstName: String
+  email: String! @unique  
+  createdAt: DateTime! @createdAt
+  call_length: String
+  description: String
+  updatedAt: DateTime @updatedAt
+  mobile: String
+  profile_image: String
+  lead_source: String
+  refferalBonus: String
+  profession: String
+  outcome: String
+  recording: Boolean
+  my_emotions: String
+  call_conclusion: String
+}
+
+type Customer {
   id: ID! @id
   name: String!
   lastName: String
