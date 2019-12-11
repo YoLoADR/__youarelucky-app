@@ -26,57 +26,8 @@ async function getUsers(parent, args, context, info) {
   };
 }
 
-async function getBookings(parent, args, context, info) {
-  // Si "argument de filtre" on construit un ~ WHERE en SQL
-  const where = args.filter
-    ? {
-        OR: [
-          { description_contains: args.filter },
-          { url_contains: args.filter }
-        ]
-      }
-    : {};
-  const bookings = await context.prisma.bookings({
-    where,
-    skip: args.skip,
-    first: args.first,
-    orderBy: args.orderBy
-  });
-  const count = await context.prisma
-    .bookingsConnection({
-      where
-    })
-    .aggregate()
-    .count();
-  return {
-    bookings,
-    count
-  };
-}
-
-function getCancelReason(parent, args, context) {
-  return context.prisma.cancelReasons();
-}
-
-function getOffers(parent, args, context) {
-  return context.prisma.offers();
-}
-
-function getCarType(parent, args, context) {
-  return context.prisma.carTypes();
-}
-
-function getReward(parent, args, context) {
-  return context.prisma.rewards();
-}
-
 module.exports = {
-  getUsers,
-  getBookings,
-  getCancelReason,
-  getOffers,
-  getCarType,
-  getReward
+  getUsers
 };
 
 // Vous utilisez d’abord les arguments de filtrage, d’ordre et de pagination fournis pour extraire un certain nombre d’ Linkéléments.

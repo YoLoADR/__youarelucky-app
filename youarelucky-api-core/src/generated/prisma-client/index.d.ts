@@ -16,10 +16,9 @@ export type AtLeastOne<T, U = { [K in keyof T]: Pick<T, K> }> = Partial<T> &
 export type Maybe<T> = T | undefined | null;
 
 export interface Exists {
-  booking: (where?: BookingWhereInput) => Promise<boolean>;
-  cancelReason: (where?: CancelReasonWhereInput) => Promise<boolean>;
-  carType: (where?: CarTypeWhereInput) => Promise<boolean>;
-  offer: (where?: OfferWhereInput) => Promise<boolean>;
+  applicant: (where?: ApplicantWhereInput) => Promise<boolean>;
+  partner: (where?: PartnerWhereInput) => Promise<boolean>;
+  prospect: (where?: ProspectWhereInput) => Promise<boolean>;
   user: (where?: UserWhereInput) => Promise<boolean>;
 }
 
@@ -42,84 +41,63 @@ export interface Prisma {
    * Queries
    */
 
-  booking: (where: BookingWhereUniqueInput) => BookingNullablePromise;
-  bookings: (args?: {
-    where?: BookingWhereInput;
-    orderBy?: BookingOrderByInput;
+  applicant: (where: ApplicantWhereUniqueInput) => ApplicantNullablePromise;
+  applicants: (args?: {
+    where?: ApplicantWhereInput;
+    orderBy?: ApplicantOrderByInput;
     skip?: Int;
     after?: String;
     before?: String;
     first?: Int;
     last?: Int;
-  }) => FragmentableArray<Booking>;
-  bookingsConnection: (args?: {
-    where?: BookingWhereInput;
-    orderBy?: BookingOrderByInput;
+  }) => FragmentableArray<Applicant>;
+  applicantsConnection: (args?: {
+    where?: ApplicantWhereInput;
+    orderBy?: ApplicantOrderByInput;
     skip?: Int;
     after?: String;
     before?: String;
     first?: Int;
     last?: Int;
-  }) => BookingConnectionPromise;
-  cancelReason: (
-    where: CancelReasonWhereUniqueInput
-  ) => CancelReasonNullablePromise;
-  cancelReasons: (args?: {
-    where?: CancelReasonWhereInput;
-    orderBy?: CancelReasonOrderByInput;
+  }) => ApplicantConnectionPromise;
+  partner: (where: PartnerWhereUniqueInput) => PartnerNullablePromise;
+  partners: (args?: {
+    where?: PartnerWhereInput;
+    orderBy?: PartnerOrderByInput;
     skip?: Int;
     after?: String;
     before?: String;
     first?: Int;
     last?: Int;
-  }) => FragmentableArray<CancelReason>;
-  cancelReasonsConnection: (args?: {
-    where?: CancelReasonWhereInput;
-    orderBy?: CancelReasonOrderByInput;
+  }) => FragmentableArray<Partner>;
+  partnersConnection: (args?: {
+    where?: PartnerWhereInput;
+    orderBy?: PartnerOrderByInput;
     skip?: Int;
     after?: String;
     before?: String;
     first?: Int;
     last?: Int;
-  }) => CancelReasonConnectionPromise;
-  carType: (where: CarTypeWhereUniqueInput) => CarTypeNullablePromise;
-  carTypes: (args?: {
-    where?: CarTypeWhereInput;
-    orderBy?: CarTypeOrderByInput;
+  }) => PartnerConnectionPromise;
+  prospect: (where: ProspectWhereUniqueInput) => ProspectNullablePromise;
+  prospects: (args?: {
+    where?: ProspectWhereInput;
+    orderBy?: ProspectOrderByInput;
     skip?: Int;
     after?: String;
     before?: String;
     first?: Int;
     last?: Int;
-  }) => FragmentableArray<CarType>;
-  carTypesConnection: (args?: {
-    where?: CarTypeWhereInput;
-    orderBy?: CarTypeOrderByInput;
+  }) => FragmentableArray<Prospect>;
+  prospectsConnection: (args?: {
+    where?: ProspectWhereInput;
+    orderBy?: ProspectOrderByInput;
     skip?: Int;
     after?: String;
     before?: String;
     first?: Int;
     last?: Int;
-  }) => CarTypeConnectionPromise;
-  offer: (where: OfferWhereUniqueInput) => OfferNullablePromise;
-  offers: (args?: {
-    where?: OfferWhereInput;
-    orderBy?: OfferOrderByInput;
-    skip?: Int;
-    after?: String;
-    before?: String;
-    first?: Int;
-    last?: Int;
-  }) => FragmentableArray<Offer>;
-  offersConnection: (args?: {
-    where?: OfferWhereInput;
-    orderBy?: OfferOrderByInput;
-    skip?: Int;
-    after?: String;
-    before?: String;
-    first?: Int;
-    last?: Int;
-  }) => OfferConnectionPromise;
+  }) => ProspectConnectionPromise;
   user: (where: UserWhereUniqueInput) => UserNullablePromise;
   users: (args?: {
     where?: UserWhereInput;
@@ -145,74 +123,54 @@ export interface Prisma {
    * Mutations
    */
 
-  createBooking: (data: BookingCreateInput) => BookingPromise;
-  updateBooking: (args: {
-    data: BookingUpdateInput;
-    where: BookingWhereUniqueInput;
-  }) => BookingPromise;
-  updateManyBookings: (args: {
-    data: BookingUpdateManyMutationInput;
-    where?: BookingWhereInput;
+  createApplicant: (data: ApplicantCreateInput) => ApplicantPromise;
+  updateApplicant: (args: {
+    data: ApplicantUpdateInput;
+    where: ApplicantWhereUniqueInput;
+  }) => ApplicantPromise;
+  updateManyApplicants: (args: {
+    data: ApplicantUpdateManyMutationInput;
+    where?: ApplicantWhereInput;
   }) => BatchPayloadPromise;
-  upsertBooking: (args: {
-    where: BookingWhereUniqueInput;
-    create: BookingCreateInput;
-    update: BookingUpdateInput;
-  }) => BookingPromise;
-  deleteBooking: (where: BookingWhereUniqueInput) => BookingPromise;
-  deleteManyBookings: (where?: BookingWhereInput) => BatchPayloadPromise;
-  createCancelReason: (data: CancelReasonCreateInput) => CancelReasonPromise;
-  updateCancelReason: (args: {
-    data: CancelReasonUpdateInput;
-    where: CancelReasonWhereUniqueInput;
-  }) => CancelReasonPromise;
-  updateManyCancelReasons: (args: {
-    data: CancelReasonUpdateManyMutationInput;
-    where?: CancelReasonWhereInput;
+  upsertApplicant: (args: {
+    where: ApplicantWhereUniqueInput;
+    create: ApplicantCreateInput;
+    update: ApplicantUpdateInput;
+  }) => ApplicantPromise;
+  deleteApplicant: (where: ApplicantWhereUniqueInput) => ApplicantPromise;
+  deleteManyApplicants: (where?: ApplicantWhereInput) => BatchPayloadPromise;
+  createPartner: (data: PartnerCreateInput) => PartnerPromise;
+  updatePartner: (args: {
+    data: PartnerUpdateInput;
+    where: PartnerWhereUniqueInput;
+  }) => PartnerPromise;
+  updateManyPartners: (args: {
+    data: PartnerUpdateManyMutationInput;
+    where?: PartnerWhereInput;
   }) => BatchPayloadPromise;
-  upsertCancelReason: (args: {
-    where: CancelReasonWhereUniqueInput;
-    create: CancelReasonCreateInput;
-    update: CancelReasonUpdateInput;
-  }) => CancelReasonPromise;
-  deleteCancelReason: (
-    where: CancelReasonWhereUniqueInput
-  ) => CancelReasonPromise;
-  deleteManyCancelReasons: (
-    where?: CancelReasonWhereInput
-  ) => BatchPayloadPromise;
-  createCarType: (data: CarTypeCreateInput) => CarTypePromise;
-  updateCarType: (args: {
-    data: CarTypeUpdateInput;
-    where: CarTypeWhereUniqueInput;
-  }) => CarTypePromise;
-  updateManyCarTypes: (args: {
-    data: CarTypeUpdateManyMutationInput;
-    where?: CarTypeWhereInput;
+  upsertPartner: (args: {
+    where: PartnerWhereUniqueInput;
+    create: PartnerCreateInput;
+    update: PartnerUpdateInput;
+  }) => PartnerPromise;
+  deletePartner: (where: PartnerWhereUniqueInput) => PartnerPromise;
+  deleteManyPartners: (where?: PartnerWhereInput) => BatchPayloadPromise;
+  createProspect: (data: ProspectCreateInput) => ProspectPromise;
+  updateProspect: (args: {
+    data: ProspectUpdateInput;
+    where: ProspectWhereUniqueInput;
+  }) => ProspectPromise;
+  updateManyProspects: (args: {
+    data: ProspectUpdateManyMutationInput;
+    where?: ProspectWhereInput;
   }) => BatchPayloadPromise;
-  upsertCarType: (args: {
-    where: CarTypeWhereUniqueInput;
-    create: CarTypeCreateInput;
-    update: CarTypeUpdateInput;
-  }) => CarTypePromise;
-  deleteCarType: (where: CarTypeWhereUniqueInput) => CarTypePromise;
-  deleteManyCarTypes: (where?: CarTypeWhereInput) => BatchPayloadPromise;
-  createOffer: (data: OfferCreateInput) => OfferPromise;
-  updateOffer: (args: {
-    data: OfferUpdateInput;
-    where: OfferWhereUniqueInput;
-  }) => OfferPromise;
-  updateManyOffers: (args: {
-    data: OfferUpdateManyMutationInput;
-    where?: OfferWhereInput;
-  }) => BatchPayloadPromise;
-  upsertOffer: (args: {
-    where: OfferWhereUniqueInput;
-    create: OfferCreateInput;
-    update: OfferUpdateInput;
-  }) => OfferPromise;
-  deleteOffer: (where: OfferWhereUniqueInput) => OfferPromise;
-  deleteManyOffers: (where?: OfferWhereInput) => BatchPayloadPromise;
+  upsertProspect: (args: {
+    where: ProspectWhereUniqueInput;
+    create: ProspectCreateInput;
+    update: ProspectUpdateInput;
+  }) => ProspectPromise;
+  deleteProspect: (where: ProspectWhereUniqueInput) => ProspectPromise;
+  deleteManyProspects: (where?: ProspectWhereInput) => BatchPayloadPromise;
   createUser: (data: UserCreateInput) => UserPromise;
   updateUser: (args: {
     data: UserUpdateInput;
@@ -238,18 +196,15 @@ export interface Prisma {
 }
 
 export interface Subscription {
-  booking: (
-    where?: BookingSubscriptionWhereInput
-  ) => BookingSubscriptionPayloadSubscription;
-  cancelReason: (
-    where?: CancelReasonSubscriptionWhereInput
-  ) => CancelReasonSubscriptionPayloadSubscription;
-  carType: (
-    where?: CarTypeSubscriptionWhereInput
-  ) => CarTypeSubscriptionPayloadSubscription;
-  offer: (
-    where?: OfferSubscriptionWhereInput
-  ) => OfferSubscriptionPayloadSubscription;
+  applicant: (
+    where?: ApplicantSubscriptionWhereInput
+  ) => ApplicantSubscriptionPayloadSubscription;
+  partner: (
+    where?: PartnerSubscriptionWhereInput
+  ) => PartnerSubscriptionPayloadSubscription;
+  prospect: (
+    where?: ProspectSubscriptionWhereInput
+  ) => ProspectSubscriptionPayloadSubscription;
   user: (
     where?: UserSubscriptionWhereInput
   ) => UserSubscriptionPayloadSubscription;
@@ -263,101 +218,43 @@ export interface ClientConstructor<T> {
  * Types
  */
 
-export type BookingOrderByInput =
+export type PartnerOrderByInput =
   | "id_ASC"
   | "id_DESC"
-  | "tripdate_ASC"
-  | "tripdate_DESC"
-  | "trip_start_time_ASC"
-  | "trip_start_time_DESC"
-  | "trip_end_time_ASC"
-  | "trip_end_time_DESC"
-  | "customer_name_ASC"
-  | "customer_name_DESC"
-  | "carType_ASC"
-  | "carType_DESC"
-  | "vehicle_number_ASC"
-  | "vehicle_number_DESC"
-  | "driver_number_ASC"
-  | "driver_number_DESC"
-  | "passenger_number_ASC"
-  | "passenger_number_DESC"
-  | "kilometer_number_ASC"
-  | "kilometer_number_DESC"
-  | "hour_number_ASC"
-  | "hour_number_DESC"
-  | "day_number_ASC"
-  | "day_number_DESC"
-  | "pickupAddress_ASC"
-  | "pickupAddress_DESC"
-  | "pickupCity_ASC"
-  | "pickupCity_DESC"
-  | "dropAddress_ASC"
-  | "dropAddress_DESC"
-  | "dropCity_ASC"
-  | "dropCity_DESC"
-  | "driver_name_ASC"
-  | "driver_name_DESC"
-  | "status_ASC"
-  | "status_DESC"
-  | "trip_cost_ASC"
-  | "trip_cost_DESC"
-  | "discount_ASC"
-  | "discount_DESC"
-  | "payment_status_ASC"
-  | "payment_status_DESC"
-  | "createdAt_ASC"
-  | "createdAt_DESC"
-  | "comment_ASC"
-  | "comment_DESC";
-
-export type CancelReasonOrderByInput =
-  | "id_ASC"
-  | "id_DESC"
-  | "value_ASC"
-  | "value_DESC"
-  | "label_ASC"
-  | "label_DESC";
-
-export type CarTypeOrderByInput =
-  | "id_ASC"
-  | "id_DESC"
-  | "convenience_fees_ASC"
-  | "convenience_fees_DESC"
-  | "image_ASC"
-  | "image_DESC"
   | "name_ASC"
   | "name_DESC"
-  | "rate_per_hour_ASC"
-  | "rate_per_hour_DESC"
-  | "rate_per_kilometer_ASC"
-  | "rate_per_kilometer_DESC"
+  | "lastName_ASC"
+  | "lastName_DESC"
+  | "firstName_ASC"
+  | "firstName_DESC"
+  | "email_ASC"
+  | "email_DESC"
+  | "createdAt_ASC"
+  | "createdAt_DESC"
+  | "call_length_ASC"
+  | "call_length_DESC"
+  | "description_ASC"
+  | "description_DESC"
   | "updatedAt_ASC"
-  | "updatedAt_DESC";
-
-export type OfferOrderByInput =
-  | "id_ASC"
-  | "id_DESC"
-  | "max_promo_discount_value_ASC"
-  | "max_promo_discount_value_DESC"
-  | "min_order_ASC"
-  | "min_order_DESC"
-  | "promo_description_ASC"
-  | "promo_description_DESC"
-  | "promo_discount_type_ASC"
-  | "promo_discount_type_DESC"
-  | "promo_discount_value_ASC"
-  | "promo_discount_value_DESC"
-  | "promo_name_ASC"
-  | "promo_name_DESC"
-  | "promo_start_ASC"
-  | "promo_start_DESC"
-  | "promo_usage_limit_ASC"
-  | "promo_usage_limit_DESC"
-  | "promo_validity_ASC"
-  | "promo_validity_DESC";
-
-export type MutationType = "CREATED" | "UPDATED" | "DELETED";
+  | "updatedAt_DESC"
+  | "mobile_ASC"
+  | "mobile_DESC"
+  | "profile_image_ASC"
+  | "profile_image_DESC"
+  | "lead_source_ASC"
+  | "lead_source_DESC"
+  | "refferalBonus_ASC"
+  | "refferalBonus_DESC"
+  | "profession_ASC"
+  | "profession_DESC"
+  | "outcome_ASC"
+  | "outcome_DESC"
+  | "recording_ASC"
+  | "recording_DESC"
+  | "my_emotions_ASC"
+  | "my_emotions_DESC"
+  | "call_conclusion_ASC"
+  | "call_conclusion_DESC";
 
 export type UserOrderByInput =
   | "id_ASC"
@@ -393,448 +290,180 @@ export type UserOrderByInput =
   | "profession_ASC"
   | "profession_DESC";
 
-export type BookingWhereUniqueInput = AtLeastOne<{
+export type ApplicantOrderByInput =
+  | "id_ASC"
+  | "id_DESC"
+  | "name_ASC"
+  | "name_DESC"
+  | "lastName_ASC"
+  | "lastName_DESC"
+  | "firstName_ASC"
+  | "firstName_DESC"
+  | "email_ASC"
+  | "email_DESC"
+  | "createdAt_ASC"
+  | "createdAt_DESC"
+  | "call_length_ASC"
+  | "call_length_DESC"
+  | "description_ASC"
+  | "description_DESC"
+  | "updatedAt_ASC"
+  | "updatedAt_DESC"
+  | "mobile_ASC"
+  | "mobile_DESC"
+  | "profile_image_ASC"
+  | "profile_image_DESC"
+  | "lead_source_ASC"
+  | "lead_source_DESC"
+  | "refferalBonus_ASC"
+  | "refferalBonus_DESC"
+  | "profession_ASC"
+  | "profession_DESC"
+  | "outcome_ASC"
+  | "outcome_DESC"
+  | "recording_ASC"
+  | "recording_DESC"
+  | "my_emotions_ASC"
+  | "my_emotions_DESC"
+  | "call_conclusion_ASC"
+  | "call_conclusion_DESC";
+
+export type ProspectOrderByInput =
+  | "id_ASC"
+  | "id_DESC"
+  | "name_ASC"
+  | "name_DESC"
+  | "lastName_ASC"
+  | "lastName_DESC"
+  | "firstName_ASC"
+  | "firstName_DESC"
+  | "email_ASC"
+  | "email_DESC"
+  | "createdAt_ASC"
+  | "createdAt_DESC"
+  | "call_length_ASC"
+  | "call_length_DESC"
+  | "description_ASC"
+  | "description_DESC"
+  | "updatedAt_ASC"
+  | "updatedAt_DESC"
+  | "mobile_ASC"
+  | "mobile_DESC"
+  | "profile_image_ASC"
+  | "profile_image_DESC"
+  | "lead_source_ASC"
+  | "lead_source_DESC"
+  | "refferalBonus_ASC"
+  | "refferalBonus_DESC"
+  | "profession_ASC"
+  | "profession_DESC"
+  | "outcome_ASC"
+  | "outcome_DESC"
+  | "recording_ASC"
+  | "recording_DESC"
+  | "my_emotions_ASC"
+  | "my_emotions_DESC"
+  | "call_conclusion_ASC"
+  | "call_conclusion_DESC";
+
+export type MutationType = "CREATED" | "UPDATED" | "DELETED";
+
+export interface ProspectCreateInput {
+  id?: Maybe<ID_Input>;
+  name: String;
+  lastName?: Maybe<String>;
+  firstName?: Maybe<String>;
+  email: String;
+  call_length?: Maybe<String>;
+  description?: Maybe<String>;
+  mobile?: Maybe<String>;
+  profile_image?: Maybe<String>;
+  lead_source?: Maybe<String>;
+  refferalBonus?: Maybe<String>;
+  profession?: Maybe<String>;
+  outcome?: Maybe<String>;
+  recording?: Maybe<Boolean>;
+  my_emotions?: Maybe<String>;
+  call_conclusion?: Maybe<String>;
+}
+
+export type ApplicantWhereUniqueInput = AtLeastOne<{
   id: Maybe<ID_Input>;
+  email?: Maybe<String>;
 }>;
 
-export interface OfferUpdateInput {
-  max_promo_discount_value?: Maybe<Int>;
-  min_order?: Maybe<Int>;
-  promo_description?: Maybe<String>;
-  promo_discount_type?: Maybe<String>;
-  promo_discount_value?: Maybe<Int>;
-  promo_name?: Maybe<String>;
-  promo_start?: Maybe<String>;
-  promo_usage_limit?: Maybe<Int>;
-  promo_validity?: Maybe<String>;
-}
-
-export interface BookingCreateInput {
-  id?: Maybe<ID_Input>;
-  tripdate?: Maybe<String>;
-  trip_start_time?: Maybe<String>;
-  trip_end_time?: Maybe<String>;
-  customer_name?: Maybe<String>;
-  carType?: Maybe<String>;
-  vehicle_number?: Maybe<String>;
-  driver_number?: Maybe<String>;
-  passenger_number?: Maybe<String>;
-  kilometer_number?: Maybe<String>;
-  hour_number?: Maybe<String>;
-  day_number?: Maybe<String>;
-  pickupAddress?: Maybe<String>;
-  pickupCity?: Maybe<String>;
-  dropAddress?: Maybe<String>;
-  dropCity?: Maybe<String>;
-  driver_name?: Maybe<String>;
-  status?: Maybe<String>;
-  trip_cost?: Maybe<String>;
-  discount?: Maybe<String>;
-  payment_status?: Maybe<String>;
-  comment?: Maybe<String>;
-}
-
-export interface OfferCreateInput {
-  id?: Maybe<ID_Input>;
-  max_promo_discount_value?: Maybe<Int>;
-  min_order?: Maybe<Int>;
-  promo_description?: Maybe<String>;
-  promo_discount_type?: Maybe<String>;
-  promo_discount_value?: Maybe<Int>;
-  promo_name?: Maybe<String>;
-  promo_start?: Maybe<String>;
-  promo_usage_limit?: Maybe<Int>;
-  promo_validity?: Maybe<String>;
-}
-
-export interface OfferSubscriptionWhereInput {
-  mutation_in?: Maybe<MutationType[] | MutationType>;
-  updatedFields_contains?: Maybe<String>;
-  updatedFields_contains_every?: Maybe<String[] | String>;
-  updatedFields_contains_some?: Maybe<String[] | String>;
-  node?: Maybe<OfferWhereInput>;
-  AND?: Maybe<OfferSubscriptionWhereInput[] | OfferSubscriptionWhereInput>;
-  OR?: Maybe<OfferSubscriptionWhereInput[] | OfferSubscriptionWhereInput>;
-  NOT?: Maybe<OfferSubscriptionWhereInput[] | OfferSubscriptionWhereInput>;
-}
-
-export interface CarTypeUpdateManyMutationInput {
-  convenience_fees?: Maybe<Int>;
-  image?: Maybe<String>;
+export interface PartnerUpdateInput {
   name?: Maybe<String>;
-  rate_per_hour?: Maybe<Int>;
-  rate_per_kilometer?: Maybe<String>;
+  lastName?: Maybe<String>;
+  firstName?: Maybe<String>;
+  email?: Maybe<String>;
+  call_length?: Maybe<String>;
+  description?: Maybe<String>;
+  mobile?: Maybe<String>;
+  profile_image?: Maybe<String>;
+  lead_source?: Maybe<String>;
+  refferalBonus?: Maybe<String>;
+  profession?: Maybe<String>;
+  outcome?: Maybe<String>;
+  recording?: Maybe<Boolean>;
+  my_emotions?: Maybe<String>;
+  call_conclusion?: Maybe<String>;
 }
 
-export interface CancelReasonSubscriptionWhereInput {
+export interface ProspectSubscriptionWhereInput {
   mutation_in?: Maybe<MutationType[] | MutationType>;
   updatedFields_contains?: Maybe<String>;
   updatedFields_contains_every?: Maybe<String[] | String>;
   updatedFields_contains_some?: Maybe<String[] | String>;
-  node?: Maybe<CancelReasonWhereInput>;
+  node?: Maybe<ProspectWhereInput>;
   AND?: Maybe<
-    CancelReasonSubscriptionWhereInput[] | CancelReasonSubscriptionWhereInput
+    ProspectSubscriptionWhereInput[] | ProspectSubscriptionWhereInput
+  >;
+  OR?: Maybe<ProspectSubscriptionWhereInput[] | ProspectSubscriptionWhereInput>;
+  NOT?: Maybe<
+    ProspectSubscriptionWhereInput[] | ProspectSubscriptionWhereInput
+  >;
+}
+
+export type ProspectWhereUniqueInput = AtLeastOne<{
+  id: Maybe<ID_Input>;
+  email?: Maybe<String>;
+}>;
+
+export interface ApplicantSubscriptionWhereInput {
+  mutation_in?: Maybe<MutationType[] | MutationType>;
+  updatedFields_contains?: Maybe<String>;
+  updatedFields_contains_every?: Maybe<String[] | String>;
+  updatedFields_contains_some?: Maybe<String[] | String>;
+  node?: Maybe<ApplicantWhereInput>;
+  AND?: Maybe<
+    ApplicantSubscriptionWhereInput[] | ApplicantSubscriptionWhereInput
   >;
   OR?: Maybe<
-    CancelReasonSubscriptionWhereInput[] | CancelReasonSubscriptionWhereInput
+    ApplicantSubscriptionWhereInput[] | ApplicantSubscriptionWhereInput
   >;
   NOT?: Maybe<
-    CancelReasonSubscriptionWhereInput[] | CancelReasonSubscriptionWhereInput
+    ApplicantSubscriptionWhereInput[] | ApplicantSubscriptionWhereInput
   >;
 }
 
-export interface CarTypeUpdateInput {
-  convenience_fees?: Maybe<Int>;
-  image?: Maybe<String>;
-  name?: Maybe<String>;
-  rate_per_hour?: Maybe<Int>;
-  rate_per_kilometer?: Maybe<String>;
-}
-
-export interface BookingSubscriptionWhereInput {
-  mutation_in?: Maybe<MutationType[] | MutationType>;
-  updatedFields_contains?: Maybe<String>;
-  updatedFields_contains_every?: Maybe<String[] | String>;
-  updatedFields_contains_some?: Maybe<String[] | String>;
-  node?: Maybe<BookingWhereInput>;
-  AND?: Maybe<BookingSubscriptionWhereInput[] | BookingSubscriptionWhereInput>;
-  OR?: Maybe<BookingSubscriptionWhereInput[] | BookingSubscriptionWhereInput>;
-  NOT?: Maybe<BookingSubscriptionWhereInput[] | BookingSubscriptionWhereInput>;
-}
-
-export type OfferWhereUniqueInput = AtLeastOne<{
-  id: Maybe<ID_Input>;
-}>;
-
-export interface BookingWhereInput {
+export interface PartnerCreateInput {
   id?: Maybe<ID_Input>;
-  id_not?: Maybe<ID_Input>;
-  id_in?: Maybe<ID_Input[] | ID_Input>;
-  id_not_in?: Maybe<ID_Input[] | ID_Input>;
-  id_lt?: Maybe<ID_Input>;
-  id_lte?: Maybe<ID_Input>;
-  id_gt?: Maybe<ID_Input>;
-  id_gte?: Maybe<ID_Input>;
-  id_contains?: Maybe<ID_Input>;
-  id_not_contains?: Maybe<ID_Input>;
-  id_starts_with?: Maybe<ID_Input>;
-  id_not_starts_with?: Maybe<ID_Input>;
-  id_ends_with?: Maybe<ID_Input>;
-  id_not_ends_with?: Maybe<ID_Input>;
-  tripdate?: Maybe<String>;
-  tripdate_not?: Maybe<String>;
-  tripdate_in?: Maybe<String[] | String>;
-  tripdate_not_in?: Maybe<String[] | String>;
-  tripdate_lt?: Maybe<String>;
-  tripdate_lte?: Maybe<String>;
-  tripdate_gt?: Maybe<String>;
-  tripdate_gte?: Maybe<String>;
-  tripdate_contains?: Maybe<String>;
-  tripdate_not_contains?: Maybe<String>;
-  tripdate_starts_with?: Maybe<String>;
-  tripdate_not_starts_with?: Maybe<String>;
-  tripdate_ends_with?: Maybe<String>;
-  tripdate_not_ends_with?: Maybe<String>;
-  trip_start_time?: Maybe<String>;
-  trip_start_time_not?: Maybe<String>;
-  trip_start_time_in?: Maybe<String[] | String>;
-  trip_start_time_not_in?: Maybe<String[] | String>;
-  trip_start_time_lt?: Maybe<String>;
-  trip_start_time_lte?: Maybe<String>;
-  trip_start_time_gt?: Maybe<String>;
-  trip_start_time_gte?: Maybe<String>;
-  trip_start_time_contains?: Maybe<String>;
-  trip_start_time_not_contains?: Maybe<String>;
-  trip_start_time_starts_with?: Maybe<String>;
-  trip_start_time_not_starts_with?: Maybe<String>;
-  trip_start_time_ends_with?: Maybe<String>;
-  trip_start_time_not_ends_with?: Maybe<String>;
-  trip_end_time?: Maybe<String>;
-  trip_end_time_not?: Maybe<String>;
-  trip_end_time_in?: Maybe<String[] | String>;
-  trip_end_time_not_in?: Maybe<String[] | String>;
-  trip_end_time_lt?: Maybe<String>;
-  trip_end_time_lte?: Maybe<String>;
-  trip_end_time_gt?: Maybe<String>;
-  trip_end_time_gte?: Maybe<String>;
-  trip_end_time_contains?: Maybe<String>;
-  trip_end_time_not_contains?: Maybe<String>;
-  trip_end_time_starts_with?: Maybe<String>;
-  trip_end_time_not_starts_with?: Maybe<String>;
-  trip_end_time_ends_with?: Maybe<String>;
-  trip_end_time_not_ends_with?: Maybe<String>;
-  customer_name?: Maybe<String>;
-  customer_name_not?: Maybe<String>;
-  customer_name_in?: Maybe<String[] | String>;
-  customer_name_not_in?: Maybe<String[] | String>;
-  customer_name_lt?: Maybe<String>;
-  customer_name_lte?: Maybe<String>;
-  customer_name_gt?: Maybe<String>;
-  customer_name_gte?: Maybe<String>;
-  customer_name_contains?: Maybe<String>;
-  customer_name_not_contains?: Maybe<String>;
-  customer_name_starts_with?: Maybe<String>;
-  customer_name_not_starts_with?: Maybe<String>;
-  customer_name_ends_with?: Maybe<String>;
-  customer_name_not_ends_with?: Maybe<String>;
-  carType?: Maybe<String>;
-  carType_not?: Maybe<String>;
-  carType_in?: Maybe<String[] | String>;
-  carType_not_in?: Maybe<String[] | String>;
-  carType_lt?: Maybe<String>;
-  carType_lte?: Maybe<String>;
-  carType_gt?: Maybe<String>;
-  carType_gte?: Maybe<String>;
-  carType_contains?: Maybe<String>;
-  carType_not_contains?: Maybe<String>;
-  carType_starts_with?: Maybe<String>;
-  carType_not_starts_with?: Maybe<String>;
-  carType_ends_with?: Maybe<String>;
-  carType_not_ends_with?: Maybe<String>;
-  vehicle_number?: Maybe<String>;
-  vehicle_number_not?: Maybe<String>;
-  vehicle_number_in?: Maybe<String[] | String>;
-  vehicle_number_not_in?: Maybe<String[] | String>;
-  vehicle_number_lt?: Maybe<String>;
-  vehicle_number_lte?: Maybe<String>;
-  vehicle_number_gt?: Maybe<String>;
-  vehicle_number_gte?: Maybe<String>;
-  vehicle_number_contains?: Maybe<String>;
-  vehicle_number_not_contains?: Maybe<String>;
-  vehicle_number_starts_with?: Maybe<String>;
-  vehicle_number_not_starts_with?: Maybe<String>;
-  vehicle_number_ends_with?: Maybe<String>;
-  vehicle_number_not_ends_with?: Maybe<String>;
-  driver_number?: Maybe<String>;
-  driver_number_not?: Maybe<String>;
-  driver_number_in?: Maybe<String[] | String>;
-  driver_number_not_in?: Maybe<String[] | String>;
-  driver_number_lt?: Maybe<String>;
-  driver_number_lte?: Maybe<String>;
-  driver_number_gt?: Maybe<String>;
-  driver_number_gte?: Maybe<String>;
-  driver_number_contains?: Maybe<String>;
-  driver_number_not_contains?: Maybe<String>;
-  driver_number_starts_with?: Maybe<String>;
-  driver_number_not_starts_with?: Maybe<String>;
-  driver_number_ends_with?: Maybe<String>;
-  driver_number_not_ends_with?: Maybe<String>;
-  passenger_number?: Maybe<String>;
-  passenger_number_not?: Maybe<String>;
-  passenger_number_in?: Maybe<String[] | String>;
-  passenger_number_not_in?: Maybe<String[] | String>;
-  passenger_number_lt?: Maybe<String>;
-  passenger_number_lte?: Maybe<String>;
-  passenger_number_gt?: Maybe<String>;
-  passenger_number_gte?: Maybe<String>;
-  passenger_number_contains?: Maybe<String>;
-  passenger_number_not_contains?: Maybe<String>;
-  passenger_number_starts_with?: Maybe<String>;
-  passenger_number_not_starts_with?: Maybe<String>;
-  passenger_number_ends_with?: Maybe<String>;
-  passenger_number_not_ends_with?: Maybe<String>;
-  kilometer_number?: Maybe<String>;
-  kilometer_number_not?: Maybe<String>;
-  kilometer_number_in?: Maybe<String[] | String>;
-  kilometer_number_not_in?: Maybe<String[] | String>;
-  kilometer_number_lt?: Maybe<String>;
-  kilometer_number_lte?: Maybe<String>;
-  kilometer_number_gt?: Maybe<String>;
-  kilometer_number_gte?: Maybe<String>;
-  kilometer_number_contains?: Maybe<String>;
-  kilometer_number_not_contains?: Maybe<String>;
-  kilometer_number_starts_with?: Maybe<String>;
-  kilometer_number_not_starts_with?: Maybe<String>;
-  kilometer_number_ends_with?: Maybe<String>;
-  kilometer_number_not_ends_with?: Maybe<String>;
-  hour_number?: Maybe<String>;
-  hour_number_not?: Maybe<String>;
-  hour_number_in?: Maybe<String[] | String>;
-  hour_number_not_in?: Maybe<String[] | String>;
-  hour_number_lt?: Maybe<String>;
-  hour_number_lte?: Maybe<String>;
-  hour_number_gt?: Maybe<String>;
-  hour_number_gte?: Maybe<String>;
-  hour_number_contains?: Maybe<String>;
-  hour_number_not_contains?: Maybe<String>;
-  hour_number_starts_with?: Maybe<String>;
-  hour_number_not_starts_with?: Maybe<String>;
-  hour_number_ends_with?: Maybe<String>;
-  hour_number_not_ends_with?: Maybe<String>;
-  day_number?: Maybe<String>;
-  day_number_not?: Maybe<String>;
-  day_number_in?: Maybe<String[] | String>;
-  day_number_not_in?: Maybe<String[] | String>;
-  day_number_lt?: Maybe<String>;
-  day_number_lte?: Maybe<String>;
-  day_number_gt?: Maybe<String>;
-  day_number_gte?: Maybe<String>;
-  day_number_contains?: Maybe<String>;
-  day_number_not_contains?: Maybe<String>;
-  day_number_starts_with?: Maybe<String>;
-  day_number_not_starts_with?: Maybe<String>;
-  day_number_ends_with?: Maybe<String>;
-  day_number_not_ends_with?: Maybe<String>;
-  pickupAddress?: Maybe<String>;
-  pickupAddress_not?: Maybe<String>;
-  pickupAddress_in?: Maybe<String[] | String>;
-  pickupAddress_not_in?: Maybe<String[] | String>;
-  pickupAddress_lt?: Maybe<String>;
-  pickupAddress_lte?: Maybe<String>;
-  pickupAddress_gt?: Maybe<String>;
-  pickupAddress_gte?: Maybe<String>;
-  pickupAddress_contains?: Maybe<String>;
-  pickupAddress_not_contains?: Maybe<String>;
-  pickupAddress_starts_with?: Maybe<String>;
-  pickupAddress_not_starts_with?: Maybe<String>;
-  pickupAddress_ends_with?: Maybe<String>;
-  pickupAddress_not_ends_with?: Maybe<String>;
-  pickupCity?: Maybe<String>;
-  pickupCity_not?: Maybe<String>;
-  pickupCity_in?: Maybe<String[] | String>;
-  pickupCity_not_in?: Maybe<String[] | String>;
-  pickupCity_lt?: Maybe<String>;
-  pickupCity_lte?: Maybe<String>;
-  pickupCity_gt?: Maybe<String>;
-  pickupCity_gte?: Maybe<String>;
-  pickupCity_contains?: Maybe<String>;
-  pickupCity_not_contains?: Maybe<String>;
-  pickupCity_starts_with?: Maybe<String>;
-  pickupCity_not_starts_with?: Maybe<String>;
-  pickupCity_ends_with?: Maybe<String>;
-  pickupCity_not_ends_with?: Maybe<String>;
-  dropAddress?: Maybe<String>;
-  dropAddress_not?: Maybe<String>;
-  dropAddress_in?: Maybe<String[] | String>;
-  dropAddress_not_in?: Maybe<String[] | String>;
-  dropAddress_lt?: Maybe<String>;
-  dropAddress_lte?: Maybe<String>;
-  dropAddress_gt?: Maybe<String>;
-  dropAddress_gte?: Maybe<String>;
-  dropAddress_contains?: Maybe<String>;
-  dropAddress_not_contains?: Maybe<String>;
-  dropAddress_starts_with?: Maybe<String>;
-  dropAddress_not_starts_with?: Maybe<String>;
-  dropAddress_ends_with?: Maybe<String>;
-  dropAddress_not_ends_with?: Maybe<String>;
-  dropCity?: Maybe<String>;
-  dropCity_not?: Maybe<String>;
-  dropCity_in?: Maybe<String[] | String>;
-  dropCity_not_in?: Maybe<String[] | String>;
-  dropCity_lt?: Maybe<String>;
-  dropCity_lte?: Maybe<String>;
-  dropCity_gt?: Maybe<String>;
-  dropCity_gte?: Maybe<String>;
-  dropCity_contains?: Maybe<String>;
-  dropCity_not_contains?: Maybe<String>;
-  dropCity_starts_with?: Maybe<String>;
-  dropCity_not_starts_with?: Maybe<String>;
-  dropCity_ends_with?: Maybe<String>;
-  dropCity_not_ends_with?: Maybe<String>;
-  driver_name?: Maybe<String>;
-  driver_name_not?: Maybe<String>;
-  driver_name_in?: Maybe<String[] | String>;
-  driver_name_not_in?: Maybe<String[] | String>;
-  driver_name_lt?: Maybe<String>;
-  driver_name_lte?: Maybe<String>;
-  driver_name_gt?: Maybe<String>;
-  driver_name_gte?: Maybe<String>;
-  driver_name_contains?: Maybe<String>;
-  driver_name_not_contains?: Maybe<String>;
-  driver_name_starts_with?: Maybe<String>;
-  driver_name_not_starts_with?: Maybe<String>;
-  driver_name_ends_with?: Maybe<String>;
-  driver_name_not_ends_with?: Maybe<String>;
-  status?: Maybe<String>;
-  status_not?: Maybe<String>;
-  status_in?: Maybe<String[] | String>;
-  status_not_in?: Maybe<String[] | String>;
-  status_lt?: Maybe<String>;
-  status_lte?: Maybe<String>;
-  status_gt?: Maybe<String>;
-  status_gte?: Maybe<String>;
-  status_contains?: Maybe<String>;
-  status_not_contains?: Maybe<String>;
-  status_starts_with?: Maybe<String>;
-  status_not_starts_with?: Maybe<String>;
-  status_ends_with?: Maybe<String>;
-  status_not_ends_with?: Maybe<String>;
-  trip_cost?: Maybe<String>;
-  trip_cost_not?: Maybe<String>;
-  trip_cost_in?: Maybe<String[] | String>;
-  trip_cost_not_in?: Maybe<String[] | String>;
-  trip_cost_lt?: Maybe<String>;
-  trip_cost_lte?: Maybe<String>;
-  trip_cost_gt?: Maybe<String>;
-  trip_cost_gte?: Maybe<String>;
-  trip_cost_contains?: Maybe<String>;
-  trip_cost_not_contains?: Maybe<String>;
-  trip_cost_starts_with?: Maybe<String>;
-  trip_cost_not_starts_with?: Maybe<String>;
-  trip_cost_ends_with?: Maybe<String>;
-  trip_cost_not_ends_with?: Maybe<String>;
-  discount?: Maybe<String>;
-  discount_not?: Maybe<String>;
-  discount_in?: Maybe<String[] | String>;
-  discount_not_in?: Maybe<String[] | String>;
-  discount_lt?: Maybe<String>;
-  discount_lte?: Maybe<String>;
-  discount_gt?: Maybe<String>;
-  discount_gte?: Maybe<String>;
-  discount_contains?: Maybe<String>;
-  discount_not_contains?: Maybe<String>;
-  discount_starts_with?: Maybe<String>;
-  discount_not_starts_with?: Maybe<String>;
-  discount_ends_with?: Maybe<String>;
-  discount_not_ends_with?: Maybe<String>;
-  payment_status?: Maybe<String>;
-  payment_status_not?: Maybe<String>;
-  payment_status_in?: Maybe<String[] | String>;
-  payment_status_not_in?: Maybe<String[] | String>;
-  payment_status_lt?: Maybe<String>;
-  payment_status_lte?: Maybe<String>;
-  payment_status_gt?: Maybe<String>;
-  payment_status_gte?: Maybe<String>;
-  payment_status_contains?: Maybe<String>;
-  payment_status_not_contains?: Maybe<String>;
-  payment_status_starts_with?: Maybe<String>;
-  payment_status_not_starts_with?: Maybe<String>;
-  payment_status_ends_with?: Maybe<String>;
-  payment_status_not_ends_with?: Maybe<String>;
-  createdAt?: Maybe<DateTimeInput>;
-  createdAt_not?: Maybe<DateTimeInput>;
-  createdAt_in?: Maybe<DateTimeInput[] | DateTimeInput>;
-  createdAt_not_in?: Maybe<DateTimeInput[] | DateTimeInput>;
-  createdAt_lt?: Maybe<DateTimeInput>;
-  createdAt_lte?: Maybe<DateTimeInput>;
-  createdAt_gt?: Maybe<DateTimeInput>;
-  createdAt_gte?: Maybe<DateTimeInput>;
-  comment?: Maybe<String>;
-  comment_not?: Maybe<String>;
-  comment_in?: Maybe<String[] | String>;
-  comment_not_in?: Maybe<String[] | String>;
-  comment_lt?: Maybe<String>;
-  comment_lte?: Maybe<String>;
-  comment_gt?: Maybe<String>;
-  comment_gte?: Maybe<String>;
-  comment_contains?: Maybe<String>;
-  comment_not_contains?: Maybe<String>;
-  comment_starts_with?: Maybe<String>;
-  comment_not_starts_with?: Maybe<String>;
-  comment_ends_with?: Maybe<String>;
-  comment_not_ends_with?: Maybe<String>;
-  AND?: Maybe<BookingWhereInput[] | BookingWhereInput>;
-  OR?: Maybe<BookingWhereInput[] | BookingWhereInput>;
-  NOT?: Maybe<BookingWhereInput[] | BookingWhereInput>;
-}
-
-export interface CarTypeCreateInput {
-  id?: Maybe<ID_Input>;
-  convenience_fees?: Maybe<Int>;
-  image?: Maybe<String>;
-  name?: Maybe<String>;
-  rate_per_hour?: Maybe<Int>;
-  rate_per_kilometer?: Maybe<String>;
+  name: String;
+  lastName?: Maybe<String>;
+  firstName?: Maybe<String>;
+  email: String;
+  call_length?: Maybe<String>;
+  description?: Maybe<String>;
+  mobile?: Maybe<String>;
+  profile_image?: Maybe<String>;
+  lead_source?: Maybe<String>;
+  refferalBonus?: Maybe<String>;
+  profession?: Maybe<String>;
+  outcome?: Maybe<String>;
+  recording?: Maybe<Boolean>;
+  my_emotions?: Maybe<String>;
+  call_conclusion?: Maybe<String>;
 }
 
 export interface UserUpdateInput {
@@ -853,7 +482,7 @@ export interface UserUpdateInput {
   profession?: Maybe<String>;
 }
 
-export interface OfferWhereInput {
+export interface ProspectWhereInput {
   id?: Maybe<ID_Input>;
   id_not?: Maybe<ID_Input>;
   id_in?: Maybe<ID_Input[] | ID_Input>;
@@ -868,159 +497,6 @@ export interface OfferWhereInput {
   id_not_starts_with?: Maybe<ID_Input>;
   id_ends_with?: Maybe<ID_Input>;
   id_not_ends_with?: Maybe<ID_Input>;
-  max_promo_discount_value?: Maybe<Int>;
-  max_promo_discount_value_not?: Maybe<Int>;
-  max_promo_discount_value_in?: Maybe<Int[] | Int>;
-  max_promo_discount_value_not_in?: Maybe<Int[] | Int>;
-  max_promo_discount_value_lt?: Maybe<Int>;
-  max_promo_discount_value_lte?: Maybe<Int>;
-  max_promo_discount_value_gt?: Maybe<Int>;
-  max_promo_discount_value_gte?: Maybe<Int>;
-  min_order?: Maybe<Int>;
-  min_order_not?: Maybe<Int>;
-  min_order_in?: Maybe<Int[] | Int>;
-  min_order_not_in?: Maybe<Int[] | Int>;
-  min_order_lt?: Maybe<Int>;
-  min_order_lte?: Maybe<Int>;
-  min_order_gt?: Maybe<Int>;
-  min_order_gte?: Maybe<Int>;
-  promo_description?: Maybe<String>;
-  promo_description_not?: Maybe<String>;
-  promo_description_in?: Maybe<String[] | String>;
-  promo_description_not_in?: Maybe<String[] | String>;
-  promo_description_lt?: Maybe<String>;
-  promo_description_lte?: Maybe<String>;
-  promo_description_gt?: Maybe<String>;
-  promo_description_gte?: Maybe<String>;
-  promo_description_contains?: Maybe<String>;
-  promo_description_not_contains?: Maybe<String>;
-  promo_description_starts_with?: Maybe<String>;
-  promo_description_not_starts_with?: Maybe<String>;
-  promo_description_ends_with?: Maybe<String>;
-  promo_description_not_ends_with?: Maybe<String>;
-  promo_discount_type?: Maybe<String>;
-  promo_discount_type_not?: Maybe<String>;
-  promo_discount_type_in?: Maybe<String[] | String>;
-  promo_discount_type_not_in?: Maybe<String[] | String>;
-  promo_discount_type_lt?: Maybe<String>;
-  promo_discount_type_lte?: Maybe<String>;
-  promo_discount_type_gt?: Maybe<String>;
-  promo_discount_type_gte?: Maybe<String>;
-  promo_discount_type_contains?: Maybe<String>;
-  promo_discount_type_not_contains?: Maybe<String>;
-  promo_discount_type_starts_with?: Maybe<String>;
-  promo_discount_type_not_starts_with?: Maybe<String>;
-  promo_discount_type_ends_with?: Maybe<String>;
-  promo_discount_type_not_ends_with?: Maybe<String>;
-  promo_discount_value?: Maybe<Int>;
-  promo_discount_value_not?: Maybe<Int>;
-  promo_discount_value_in?: Maybe<Int[] | Int>;
-  promo_discount_value_not_in?: Maybe<Int[] | Int>;
-  promo_discount_value_lt?: Maybe<Int>;
-  promo_discount_value_lte?: Maybe<Int>;
-  promo_discount_value_gt?: Maybe<Int>;
-  promo_discount_value_gte?: Maybe<Int>;
-  promo_name?: Maybe<String>;
-  promo_name_not?: Maybe<String>;
-  promo_name_in?: Maybe<String[] | String>;
-  promo_name_not_in?: Maybe<String[] | String>;
-  promo_name_lt?: Maybe<String>;
-  promo_name_lte?: Maybe<String>;
-  promo_name_gt?: Maybe<String>;
-  promo_name_gte?: Maybe<String>;
-  promo_name_contains?: Maybe<String>;
-  promo_name_not_contains?: Maybe<String>;
-  promo_name_starts_with?: Maybe<String>;
-  promo_name_not_starts_with?: Maybe<String>;
-  promo_name_ends_with?: Maybe<String>;
-  promo_name_not_ends_with?: Maybe<String>;
-  promo_start?: Maybe<String>;
-  promo_start_not?: Maybe<String>;
-  promo_start_in?: Maybe<String[] | String>;
-  promo_start_not_in?: Maybe<String[] | String>;
-  promo_start_lt?: Maybe<String>;
-  promo_start_lte?: Maybe<String>;
-  promo_start_gt?: Maybe<String>;
-  promo_start_gte?: Maybe<String>;
-  promo_start_contains?: Maybe<String>;
-  promo_start_not_contains?: Maybe<String>;
-  promo_start_starts_with?: Maybe<String>;
-  promo_start_not_starts_with?: Maybe<String>;
-  promo_start_ends_with?: Maybe<String>;
-  promo_start_not_ends_with?: Maybe<String>;
-  promo_usage_limit?: Maybe<Int>;
-  promo_usage_limit_not?: Maybe<Int>;
-  promo_usage_limit_in?: Maybe<Int[] | Int>;
-  promo_usage_limit_not_in?: Maybe<Int[] | Int>;
-  promo_usage_limit_lt?: Maybe<Int>;
-  promo_usage_limit_lte?: Maybe<Int>;
-  promo_usage_limit_gt?: Maybe<Int>;
-  promo_usage_limit_gte?: Maybe<Int>;
-  promo_validity?: Maybe<String>;
-  promo_validity_not?: Maybe<String>;
-  promo_validity_in?: Maybe<String[] | String>;
-  promo_validity_not_in?: Maybe<String[] | String>;
-  promo_validity_lt?: Maybe<String>;
-  promo_validity_lte?: Maybe<String>;
-  promo_validity_gt?: Maybe<String>;
-  promo_validity_gte?: Maybe<String>;
-  promo_validity_contains?: Maybe<String>;
-  promo_validity_not_contains?: Maybe<String>;
-  promo_validity_starts_with?: Maybe<String>;
-  promo_validity_not_starts_with?: Maybe<String>;
-  promo_validity_ends_with?: Maybe<String>;
-  promo_validity_not_ends_with?: Maybe<String>;
-  AND?: Maybe<OfferWhereInput[] | OfferWhereInput>;
-  OR?: Maybe<OfferWhereInput[] | OfferWhereInput>;
-  NOT?: Maybe<OfferWhereInput[] | OfferWhereInput>;
-}
-
-export type CarTypeWhereUniqueInput = AtLeastOne<{
-  id: Maybe<ID_Input>;
-}>;
-
-export interface CancelReasonUpdateManyMutationInput {
-  value?: Maybe<String>;
-  label?: Maybe<String>;
-}
-
-export interface CarTypeWhereInput {
-  id?: Maybe<ID_Input>;
-  id_not?: Maybe<ID_Input>;
-  id_in?: Maybe<ID_Input[] | ID_Input>;
-  id_not_in?: Maybe<ID_Input[] | ID_Input>;
-  id_lt?: Maybe<ID_Input>;
-  id_lte?: Maybe<ID_Input>;
-  id_gt?: Maybe<ID_Input>;
-  id_gte?: Maybe<ID_Input>;
-  id_contains?: Maybe<ID_Input>;
-  id_not_contains?: Maybe<ID_Input>;
-  id_starts_with?: Maybe<ID_Input>;
-  id_not_starts_with?: Maybe<ID_Input>;
-  id_ends_with?: Maybe<ID_Input>;
-  id_not_ends_with?: Maybe<ID_Input>;
-  convenience_fees?: Maybe<Int>;
-  convenience_fees_not?: Maybe<Int>;
-  convenience_fees_in?: Maybe<Int[] | Int>;
-  convenience_fees_not_in?: Maybe<Int[] | Int>;
-  convenience_fees_lt?: Maybe<Int>;
-  convenience_fees_lte?: Maybe<Int>;
-  convenience_fees_gt?: Maybe<Int>;
-  convenience_fees_gte?: Maybe<Int>;
-  image?: Maybe<String>;
-  image_not?: Maybe<String>;
-  image_in?: Maybe<String[] | String>;
-  image_not_in?: Maybe<String[] | String>;
-  image_lt?: Maybe<String>;
-  image_lte?: Maybe<String>;
-  image_gt?: Maybe<String>;
-  image_gte?: Maybe<String>;
-  image_contains?: Maybe<String>;
-  image_not_contains?: Maybe<String>;
-  image_starts_with?: Maybe<String>;
-  image_not_starts_with?: Maybe<String>;
-  image_ends_with?: Maybe<String>;
-  image_not_ends_with?: Maybe<String>;
   name?: Maybe<String>;
   name_not?: Maybe<String>;
   name_in?: Maybe<String[] | String>;
@@ -1035,28 +511,84 @@ export interface CarTypeWhereInput {
   name_not_starts_with?: Maybe<String>;
   name_ends_with?: Maybe<String>;
   name_not_ends_with?: Maybe<String>;
-  rate_per_hour?: Maybe<Int>;
-  rate_per_hour_not?: Maybe<Int>;
-  rate_per_hour_in?: Maybe<Int[] | Int>;
-  rate_per_hour_not_in?: Maybe<Int[] | Int>;
-  rate_per_hour_lt?: Maybe<Int>;
-  rate_per_hour_lte?: Maybe<Int>;
-  rate_per_hour_gt?: Maybe<Int>;
-  rate_per_hour_gte?: Maybe<Int>;
-  rate_per_kilometer?: Maybe<String>;
-  rate_per_kilometer_not?: Maybe<String>;
-  rate_per_kilometer_in?: Maybe<String[] | String>;
-  rate_per_kilometer_not_in?: Maybe<String[] | String>;
-  rate_per_kilometer_lt?: Maybe<String>;
-  rate_per_kilometer_lte?: Maybe<String>;
-  rate_per_kilometer_gt?: Maybe<String>;
-  rate_per_kilometer_gte?: Maybe<String>;
-  rate_per_kilometer_contains?: Maybe<String>;
-  rate_per_kilometer_not_contains?: Maybe<String>;
-  rate_per_kilometer_starts_with?: Maybe<String>;
-  rate_per_kilometer_not_starts_with?: Maybe<String>;
-  rate_per_kilometer_ends_with?: Maybe<String>;
-  rate_per_kilometer_not_ends_with?: Maybe<String>;
+  lastName?: Maybe<String>;
+  lastName_not?: Maybe<String>;
+  lastName_in?: Maybe<String[] | String>;
+  lastName_not_in?: Maybe<String[] | String>;
+  lastName_lt?: Maybe<String>;
+  lastName_lte?: Maybe<String>;
+  lastName_gt?: Maybe<String>;
+  lastName_gte?: Maybe<String>;
+  lastName_contains?: Maybe<String>;
+  lastName_not_contains?: Maybe<String>;
+  lastName_starts_with?: Maybe<String>;
+  lastName_not_starts_with?: Maybe<String>;
+  lastName_ends_with?: Maybe<String>;
+  lastName_not_ends_with?: Maybe<String>;
+  firstName?: Maybe<String>;
+  firstName_not?: Maybe<String>;
+  firstName_in?: Maybe<String[] | String>;
+  firstName_not_in?: Maybe<String[] | String>;
+  firstName_lt?: Maybe<String>;
+  firstName_lte?: Maybe<String>;
+  firstName_gt?: Maybe<String>;
+  firstName_gte?: Maybe<String>;
+  firstName_contains?: Maybe<String>;
+  firstName_not_contains?: Maybe<String>;
+  firstName_starts_with?: Maybe<String>;
+  firstName_not_starts_with?: Maybe<String>;
+  firstName_ends_with?: Maybe<String>;
+  firstName_not_ends_with?: Maybe<String>;
+  email?: Maybe<String>;
+  email_not?: Maybe<String>;
+  email_in?: Maybe<String[] | String>;
+  email_not_in?: Maybe<String[] | String>;
+  email_lt?: Maybe<String>;
+  email_lte?: Maybe<String>;
+  email_gt?: Maybe<String>;
+  email_gte?: Maybe<String>;
+  email_contains?: Maybe<String>;
+  email_not_contains?: Maybe<String>;
+  email_starts_with?: Maybe<String>;
+  email_not_starts_with?: Maybe<String>;
+  email_ends_with?: Maybe<String>;
+  email_not_ends_with?: Maybe<String>;
+  createdAt?: Maybe<DateTimeInput>;
+  createdAt_not?: Maybe<DateTimeInput>;
+  createdAt_in?: Maybe<DateTimeInput[] | DateTimeInput>;
+  createdAt_not_in?: Maybe<DateTimeInput[] | DateTimeInput>;
+  createdAt_lt?: Maybe<DateTimeInput>;
+  createdAt_lte?: Maybe<DateTimeInput>;
+  createdAt_gt?: Maybe<DateTimeInput>;
+  createdAt_gte?: Maybe<DateTimeInput>;
+  call_length?: Maybe<String>;
+  call_length_not?: Maybe<String>;
+  call_length_in?: Maybe<String[] | String>;
+  call_length_not_in?: Maybe<String[] | String>;
+  call_length_lt?: Maybe<String>;
+  call_length_lte?: Maybe<String>;
+  call_length_gt?: Maybe<String>;
+  call_length_gte?: Maybe<String>;
+  call_length_contains?: Maybe<String>;
+  call_length_not_contains?: Maybe<String>;
+  call_length_starts_with?: Maybe<String>;
+  call_length_not_starts_with?: Maybe<String>;
+  call_length_ends_with?: Maybe<String>;
+  call_length_not_ends_with?: Maybe<String>;
+  description?: Maybe<String>;
+  description_not?: Maybe<String>;
+  description_in?: Maybe<String[] | String>;
+  description_not_in?: Maybe<String[] | String>;
+  description_lt?: Maybe<String>;
+  description_lte?: Maybe<String>;
+  description_gt?: Maybe<String>;
+  description_gte?: Maybe<String>;
+  description_contains?: Maybe<String>;
+  description_not_contains?: Maybe<String>;
+  description_starts_with?: Maybe<String>;
+  description_not_starts_with?: Maybe<String>;
+  description_ends_with?: Maybe<String>;
+  description_not_ends_with?: Maybe<String>;
   updatedAt?: Maybe<DateTimeInput>;
   updatedAt_not?: Maybe<DateTimeInput>;
   updatedAt_in?: Maybe<DateTimeInput[] | DateTimeInput>;
@@ -1065,34 +597,144 @@ export interface CarTypeWhereInput {
   updatedAt_lte?: Maybe<DateTimeInput>;
   updatedAt_gt?: Maybe<DateTimeInput>;
   updatedAt_gte?: Maybe<DateTimeInput>;
-  AND?: Maybe<CarTypeWhereInput[] | CarTypeWhereInput>;
-  OR?: Maybe<CarTypeWhereInput[] | CarTypeWhereInput>;
-  NOT?: Maybe<CarTypeWhereInput[] | CarTypeWhereInput>;
+  mobile?: Maybe<String>;
+  mobile_not?: Maybe<String>;
+  mobile_in?: Maybe<String[] | String>;
+  mobile_not_in?: Maybe<String[] | String>;
+  mobile_lt?: Maybe<String>;
+  mobile_lte?: Maybe<String>;
+  mobile_gt?: Maybe<String>;
+  mobile_gte?: Maybe<String>;
+  mobile_contains?: Maybe<String>;
+  mobile_not_contains?: Maybe<String>;
+  mobile_starts_with?: Maybe<String>;
+  mobile_not_starts_with?: Maybe<String>;
+  mobile_ends_with?: Maybe<String>;
+  mobile_not_ends_with?: Maybe<String>;
+  profile_image?: Maybe<String>;
+  profile_image_not?: Maybe<String>;
+  profile_image_in?: Maybe<String[] | String>;
+  profile_image_not_in?: Maybe<String[] | String>;
+  profile_image_lt?: Maybe<String>;
+  profile_image_lte?: Maybe<String>;
+  profile_image_gt?: Maybe<String>;
+  profile_image_gte?: Maybe<String>;
+  profile_image_contains?: Maybe<String>;
+  profile_image_not_contains?: Maybe<String>;
+  profile_image_starts_with?: Maybe<String>;
+  profile_image_not_starts_with?: Maybe<String>;
+  profile_image_ends_with?: Maybe<String>;
+  profile_image_not_ends_with?: Maybe<String>;
+  lead_source?: Maybe<String>;
+  lead_source_not?: Maybe<String>;
+  lead_source_in?: Maybe<String[] | String>;
+  lead_source_not_in?: Maybe<String[] | String>;
+  lead_source_lt?: Maybe<String>;
+  lead_source_lte?: Maybe<String>;
+  lead_source_gt?: Maybe<String>;
+  lead_source_gte?: Maybe<String>;
+  lead_source_contains?: Maybe<String>;
+  lead_source_not_contains?: Maybe<String>;
+  lead_source_starts_with?: Maybe<String>;
+  lead_source_not_starts_with?: Maybe<String>;
+  lead_source_ends_with?: Maybe<String>;
+  lead_source_not_ends_with?: Maybe<String>;
+  refferalBonus?: Maybe<String>;
+  refferalBonus_not?: Maybe<String>;
+  refferalBonus_in?: Maybe<String[] | String>;
+  refferalBonus_not_in?: Maybe<String[] | String>;
+  refferalBonus_lt?: Maybe<String>;
+  refferalBonus_lte?: Maybe<String>;
+  refferalBonus_gt?: Maybe<String>;
+  refferalBonus_gte?: Maybe<String>;
+  refferalBonus_contains?: Maybe<String>;
+  refferalBonus_not_contains?: Maybe<String>;
+  refferalBonus_starts_with?: Maybe<String>;
+  refferalBonus_not_starts_with?: Maybe<String>;
+  refferalBonus_ends_with?: Maybe<String>;
+  refferalBonus_not_ends_with?: Maybe<String>;
+  profession?: Maybe<String>;
+  profession_not?: Maybe<String>;
+  profession_in?: Maybe<String[] | String>;
+  profession_not_in?: Maybe<String[] | String>;
+  profession_lt?: Maybe<String>;
+  profession_lte?: Maybe<String>;
+  profession_gt?: Maybe<String>;
+  profession_gte?: Maybe<String>;
+  profession_contains?: Maybe<String>;
+  profession_not_contains?: Maybe<String>;
+  profession_starts_with?: Maybe<String>;
+  profession_not_starts_with?: Maybe<String>;
+  profession_ends_with?: Maybe<String>;
+  profession_not_ends_with?: Maybe<String>;
+  outcome?: Maybe<String>;
+  outcome_not?: Maybe<String>;
+  outcome_in?: Maybe<String[] | String>;
+  outcome_not_in?: Maybe<String[] | String>;
+  outcome_lt?: Maybe<String>;
+  outcome_lte?: Maybe<String>;
+  outcome_gt?: Maybe<String>;
+  outcome_gte?: Maybe<String>;
+  outcome_contains?: Maybe<String>;
+  outcome_not_contains?: Maybe<String>;
+  outcome_starts_with?: Maybe<String>;
+  outcome_not_starts_with?: Maybe<String>;
+  outcome_ends_with?: Maybe<String>;
+  outcome_not_ends_with?: Maybe<String>;
+  recording?: Maybe<Boolean>;
+  recording_not?: Maybe<Boolean>;
+  my_emotions?: Maybe<String>;
+  my_emotions_not?: Maybe<String>;
+  my_emotions_in?: Maybe<String[] | String>;
+  my_emotions_not_in?: Maybe<String[] | String>;
+  my_emotions_lt?: Maybe<String>;
+  my_emotions_lte?: Maybe<String>;
+  my_emotions_gt?: Maybe<String>;
+  my_emotions_gte?: Maybe<String>;
+  my_emotions_contains?: Maybe<String>;
+  my_emotions_not_contains?: Maybe<String>;
+  my_emotions_starts_with?: Maybe<String>;
+  my_emotions_not_starts_with?: Maybe<String>;
+  my_emotions_ends_with?: Maybe<String>;
+  my_emotions_not_ends_with?: Maybe<String>;
+  call_conclusion?: Maybe<String>;
+  call_conclusion_not?: Maybe<String>;
+  call_conclusion_in?: Maybe<String[] | String>;
+  call_conclusion_not_in?: Maybe<String[] | String>;
+  call_conclusion_lt?: Maybe<String>;
+  call_conclusion_lte?: Maybe<String>;
+  call_conclusion_gt?: Maybe<String>;
+  call_conclusion_gte?: Maybe<String>;
+  call_conclusion_contains?: Maybe<String>;
+  call_conclusion_not_contains?: Maybe<String>;
+  call_conclusion_starts_with?: Maybe<String>;
+  call_conclusion_not_starts_with?: Maybe<String>;
+  call_conclusion_ends_with?: Maybe<String>;
+  call_conclusion_not_ends_with?: Maybe<String>;
+  AND?: Maybe<ProspectWhereInput[] | ProspectWhereInput>;
+  OR?: Maybe<ProspectWhereInput[] | ProspectWhereInput>;
+  NOT?: Maybe<ProspectWhereInput[] | ProspectWhereInput>;
 }
 
-export interface CancelReasonUpdateInput {
-  value?: Maybe<String>;
-  label?: Maybe<String>;
+export interface ProspectUpdateManyMutationInput {
+  name?: Maybe<String>;
+  lastName?: Maybe<String>;
+  firstName?: Maybe<String>;
+  email?: Maybe<String>;
+  call_length?: Maybe<String>;
+  description?: Maybe<String>;
+  mobile?: Maybe<String>;
+  profile_image?: Maybe<String>;
+  lead_source?: Maybe<String>;
+  refferalBonus?: Maybe<String>;
+  profession?: Maybe<String>;
+  outcome?: Maybe<String>;
+  recording?: Maybe<Boolean>;
+  my_emotions?: Maybe<String>;
+  call_conclusion?: Maybe<String>;
 }
 
-export interface CarTypeSubscriptionWhereInput {
-  mutation_in?: Maybe<MutationType[] | MutationType>;
-  updatedFields_contains?: Maybe<String>;
-  updatedFields_contains_every?: Maybe<String[] | String>;
-  updatedFields_contains_some?: Maybe<String[] | String>;
-  node?: Maybe<CarTypeWhereInput>;
-  AND?: Maybe<CarTypeSubscriptionWhereInput[] | CarTypeSubscriptionWhereInput>;
-  OR?: Maybe<CarTypeSubscriptionWhereInput[] | CarTypeSubscriptionWhereInput>;
-  NOT?: Maybe<CarTypeSubscriptionWhereInput[] | CarTypeSubscriptionWhereInput>;
-}
-
-export interface CancelReasonCreateInput {
-  id?: Maybe<ID_Input>;
-  value: String;
-  label: String;
-}
-
-export interface CancelReasonWhereInput {
+export interface ApplicantWhereInput {
   id?: Maybe<ID_Input>;
   id_not?: Maybe<ID_Input>;
   id_in?: Maybe<ID_Input[] | ID_Input>;
@@ -1107,37 +749,323 @@ export interface CancelReasonWhereInput {
   id_not_starts_with?: Maybe<ID_Input>;
   id_ends_with?: Maybe<ID_Input>;
   id_not_ends_with?: Maybe<ID_Input>;
-  value?: Maybe<String>;
-  value_not?: Maybe<String>;
-  value_in?: Maybe<String[] | String>;
-  value_not_in?: Maybe<String[] | String>;
-  value_lt?: Maybe<String>;
-  value_lte?: Maybe<String>;
-  value_gt?: Maybe<String>;
-  value_gte?: Maybe<String>;
-  value_contains?: Maybe<String>;
-  value_not_contains?: Maybe<String>;
-  value_starts_with?: Maybe<String>;
-  value_not_starts_with?: Maybe<String>;
-  value_ends_with?: Maybe<String>;
-  value_not_ends_with?: Maybe<String>;
-  label?: Maybe<String>;
-  label_not?: Maybe<String>;
-  label_in?: Maybe<String[] | String>;
-  label_not_in?: Maybe<String[] | String>;
-  label_lt?: Maybe<String>;
-  label_lte?: Maybe<String>;
-  label_gt?: Maybe<String>;
-  label_gte?: Maybe<String>;
-  label_contains?: Maybe<String>;
-  label_not_contains?: Maybe<String>;
-  label_starts_with?: Maybe<String>;
-  label_not_starts_with?: Maybe<String>;
-  label_ends_with?: Maybe<String>;
-  label_not_ends_with?: Maybe<String>;
-  AND?: Maybe<CancelReasonWhereInput[] | CancelReasonWhereInput>;
-  OR?: Maybe<CancelReasonWhereInput[] | CancelReasonWhereInput>;
-  NOT?: Maybe<CancelReasonWhereInput[] | CancelReasonWhereInput>;
+  name?: Maybe<String>;
+  name_not?: Maybe<String>;
+  name_in?: Maybe<String[] | String>;
+  name_not_in?: Maybe<String[] | String>;
+  name_lt?: Maybe<String>;
+  name_lte?: Maybe<String>;
+  name_gt?: Maybe<String>;
+  name_gte?: Maybe<String>;
+  name_contains?: Maybe<String>;
+  name_not_contains?: Maybe<String>;
+  name_starts_with?: Maybe<String>;
+  name_not_starts_with?: Maybe<String>;
+  name_ends_with?: Maybe<String>;
+  name_not_ends_with?: Maybe<String>;
+  lastName?: Maybe<String>;
+  lastName_not?: Maybe<String>;
+  lastName_in?: Maybe<String[] | String>;
+  lastName_not_in?: Maybe<String[] | String>;
+  lastName_lt?: Maybe<String>;
+  lastName_lte?: Maybe<String>;
+  lastName_gt?: Maybe<String>;
+  lastName_gte?: Maybe<String>;
+  lastName_contains?: Maybe<String>;
+  lastName_not_contains?: Maybe<String>;
+  lastName_starts_with?: Maybe<String>;
+  lastName_not_starts_with?: Maybe<String>;
+  lastName_ends_with?: Maybe<String>;
+  lastName_not_ends_with?: Maybe<String>;
+  firstName?: Maybe<String>;
+  firstName_not?: Maybe<String>;
+  firstName_in?: Maybe<String[] | String>;
+  firstName_not_in?: Maybe<String[] | String>;
+  firstName_lt?: Maybe<String>;
+  firstName_lte?: Maybe<String>;
+  firstName_gt?: Maybe<String>;
+  firstName_gte?: Maybe<String>;
+  firstName_contains?: Maybe<String>;
+  firstName_not_contains?: Maybe<String>;
+  firstName_starts_with?: Maybe<String>;
+  firstName_not_starts_with?: Maybe<String>;
+  firstName_ends_with?: Maybe<String>;
+  firstName_not_ends_with?: Maybe<String>;
+  email?: Maybe<String>;
+  email_not?: Maybe<String>;
+  email_in?: Maybe<String[] | String>;
+  email_not_in?: Maybe<String[] | String>;
+  email_lt?: Maybe<String>;
+  email_lte?: Maybe<String>;
+  email_gt?: Maybe<String>;
+  email_gte?: Maybe<String>;
+  email_contains?: Maybe<String>;
+  email_not_contains?: Maybe<String>;
+  email_starts_with?: Maybe<String>;
+  email_not_starts_with?: Maybe<String>;
+  email_ends_with?: Maybe<String>;
+  email_not_ends_with?: Maybe<String>;
+  createdAt?: Maybe<DateTimeInput>;
+  createdAt_not?: Maybe<DateTimeInput>;
+  createdAt_in?: Maybe<DateTimeInput[] | DateTimeInput>;
+  createdAt_not_in?: Maybe<DateTimeInput[] | DateTimeInput>;
+  createdAt_lt?: Maybe<DateTimeInput>;
+  createdAt_lte?: Maybe<DateTimeInput>;
+  createdAt_gt?: Maybe<DateTimeInput>;
+  createdAt_gte?: Maybe<DateTimeInput>;
+  call_length?: Maybe<String>;
+  call_length_not?: Maybe<String>;
+  call_length_in?: Maybe<String[] | String>;
+  call_length_not_in?: Maybe<String[] | String>;
+  call_length_lt?: Maybe<String>;
+  call_length_lte?: Maybe<String>;
+  call_length_gt?: Maybe<String>;
+  call_length_gte?: Maybe<String>;
+  call_length_contains?: Maybe<String>;
+  call_length_not_contains?: Maybe<String>;
+  call_length_starts_with?: Maybe<String>;
+  call_length_not_starts_with?: Maybe<String>;
+  call_length_ends_with?: Maybe<String>;
+  call_length_not_ends_with?: Maybe<String>;
+  description?: Maybe<String>;
+  description_not?: Maybe<String>;
+  description_in?: Maybe<String[] | String>;
+  description_not_in?: Maybe<String[] | String>;
+  description_lt?: Maybe<String>;
+  description_lte?: Maybe<String>;
+  description_gt?: Maybe<String>;
+  description_gte?: Maybe<String>;
+  description_contains?: Maybe<String>;
+  description_not_contains?: Maybe<String>;
+  description_starts_with?: Maybe<String>;
+  description_not_starts_with?: Maybe<String>;
+  description_ends_with?: Maybe<String>;
+  description_not_ends_with?: Maybe<String>;
+  updatedAt?: Maybe<DateTimeInput>;
+  updatedAt_not?: Maybe<DateTimeInput>;
+  updatedAt_in?: Maybe<DateTimeInput[] | DateTimeInput>;
+  updatedAt_not_in?: Maybe<DateTimeInput[] | DateTimeInput>;
+  updatedAt_lt?: Maybe<DateTimeInput>;
+  updatedAt_lte?: Maybe<DateTimeInput>;
+  updatedAt_gt?: Maybe<DateTimeInput>;
+  updatedAt_gte?: Maybe<DateTimeInput>;
+  mobile?: Maybe<String>;
+  mobile_not?: Maybe<String>;
+  mobile_in?: Maybe<String[] | String>;
+  mobile_not_in?: Maybe<String[] | String>;
+  mobile_lt?: Maybe<String>;
+  mobile_lte?: Maybe<String>;
+  mobile_gt?: Maybe<String>;
+  mobile_gte?: Maybe<String>;
+  mobile_contains?: Maybe<String>;
+  mobile_not_contains?: Maybe<String>;
+  mobile_starts_with?: Maybe<String>;
+  mobile_not_starts_with?: Maybe<String>;
+  mobile_ends_with?: Maybe<String>;
+  mobile_not_ends_with?: Maybe<String>;
+  profile_image?: Maybe<String>;
+  profile_image_not?: Maybe<String>;
+  profile_image_in?: Maybe<String[] | String>;
+  profile_image_not_in?: Maybe<String[] | String>;
+  profile_image_lt?: Maybe<String>;
+  profile_image_lte?: Maybe<String>;
+  profile_image_gt?: Maybe<String>;
+  profile_image_gte?: Maybe<String>;
+  profile_image_contains?: Maybe<String>;
+  profile_image_not_contains?: Maybe<String>;
+  profile_image_starts_with?: Maybe<String>;
+  profile_image_not_starts_with?: Maybe<String>;
+  profile_image_ends_with?: Maybe<String>;
+  profile_image_not_ends_with?: Maybe<String>;
+  lead_source?: Maybe<String>;
+  lead_source_not?: Maybe<String>;
+  lead_source_in?: Maybe<String[] | String>;
+  lead_source_not_in?: Maybe<String[] | String>;
+  lead_source_lt?: Maybe<String>;
+  lead_source_lte?: Maybe<String>;
+  lead_source_gt?: Maybe<String>;
+  lead_source_gte?: Maybe<String>;
+  lead_source_contains?: Maybe<String>;
+  lead_source_not_contains?: Maybe<String>;
+  lead_source_starts_with?: Maybe<String>;
+  lead_source_not_starts_with?: Maybe<String>;
+  lead_source_ends_with?: Maybe<String>;
+  lead_source_not_ends_with?: Maybe<String>;
+  refferalBonus?: Maybe<String>;
+  refferalBonus_not?: Maybe<String>;
+  refferalBonus_in?: Maybe<String[] | String>;
+  refferalBonus_not_in?: Maybe<String[] | String>;
+  refferalBonus_lt?: Maybe<String>;
+  refferalBonus_lte?: Maybe<String>;
+  refferalBonus_gt?: Maybe<String>;
+  refferalBonus_gte?: Maybe<String>;
+  refferalBonus_contains?: Maybe<String>;
+  refferalBonus_not_contains?: Maybe<String>;
+  refferalBonus_starts_with?: Maybe<String>;
+  refferalBonus_not_starts_with?: Maybe<String>;
+  refferalBonus_ends_with?: Maybe<String>;
+  refferalBonus_not_ends_with?: Maybe<String>;
+  profession?: Maybe<String>;
+  profession_not?: Maybe<String>;
+  profession_in?: Maybe<String[] | String>;
+  profession_not_in?: Maybe<String[] | String>;
+  profession_lt?: Maybe<String>;
+  profession_lte?: Maybe<String>;
+  profession_gt?: Maybe<String>;
+  profession_gte?: Maybe<String>;
+  profession_contains?: Maybe<String>;
+  profession_not_contains?: Maybe<String>;
+  profession_starts_with?: Maybe<String>;
+  profession_not_starts_with?: Maybe<String>;
+  profession_ends_with?: Maybe<String>;
+  profession_not_ends_with?: Maybe<String>;
+  outcome?: Maybe<String>;
+  outcome_not?: Maybe<String>;
+  outcome_in?: Maybe<String[] | String>;
+  outcome_not_in?: Maybe<String[] | String>;
+  outcome_lt?: Maybe<String>;
+  outcome_lte?: Maybe<String>;
+  outcome_gt?: Maybe<String>;
+  outcome_gte?: Maybe<String>;
+  outcome_contains?: Maybe<String>;
+  outcome_not_contains?: Maybe<String>;
+  outcome_starts_with?: Maybe<String>;
+  outcome_not_starts_with?: Maybe<String>;
+  outcome_ends_with?: Maybe<String>;
+  outcome_not_ends_with?: Maybe<String>;
+  recording?: Maybe<Boolean>;
+  recording_not?: Maybe<Boolean>;
+  my_emotions?: Maybe<String>;
+  my_emotions_not?: Maybe<String>;
+  my_emotions_in?: Maybe<String[] | String>;
+  my_emotions_not_in?: Maybe<String[] | String>;
+  my_emotions_lt?: Maybe<String>;
+  my_emotions_lte?: Maybe<String>;
+  my_emotions_gt?: Maybe<String>;
+  my_emotions_gte?: Maybe<String>;
+  my_emotions_contains?: Maybe<String>;
+  my_emotions_not_contains?: Maybe<String>;
+  my_emotions_starts_with?: Maybe<String>;
+  my_emotions_not_starts_with?: Maybe<String>;
+  my_emotions_ends_with?: Maybe<String>;
+  my_emotions_not_ends_with?: Maybe<String>;
+  call_conclusion?: Maybe<String>;
+  call_conclusion_not?: Maybe<String>;
+  call_conclusion_in?: Maybe<String[] | String>;
+  call_conclusion_not_in?: Maybe<String[] | String>;
+  call_conclusion_lt?: Maybe<String>;
+  call_conclusion_lte?: Maybe<String>;
+  call_conclusion_gt?: Maybe<String>;
+  call_conclusion_gte?: Maybe<String>;
+  call_conclusion_contains?: Maybe<String>;
+  call_conclusion_not_contains?: Maybe<String>;
+  call_conclusion_starts_with?: Maybe<String>;
+  call_conclusion_not_starts_with?: Maybe<String>;
+  call_conclusion_ends_with?: Maybe<String>;
+  call_conclusion_not_ends_with?: Maybe<String>;
+  AND?: Maybe<ApplicantWhereInput[] | ApplicantWhereInput>;
+  OR?: Maybe<ApplicantWhereInput[] | ApplicantWhereInput>;
+  NOT?: Maybe<ApplicantWhereInput[] | ApplicantWhereInput>;
+}
+
+export interface ProspectUpdateInput {
+  name?: Maybe<String>;
+  lastName?: Maybe<String>;
+  firstName?: Maybe<String>;
+  email?: Maybe<String>;
+  call_length?: Maybe<String>;
+  description?: Maybe<String>;
+  mobile?: Maybe<String>;
+  profile_image?: Maybe<String>;
+  lead_source?: Maybe<String>;
+  refferalBonus?: Maybe<String>;
+  profession?: Maybe<String>;
+  outcome?: Maybe<String>;
+  recording?: Maybe<Boolean>;
+  my_emotions?: Maybe<String>;
+  call_conclusion?: Maybe<String>;
+}
+
+export interface ApplicantUpdateManyMutationInput {
+  name?: Maybe<String>;
+  lastName?: Maybe<String>;
+  firstName?: Maybe<String>;
+  email?: Maybe<String>;
+  call_length?: Maybe<String>;
+  description?: Maybe<String>;
+  mobile?: Maybe<String>;
+  profile_image?: Maybe<String>;
+  lead_source?: Maybe<String>;
+  refferalBonus?: Maybe<String>;
+  profession?: Maybe<String>;
+  outcome?: Maybe<String>;
+  recording?: Maybe<Boolean>;
+  my_emotions?: Maybe<String>;
+  call_conclusion?: Maybe<String>;
+}
+
+export interface UserSubscriptionWhereInput {
+  mutation_in?: Maybe<MutationType[] | MutationType>;
+  updatedFields_contains?: Maybe<String>;
+  updatedFields_contains_every?: Maybe<String[] | String>;
+  updatedFields_contains_some?: Maybe<String[] | String>;
+  node?: Maybe<UserWhereInput>;
+  AND?: Maybe<UserSubscriptionWhereInput[] | UserSubscriptionWhereInput>;
+  OR?: Maybe<UserSubscriptionWhereInput[] | UserSubscriptionWhereInput>;
+  NOT?: Maybe<UserSubscriptionWhereInput[] | UserSubscriptionWhereInput>;
+}
+
+export interface ApplicantUpdateInput {
+  name?: Maybe<String>;
+  lastName?: Maybe<String>;
+  firstName?: Maybe<String>;
+  email?: Maybe<String>;
+  call_length?: Maybe<String>;
+  description?: Maybe<String>;
+  mobile?: Maybe<String>;
+  profile_image?: Maybe<String>;
+  lead_source?: Maybe<String>;
+  refferalBonus?: Maybe<String>;
+  profession?: Maybe<String>;
+  outcome?: Maybe<String>;
+  recording?: Maybe<Boolean>;
+  my_emotions?: Maybe<String>;
+  call_conclusion?: Maybe<String>;
+}
+
+export interface PartnerUpdateManyMutationInput {
+  name?: Maybe<String>;
+  lastName?: Maybe<String>;
+  firstName?: Maybe<String>;
+  email?: Maybe<String>;
+  call_length?: Maybe<String>;
+  description?: Maybe<String>;
+  mobile?: Maybe<String>;
+  profile_image?: Maybe<String>;
+  lead_source?: Maybe<String>;
+  refferalBonus?: Maybe<String>;
+  profession?: Maybe<String>;
+  outcome?: Maybe<String>;
+  recording?: Maybe<Boolean>;
+  my_emotions?: Maybe<String>;
+  call_conclusion?: Maybe<String>;
+}
+
+export interface UserCreateInput {
+  id?: Maybe<ID_Input>;
+  name: String;
+  email: String;
+  description?: Maybe<String>;
+  password: String;
+  usertype?: Maybe<String>;
+  isAdmin?: Maybe<Boolean>;
+  lastName?: Maybe<String>;
+  firstName?: Maybe<String>;
+  mobile?: Maybe<String>;
+  profile_image?: Maybe<String>;
+  approved?: Maybe<Boolean>;
+  refferalBonus?: Maybe<String>;
+  profession?: Maybe<String>;
 }
 
 export interface UserWhereInput {
@@ -1334,58 +1262,34 @@ export interface UserWhereInput {
   NOT?: Maybe<UserWhereInput[] | UserWhereInput>;
 }
 
-export interface BookingUpdateInput {
-  tripdate?: Maybe<String>;
-  trip_start_time?: Maybe<String>;
-  trip_end_time?: Maybe<String>;
-  customer_name?: Maybe<String>;
-  carType?: Maybe<String>;
-  vehicle_number?: Maybe<String>;
-  driver_number?: Maybe<String>;
-  passenger_number?: Maybe<String>;
-  kilometer_number?: Maybe<String>;
-  hour_number?: Maybe<String>;
-  day_number?: Maybe<String>;
-  pickupAddress?: Maybe<String>;
-  pickupCity?: Maybe<String>;
-  dropAddress?: Maybe<String>;
-  dropCity?: Maybe<String>;
-  driver_name?: Maybe<String>;
-  status?: Maybe<String>;
-  trip_cost?: Maybe<String>;
-  discount?: Maybe<String>;
-  payment_status?: Maybe<String>;
-  comment?: Maybe<String>;
-}
-
 export type UserWhereUniqueInput = AtLeastOne<{
   id: Maybe<ID_Input>;
   email?: Maybe<String>;
 }>;
 
-export interface BookingUpdateManyMutationInput {
-  tripdate?: Maybe<String>;
-  trip_start_time?: Maybe<String>;
-  trip_end_time?: Maybe<String>;
-  customer_name?: Maybe<String>;
-  carType?: Maybe<String>;
-  vehicle_number?: Maybe<String>;
-  driver_number?: Maybe<String>;
-  passenger_number?: Maybe<String>;
-  kilometer_number?: Maybe<String>;
-  hour_number?: Maybe<String>;
-  day_number?: Maybe<String>;
-  pickupAddress?: Maybe<String>;
-  pickupCity?: Maybe<String>;
-  dropAddress?: Maybe<String>;
-  dropCity?: Maybe<String>;
-  driver_name?: Maybe<String>;
-  status?: Maybe<String>;
-  trip_cost?: Maybe<String>;
-  discount?: Maybe<String>;
-  payment_status?: Maybe<String>;
-  comment?: Maybe<String>;
+export interface ApplicantCreateInput {
+  id?: Maybe<ID_Input>;
+  name: String;
+  lastName?: Maybe<String>;
+  firstName?: Maybe<String>;
+  email: String;
+  call_length?: Maybe<String>;
+  description?: Maybe<String>;
+  mobile?: Maybe<String>;
+  profile_image?: Maybe<String>;
+  lead_source?: Maybe<String>;
+  refferalBonus?: Maybe<String>;
+  profession?: Maybe<String>;
+  outcome?: Maybe<String>;
+  recording?: Maybe<Boolean>;
+  my_emotions?: Maybe<String>;
+  call_conclusion?: Maybe<String>;
 }
+
+export type PartnerWhereUniqueInput = AtLeastOne<{
+  id: Maybe<ID_Input>;
+  email?: Maybe<String>;
+}>;
 
 export interface UserUpdateManyMutationInput {
   name?: Maybe<String>;
@@ -1403,52 +1307,293 @@ export interface UserUpdateManyMutationInput {
   profession?: Maybe<String>;
 }
 
-export type CancelReasonWhereUniqueInput = AtLeastOne<{
-  id: Maybe<ID_Input>;
-}>;
-
-export interface UserSubscriptionWhereInput {
+export interface PartnerSubscriptionWhereInput {
   mutation_in?: Maybe<MutationType[] | MutationType>;
   updatedFields_contains?: Maybe<String>;
   updatedFields_contains_every?: Maybe<String[] | String>;
   updatedFields_contains_some?: Maybe<String[] | String>;
-  node?: Maybe<UserWhereInput>;
-  AND?: Maybe<UserSubscriptionWhereInput[] | UserSubscriptionWhereInput>;
-  OR?: Maybe<UserSubscriptionWhereInput[] | UserSubscriptionWhereInput>;
-  NOT?: Maybe<UserSubscriptionWhereInput[] | UserSubscriptionWhereInput>;
+  node?: Maybe<PartnerWhereInput>;
+  AND?: Maybe<PartnerSubscriptionWhereInput[] | PartnerSubscriptionWhereInput>;
+  OR?: Maybe<PartnerSubscriptionWhereInput[] | PartnerSubscriptionWhereInput>;
+  NOT?: Maybe<PartnerSubscriptionWhereInput[] | PartnerSubscriptionWhereInput>;
 }
 
-export interface OfferUpdateManyMutationInput {
-  max_promo_discount_value?: Maybe<Int>;
-  min_order?: Maybe<Int>;
-  promo_description?: Maybe<String>;
-  promo_discount_type?: Maybe<String>;
-  promo_discount_value?: Maybe<Int>;
-  promo_name?: Maybe<String>;
-  promo_start?: Maybe<String>;
-  promo_usage_limit?: Maybe<Int>;
-  promo_validity?: Maybe<String>;
-}
-
-export interface UserCreateInput {
+export interface PartnerWhereInput {
   id?: Maybe<ID_Input>;
-  name: String;
-  email: String;
-  description?: Maybe<String>;
-  password: String;
-  usertype?: Maybe<String>;
-  isAdmin?: Maybe<Boolean>;
+  id_not?: Maybe<ID_Input>;
+  id_in?: Maybe<ID_Input[] | ID_Input>;
+  id_not_in?: Maybe<ID_Input[] | ID_Input>;
+  id_lt?: Maybe<ID_Input>;
+  id_lte?: Maybe<ID_Input>;
+  id_gt?: Maybe<ID_Input>;
+  id_gte?: Maybe<ID_Input>;
+  id_contains?: Maybe<ID_Input>;
+  id_not_contains?: Maybe<ID_Input>;
+  id_starts_with?: Maybe<ID_Input>;
+  id_not_starts_with?: Maybe<ID_Input>;
+  id_ends_with?: Maybe<ID_Input>;
+  id_not_ends_with?: Maybe<ID_Input>;
+  name?: Maybe<String>;
+  name_not?: Maybe<String>;
+  name_in?: Maybe<String[] | String>;
+  name_not_in?: Maybe<String[] | String>;
+  name_lt?: Maybe<String>;
+  name_lte?: Maybe<String>;
+  name_gt?: Maybe<String>;
+  name_gte?: Maybe<String>;
+  name_contains?: Maybe<String>;
+  name_not_contains?: Maybe<String>;
+  name_starts_with?: Maybe<String>;
+  name_not_starts_with?: Maybe<String>;
+  name_ends_with?: Maybe<String>;
+  name_not_ends_with?: Maybe<String>;
   lastName?: Maybe<String>;
+  lastName_not?: Maybe<String>;
+  lastName_in?: Maybe<String[] | String>;
+  lastName_not_in?: Maybe<String[] | String>;
+  lastName_lt?: Maybe<String>;
+  lastName_lte?: Maybe<String>;
+  lastName_gt?: Maybe<String>;
+  lastName_gte?: Maybe<String>;
+  lastName_contains?: Maybe<String>;
+  lastName_not_contains?: Maybe<String>;
+  lastName_starts_with?: Maybe<String>;
+  lastName_not_starts_with?: Maybe<String>;
+  lastName_ends_with?: Maybe<String>;
+  lastName_not_ends_with?: Maybe<String>;
   firstName?: Maybe<String>;
+  firstName_not?: Maybe<String>;
+  firstName_in?: Maybe<String[] | String>;
+  firstName_not_in?: Maybe<String[] | String>;
+  firstName_lt?: Maybe<String>;
+  firstName_lte?: Maybe<String>;
+  firstName_gt?: Maybe<String>;
+  firstName_gte?: Maybe<String>;
+  firstName_contains?: Maybe<String>;
+  firstName_not_contains?: Maybe<String>;
+  firstName_starts_with?: Maybe<String>;
+  firstName_not_starts_with?: Maybe<String>;
+  firstName_ends_with?: Maybe<String>;
+  firstName_not_ends_with?: Maybe<String>;
+  email?: Maybe<String>;
+  email_not?: Maybe<String>;
+  email_in?: Maybe<String[] | String>;
+  email_not_in?: Maybe<String[] | String>;
+  email_lt?: Maybe<String>;
+  email_lte?: Maybe<String>;
+  email_gt?: Maybe<String>;
+  email_gte?: Maybe<String>;
+  email_contains?: Maybe<String>;
+  email_not_contains?: Maybe<String>;
+  email_starts_with?: Maybe<String>;
+  email_not_starts_with?: Maybe<String>;
+  email_ends_with?: Maybe<String>;
+  email_not_ends_with?: Maybe<String>;
+  createdAt?: Maybe<DateTimeInput>;
+  createdAt_not?: Maybe<DateTimeInput>;
+  createdAt_in?: Maybe<DateTimeInput[] | DateTimeInput>;
+  createdAt_not_in?: Maybe<DateTimeInput[] | DateTimeInput>;
+  createdAt_lt?: Maybe<DateTimeInput>;
+  createdAt_lte?: Maybe<DateTimeInput>;
+  createdAt_gt?: Maybe<DateTimeInput>;
+  createdAt_gte?: Maybe<DateTimeInput>;
+  call_length?: Maybe<String>;
+  call_length_not?: Maybe<String>;
+  call_length_in?: Maybe<String[] | String>;
+  call_length_not_in?: Maybe<String[] | String>;
+  call_length_lt?: Maybe<String>;
+  call_length_lte?: Maybe<String>;
+  call_length_gt?: Maybe<String>;
+  call_length_gte?: Maybe<String>;
+  call_length_contains?: Maybe<String>;
+  call_length_not_contains?: Maybe<String>;
+  call_length_starts_with?: Maybe<String>;
+  call_length_not_starts_with?: Maybe<String>;
+  call_length_ends_with?: Maybe<String>;
+  call_length_not_ends_with?: Maybe<String>;
+  description?: Maybe<String>;
+  description_not?: Maybe<String>;
+  description_in?: Maybe<String[] | String>;
+  description_not_in?: Maybe<String[] | String>;
+  description_lt?: Maybe<String>;
+  description_lte?: Maybe<String>;
+  description_gt?: Maybe<String>;
+  description_gte?: Maybe<String>;
+  description_contains?: Maybe<String>;
+  description_not_contains?: Maybe<String>;
+  description_starts_with?: Maybe<String>;
+  description_not_starts_with?: Maybe<String>;
+  description_ends_with?: Maybe<String>;
+  description_not_ends_with?: Maybe<String>;
+  updatedAt?: Maybe<DateTimeInput>;
+  updatedAt_not?: Maybe<DateTimeInput>;
+  updatedAt_in?: Maybe<DateTimeInput[] | DateTimeInput>;
+  updatedAt_not_in?: Maybe<DateTimeInput[] | DateTimeInput>;
+  updatedAt_lt?: Maybe<DateTimeInput>;
+  updatedAt_lte?: Maybe<DateTimeInput>;
+  updatedAt_gt?: Maybe<DateTimeInput>;
+  updatedAt_gte?: Maybe<DateTimeInput>;
   mobile?: Maybe<String>;
+  mobile_not?: Maybe<String>;
+  mobile_in?: Maybe<String[] | String>;
+  mobile_not_in?: Maybe<String[] | String>;
+  mobile_lt?: Maybe<String>;
+  mobile_lte?: Maybe<String>;
+  mobile_gt?: Maybe<String>;
+  mobile_gte?: Maybe<String>;
+  mobile_contains?: Maybe<String>;
+  mobile_not_contains?: Maybe<String>;
+  mobile_starts_with?: Maybe<String>;
+  mobile_not_starts_with?: Maybe<String>;
+  mobile_ends_with?: Maybe<String>;
+  mobile_not_ends_with?: Maybe<String>;
   profile_image?: Maybe<String>;
-  approved?: Maybe<Boolean>;
+  profile_image_not?: Maybe<String>;
+  profile_image_in?: Maybe<String[] | String>;
+  profile_image_not_in?: Maybe<String[] | String>;
+  profile_image_lt?: Maybe<String>;
+  profile_image_lte?: Maybe<String>;
+  profile_image_gt?: Maybe<String>;
+  profile_image_gte?: Maybe<String>;
+  profile_image_contains?: Maybe<String>;
+  profile_image_not_contains?: Maybe<String>;
+  profile_image_starts_with?: Maybe<String>;
+  profile_image_not_starts_with?: Maybe<String>;
+  profile_image_ends_with?: Maybe<String>;
+  profile_image_not_ends_with?: Maybe<String>;
+  lead_source?: Maybe<String>;
+  lead_source_not?: Maybe<String>;
+  lead_source_in?: Maybe<String[] | String>;
+  lead_source_not_in?: Maybe<String[] | String>;
+  lead_source_lt?: Maybe<String>;
+  lead_source_lte?: Maybe<String>;
+  lead_source_gt?: Maybe<String>;
+  lead_source_gte?: Maybe<String>;
+  lead_source_contains?: Maybe<String>;
+  lead_source_not_contains?: Maybe<String>;
+  lead_source_starts_with?: Maybe<String>;
+  lead_source_not_starts_with?: Maybe<String>;
+  lead_source_ends_with?: Maybe<String>;
+  lead_source_not_ends_with?: Maybe<String>;
   refferalBonus?: Maybe<String>;
+  refferalBonus_not?: Maybe<String>;
+  refferalBonus_in?: Maybe<String[] | String>;
+  refferalBonus_not_in?: Maybe<String[] | String>;
+  refferalBonus_lt?: Maybe<String>;
+  refferalBonus_lte?: Maybe<String>;
+  refferalBonus_gt?: Maybe<String>;
+  refferalBonus_gte?: Maybe<String>;
+  refferalBonus_contains?: Maybe<String>;
+  refferalBonus_not_contains?: Maybe<String>;
+  refferalBonus_starts_with?: Maybe<String>;
+  refferalBonus_not_starts_with?: Maybe<String>;
+  refferalBonus_ends_with?: Maybe<String>;
+  refferalBonus_not_ends_with?: Maybe<String>;
   profession?: Maybe<String>;
+  profession_not?: Maybe<String>;
+  profession_in?: Maybe<String[] | String>;
+  profession_not_in?: Maybe<String[] | String>;
+  profession_lt?: Maybe<String>;
+  profession_lte?: Maybe<String>;
+  profession_gt?: Maybe<String>;
+  profession_gte?: Maybe<String>;
+  profession_contains?: Maybe<String>;
+  profession_not_contains?: Maybe<String>;
+  profession_starts_with?: Maybe<String>;
+  profession_not_starts_with?: Maybe<String>;
+  profession_ends_with?: Maybe<String>;
+  profession_not_ends_with?: Maybe<String>;
+  outcome?: Maybe<String>;
+  outcome_not?: Maybe<String>;
+  outcome_in?: Maybe<String[] | String>;
+  outcome_not_in?: Maybe<String[] | String>;
+  outcome_lt?: Maybe<String>;
+  outcome_lte?: Maybe<String>;
+  outcome_gt?: Maybe<String>;
+  outcome_gte?: Maybe<String>;
+  outcome_contains?: Maybe<String>;
+  outcome_not_contains?: Maybe<String>;
+  outcome_starts_with?: Maybe<String>;
+  outcome_not_starts_with?: Maybe<String>;
+  outcome_ends_with?: Maybe<String>;
+  outcome_not_ends_with?: Maybe<String>;
+  recording?: Maybe<Boolean>;
+  recording_not?: Maybe<Boolean>;
+  my_emotions?: Maybe<String>;
+  my_emotions_not?: Maybe<String>;
+  my_emotions_in?: Maybe<String[] | String>;
+  my_emotions_not_in?: Maybe<String[] | String>;
+  my_emotions_lt?: Maybe<String>;
+  my_emotions_lte?: Maybe<String>;
+  my_emotions_gt?: Maybe<String>;
+  my_emotions_gte?: Maybe<String>;
+  my_emotions_contains?: Maybe<String>;
+  my_emotions_not_contains?: Maybe<String>;
+  my_emotions_starts_with?: Maybe<String>;
+  my_emotions_not_starts_with?: Maybe<String>;
+  my_emotions_ends_with?: Maybe<String>;
+  my_emotions_not_ends_with?: Maybe<String>;
+  call_conclusion?: Maybe<String>;
+  call_conclusion_not?: Maybe<String>;
+  call_conclusion_in?: Maybe<String[] | String>;
+  call_conclusion_not_in?: Maybe<String[] | String>;
+  call_conclusion_lt?: Maybe<String>;
+  call_conclusion_lte?: Maybe<String>;
+  call_conclusion_gt?: Maybe<String>;
+  call_conclusion_gte?: Maybe<String>;
+  call_conclusion_contains?: Maybe<String>;
+  call_conclusion_not_contains?: Maybe<String>;
+  call_conclusion_starts_with?: Maybe<String>;
+  call_conclusion_not_starts_with?: Maybe<String>;
+  call_conclusion_ends_with?: Maybe<String>;
+  call_conclusion_not_ends_with?: Maybe<String>;
+  AND?: Maybe<PartnerWhereInput[] | PartnerWhereInput>;
+  OR?: Maybe<PartnerWhereInput[] | PartnerWhereInput>;
+  NOT?: Maybe<PartnerWhereInput[] | PartnerWhereInput>;
 }
 
 export interface NodeNode {
   id: ID_Output;
+}
+
+export interface UserConnection {
+  pageInfo: PageInfo;
+  edges: UserEdge[];
+}
+
+export interface UserConnectionPromise
+  extends Promise<UserConnection>,
+    Fragmentable {
+  pageInfo: <T = PageInfoPromise>() => T;
+  edges: <T = FragmentableArray<UserEdge>>() => T;
+  aggregate: <T = AggregateUserPromise>() => T;
+}
+
+export interface UserConnectionSubscription
+  extends Promise<AsyncIterator<UserConnection>>,
+    Fragmentable {
+  pageInfo: <T = PageInfoSubscription>() => T;
+  edges: <T = Promise<AsyncIterator<UserEdgeSubscription>>>() => T;
+  aggregate: <T = AggregateUserSubscription>() => T;
+}
+
+export interface ApplicantEdge {
+  node: Applicant;
+  cursor: String;
+}
+
+export interface ApplicantEdgePromise
+  extends Promise<ApplicantEdge>,
+    Fragmentable {
+  node: <T = ApplicantPromise>() => T;
+  cursor: () => Promise<String>;
+}
+
+export interface ApplicantEdgeSubscription
+  extends Promise<AsyncIterator<ApplicantEdge>>,
+    Fragmentable {
+  node: <T = ApplicantSubscription>() => T;
+  cursor: () => Promise<AsyncIterator<String>>;
 }
 
 export interface UserPreviousValues {
@@ -1512,60 +1657,27 @@ export interface UserPreviousValuesSubscription
   profession: () => Promise<AsyncIterator<String>>;
 }
 
-export interface AggregateCancelReason {
-  count: Int;
+export interface PageInfo {
+  hasNextPage: Boolean;
+  hasPreviousPage: Boolean;
+  startCursor?: String;
+  endCursor?: String;
 }
 
-export interface AggregateCancelReasonPromise
-  extends Promise<AggregateCancelReason>,
+export interface PageInfoPromise extends Promise<PageInfo>, Fragmentable {
+  hasNextPage: () => Promise<Boolean>;
+  hasPreviousPage: () => Promise<Boolean>;
+  startCursor: () => Promise<String>;
+  endCursor: () => Promise<String>;
+}
+
+export interface PageInfoSubscription
+  extends Promise<AsyncIterator<PageInfo>>,
     Fragmentable {
-  count: () => Promise<Int>;
-}
-
-export interface AggregateCancelReasonSubscription
-  extends Promise<AsyncIterator<AggregateCancelReason>>,
-    Fragmentable {
-  count: () => Promise<AsyncIterator<Int>>;
-}
-
-export interface UserConnection {
-  pageInfo: PageInfo;
-  edges: UserEdge[];
-}
-
-export interface UserConnectionPromise
-  extends Promise<UserConnection>,
-    Fragmentable {
-  pageInfo: <T = PageInfoPromise>() => T;
-  edges: <T = FragmentableArray<UserEdge>>() => T;
-  aggregate: <T = AggregateUserPromise>() => T;
-}
-
-export interface UserConnectionSubscription
-  extends Promise<AsyncIterator<UserConnection>>,
-    Fragmentable {
-  pageInfo: <T = PageInfoSubscription>() => T;
-  edges: <T = Promise<AsyncIterator<UserEdgeSubscription>>>() => T;
-  aggregate: <T = AggregateUserSubscription>() => T;
-}
-
-export interface CancelReasonEdge {
-  node: CancelReason;
-  cursor: String;
-}
-
-export interface CancelReasonEdgePromise
-  extends Promise<CancelReasonEdge>,
-    Fragmentable {
-  node: <T = CancelReasonPromise>() => T;
-  cursor: () => Promise<String>;
-}
-
-export interface CancelReasonEdgeSubscription
-  extends Promise<AsyncIterator<CancelReasonEdge>>,
-    Fragmentable {
-  node: <T = CancelReasonSubscription>() => T;
-  cursor: () => Promise<AsyncIterator<String>>;
+  hasNextPage: () => Promise<AsyncIterator<Boolean>>;
+  hasPreviousPage: () => Promise<AsyncIterator<Boolean>>;
+  startCursor: () => Promise<AsyncIterator<String>>;
+  endCursor: () => Promise<AsyncIterator<String>>;
 }
 
 export interface AggregateUser {
@@ -1584,88 +1696,41 @@ export interface AggregateUserSubscription
   count: () => Promise<AsyncIterator<Int>>;
 }
 
-export interface UserEdge {
-  node: User;
-  cursor: String;
-}
-
-export interface UserEdgePromise extends Promise<UserEdge>, Fragmentable {
-  node: <T = UserPromise>() => T;
-  cursor: () => Promise<String>;
-}
-
-export interface UserEdgeSubscription
-  extends Promise<AsyncIterator<UserEdge>>,
-    Fragmentable {
-  node: <T = UserSubscription>() => T;
-  cursor: () => Promise<AsyncIterator<String>>;
-}
-
-export interface OfferSubscriptionPayload {
-  mutation: MutationType;
-  node: Offer;
-  updatedFields: String[];
-  previousValues: OfferPreviousValues;
-}
-
-export interface OfferSubscriptionPayloadPromise
-  extends Promise<OfferSubscriptionPayload>,
-    Fragmentable {
-  mutation: () => Promise<MutationType>;
-  node: <T = OfferPromise>() => T;
-  updatedFields: () => Promise<String[]>;
-  previousValues: <T = OfferPreviousValuesPromise>() => T;
-}
-
-export interface OfferSubscriptionPayloadSubscription
-  extends Promise<AsyncIterator<OfferSubscriptionPayload>>,
-    Fragmentable {
-  mutation: () => Promise<AsyncIterator<MutationType>>;
-  node: <T = OfferSubscription>() => T;
-  updatedFields: () => Promise<AsyncIterator<String[]>>;
-  previousValues: <T = OfferPreviousValuesSubscription>() => T;
-}
-
-export interface BookingConnection {
+export interface ApplicantConnection {
   pageInfo: PageInfo;
-  edges: BookingEdge[];
+  edges: ApplicantEdge[];
 }
 
-export interface BookingConnectionPromise
-  extends Promise<BookingConnection>,
+export interface ApplicantConnectionPromise
+  extends Promise<ApplicantConnection>,
     Fragmentable {
   pageInfo: <T = PageInfoPromise>() => T;
-  edges: <T = FragmentableArray<BookingEdge>>() => T;
-  aggregate: <T = AggregateBookingPromise>() => T;
+  edges: <T = FragmentableArray<ApplicantEdge>>() => T;
+  aggregate: <T = AggregateApplicantPromise>() => T;
 }
 
-export interface BookingConnectionSubscription
-  extends Promise<AsyncIterator<BookingConnection>>,
+export interface ApplicantConnectionSubscription
+  extends Promise<AsyncIterator<ApplicantConnection>>,
     Fragmentable {
   pageInfo: <T = PageInfoSubscription>() => T;
-  edges: <T = Promise<AsyncIterator<BookingEdgeSubscription>>>() => T;
-  aggregate: <T = AggregateBookingSubscription>() => T;
+  edges: <T = Promise<AsyncIterator<ApplicantEdgeSubscription>>>() => T;
+  aggregate: <T = AggregateApplicantSubscription>() => T;
 }
 
-export interface CancelReasonConnection {
-  pageInfo: PageInfo;
-  edges: CancelReasonEdge[];
+export interface AggregateProspect {
+  count: Int;
 }
 
-export interface CancelReasonConnectionPromise
-  extends Promise<CancelReasonConnection>,
+export interface AggregateProspectPromise
+  extends Promise<AggregateProspect>,
     Fragmentable {
-  pageInfo: <T = PageInfoPromise>() => T;
-  edges: <T = FragmentableArray<CancelReasonEdge>>() => T;
-  aggregate: <T = AggregateCancelReasonPromise>() => T;
+  count: () => Promise<Int>;
 }
 
-export interface CancelReasonConnectionSubscription
-  extends Promise<AsyncIterator<CancelReasonConnection>>,
+export interface AggregateProspectSubscription
+  extends Promise<AsyncIterator<AggregateProspect>>,
     Fragmentable {
-  pageInfo: <T = PageInfoSubscription>() => T;
-  edges: <T = Promise<AsyncIterator<CancelReasonEdgeSubscription>>>() => T;
-  aggregate: <T = AggregateCancelReasonSubscription>() => T;
+  count: () => Promise<AsyncIterator<Int>>;
 }
 
 export interface User {
@@ -1748,6 +1813,134 @@ export interface UserNullablePromise
   profession: () => Promise<String>;
 }
 
+export interface Applicant {
+  id: ID_Output;
+  name: String;
+  lastName?: String;
+  firstName?: String;
+  email: String;
+  createdAt: DateTimeOutput;
+  call_length?: String;
+  description?: String;
+  updatedAt?: DateTimeOutput;
+  mobile?: String;
+  profile_image?: String;
+  lead_source?: String;
+  refferalBonus?: String;
+  profession?: String;
+  outcome?: String;
+  recording?: Boolean;
+  my_emotions?: String;
+  call_conclusion?: String;
+}
+
+export interface ApplicantPromise extends Promise<Applicant>, Fragmentable {
+  id: () => Promise<ID_Output>;
+  name: () => Promise<String>;
+  lastName: () => Promise<String>;
+  firstName: () => Promise<String>;
+  email: () => Promise<String>;
+  createdAt: () => Promise<DateTimeOutput>;
+  call_length: () => Promise<String>;
+  description: () => Promise<String>;
+  updatedAt: () => Promise<DateTimeOutput>;
+  mobile: () => Promise<String>;
+  profile_image: () => Promise<String>;
+  lead_source: () => Promise<String>;
+  refferalBonus: () => Promise<String>;
+  profession: () => Promise<String>;
+  outcome: () => Promise<String>;
+  recording: () => Promise<Boolean>;
+  my_emotions: () => Promise<String>;
+  call_conclusion: () => Promise<String>;
+}
+
+export interface ApplicantSubscription
+  extends Promise<AsyncIterator<Applicant>>,
+    Fragmentable {
+  id: () => Promise<AsyncIterator<ID_Output>>;
+  name: () => Promise<AsyncIterator<String>>;
+  lastName: () => Promise<AsyncIterator<String>>;
+  firstName: () => Promise<AsyncIterator<String>>;
+  email: () => Promise<AsyncIterator<String>>;
+  createdAt: () => Promise<AsyncIterator<DateTimeOutput>>;
+  call_length: () => Promise<AsyncIterator<String>>;
+  description: () => Promise<AsyncIterator<String>>;
+  updatedAt: () => Promise<AsyncIterator<DateTimeOutput>>;
+  mobile: () => Promise<AsyncIterator<String>>;
+  profile_image: () => Promise<AsyncIterator<String>>;
+  lead_source: () => Promise<AsyncIterator<String>>;
+  refferalBonus: () => Promise<AsyncIterator<String>>;
+  profession: () => Promise<AsyncIterator<String>>;
+  outcome: () => Promise<AsyncIterator<String>>;
+  recording: () => Promise<AsyncIterator<Boolean>>;
+  my_emotions: () => Promise<AsyncIterator<String>>;
+  call_conclusion: () => Promise<AsyncIterator<String>>;
+}
+
+export interface ApplicantNullablePromise
+  extends Promise<Applicant | null>,
+    Fragmentable {
+  id: () => Promise<ID_Output>;
+  name: () => Promise<String>;
+  lastName: () => Promise<String>;
+  firstName: () => Promise<String>;
+  email: () => Promise<String>;
+  createdAt: () => Promise<DateTimeOutput>;
+  call_length: () => Promise<String>;
+  description: () => Promise<String>;
+  updatedAt: () => Promise<DateTimeOutput>;
+  mobile: () => Promise<String>;
+  profile_image: () => Promise<String>;
+  lead_source: () => Promise<String>;
+  refferalBonus: () => Promise<String>;
+  profession: () => Promise<String>;
+  outcome: () => Promise<String>;
+  recording: () => Promise<Boolean>;
+  my_emotions: () => Promise<String>;
+  call_conclusion: () => Promise<String>;
+}
+
+export interface ProspectEdge {
+  node: Prospect;
+  cursor: String;
+}
+
+export interface ProspectEdgePromise
+  extends Promise<ProspectEdge>,
+    Fragmentable {
+  node: <T = ProspectPromise>() => T;
+  cursor: () => Promise<String>;
+}
+
+export interface ProspectEdgeSubscription
+  extends Promise<AsyncIterator<ProspectEdge>>,
+    Fragmentable {
+  node: <T = ProspectSubscription>() => T;
+  cursor: () => Promise<AsyncIterator<String>>;
+}
+
+export interface ProspectConnection {
+  pageInfo: PageInfo;
+  edges: ProspectEdge[];
+}
+
+export interface ProspectConnectionPromise
+  extends Promise<ProspectConnection>,
+    Fragmentable {
+  pageInfo: <T = PageInfoPromise>() => T;
+  edges: <T = FragmentableArray<ProspectEdge>>() => T;
+  aggregate: <T = AggregateProspectPromise>() => T;
+}
+
+export interface ProspectConnectionSubscription
+  extends Promise<AsyncIterator<ProspectConnection>>,
+    Fragmentable {
+  pageInfo: <T = PageInfoSubscription>() => T;
+  edges: <T = Promise<AsyncIterator<ProspectEdgeSubscription>>>() => T;
+  aggregate: <T = AggregateProspectSubscription>() => T;
+}
+
 export interface BatchPayload {
   count: Long;
 }
@@ -1764,411 +1957,490 @@ export interface BatchPayloadSubscription
   count: () => Promise<AsyncIterator<Long>>;
 }
 
-export interface CancelReason {
+export interface Prospect {
   id: ID_Output;
-  value: String;
-  label: String;
+  name: String;
+  lastName?: String;
+  firstName?: String;
+  email: String;
+  createdAt: DateTimeOutput;
+  call_length?: String;
+  description?: String;
+  updatedAt?: DateTimeOutput;
+  mobile?: String;
+  profile_image?: String;
+  lead_source?: String;
+  refferalBonus?: String;
+  profession?: String;
+  outcome?: String;
+  recording?: Boolean;
+  my_emotions?: String;
+  call_conclusion?: String;
 }
 
-export interface CancelReasonPromise
-  extends Promise<CancelReason>,
-    Fragmentable {
+export interface ProspectPromise extends Promise<Prospect>, Fragmentable {
   id: () => Promise<ID_Output>;
-  value: () => Promise<String>;
-  label: () => Promise<String>;
+  name: () => Promise<String>;
+  lastName: () => Promise<String>;
+  firstName: () => Promise<String>;
+  email: () => Promise<String>;
+  createdAt: () => Promise<DateTimeOutput>;
+  call_length: () => Promise<String>;
+  description: () => Promise<String>;
+  updatedAt: () => Promise<DateTimeOutput>;
+  mobile: () => Promise<String>;
+  profile_image: () => Promise<String>;
+  lead_source: () => Promise<String>;
+  refferalBonus: () => Promise<String>;
+  profession: () => Promise<String>;
+  outcome: () => Promise<String>;
+  recording: () => Promise<Boolean>;
+  my_emotions: () => Promise<String>;
+  call_conclusion: () => Promise<String>;
 }
 
-export interface CancelReasonSubscription
-  extends Promise<AsyncIterator<CancelReason>>,
+export interface ProspectSubscription
+  extends Promise<AsyncIterator<Prospect>>,
     Fragmentable {
   id: () => Promise<AsyncIterator<ID_Output>>;
-  value: () => Promise<AsyncIterator<String>>;
-  label: () => Promise<AsyncIterator<String>>;
+  name: () => Promise<AsyncIterator<String>>;
+  lastName: () => Promise<AsyncIterator<String>>;
+  firstName: () => Promise<AsyncIterator<String>>;
+  email: () => Promise<AsyncIterator<String>>;
+  createdAt: () => Promise<AsyncIterator<DateTimeOutput>>;
+  call_length: () => Promise<AsyncIterator<String>>;
+  description: () => Promise<AsyncIterator<String>>;
+  updatedAt: () => Promise<AsyncIterator<DateTimeOutput>>;
+  mobile: () => Promise<AsyncIterator<String>>;
+  profile_image: () => Promise<AsyncIterator<String>>;
+  lead_source: () => Promise<AsyncIterator<String>>;
+  refferalBonus: () => Promise<AsyncIterator<String>>;
+  profession: () => Promise<AsyncIterator<String>>;
+  outcome: () => Promise<AsyncIterator<String>>;
+  recording: () => Promise<AsyncIterator<Boolean>>;
+  my_emotions: () => Promise<AsyncIterator<String>>;
+  call_conclusion: () => Promise<AsyncIterator<String>>;
 }
 
-export interface CancelReasonNullablePromise
-  extends Promise<CancelReason | null>,
+export interface ProspectNullablePromise
+  extends Promise<Prospect | null>,
     Fragmentable {
   id: () => Promise<ID_Output>;
-  value: () => Promise<String>;
-  label: () => Promise<String>;
+  name: () => Promise<String>;
+  lastName: () => Promise<String>;
+  firstName: () => Promise<String>;
+  email: () => Promise<String>;
+  createdAt: () => Promise<DateTimeOutput>;
+  call_length: () => Promise<String>;
+  description: () => Promise<String>;
+  updatedAt: () => Promise<DateTimeOutput>;
+  mobile: () => Promise<String>;
+  profile_image: () => Promise<String>;
+  lead_source: () => Promise<String>;
+  refferalBonus: () => Promise<String>;
+  profession: () => Promise<String>;
+  outcome: () => Promise<String>;
+  recording: () => Promise<Boolean>;
+  my_emotions: () => Promise<String>;
+  call_conclusion: () => Promise<String>;
 }
 
-export interface OfferEdge {
-  node: Offer;
+export interface ProspectPreviousValues {
+  id: ID_Output;
+  name: String;
+  lastName?: String;
+  firstName?: String;
+  email: String;
+  createdAt: DateTimeOutput;
+  call_length?: String;
+  description?: String;
+  updatedAt?: DateTimeOutput;
+  mobile?: String;
+  profile_image?: String;
+  lead_source?: String;
+  refferalBonus?: String;
+  profession?: String;
+  outcome?: String;
+  recording?: Boolean;
+  my_emotions?: String;
+  call_conclusion?: String;
+}
+
+export interface ProspectPreviousValuesPromise
+  extends Promise<ProspectPreviousValues>,
+    Fragmentable {
+  id: () => Promise<ID_Output>;
+  name: () => Promise<String>;
+  lastName: () => Promise<String>;
+  firstName: () => Promise<String>;
+  email: () => Promise<String>;
+  createdAt: () => Promise<DateTimeOutput>;
+  call_length: () => Promise<String>;
+  description: () => Promise<String>;
+  updatedAt: () => Promise<DateTimeOutput>;
+  mobile: () => Promise<String>;
+  profile_image: () => Promise<String>;
+  lead_source: () => Promise<String>;
+  refferalBonus: () => Promise<String>;
+  profession: () => Promise<String>;
+  outcome: () => Promise<String>;
+  recording: () => Promise<Boolean>;
+  my_emotions: () => Promise<String>;
+  call_conclusion: () => Promise<String>;
+}
+
+export interface ProspectPreviousValuesSubscription
+  extends Promise<AsyncIterator<ProspectPreviousValues>>,
+    Fragmentable {
+  id: () => Promise<AsyncIterator<ID_Output>>;
+  name: () => Promise<AsyncIterator<String>>;
+  lastName: () => Promise<AsyncIterator<String>>;
+  firstName: () => Promise<AsyncIterator<String>>;
+  email: () => Promise<AsyncIterator<String>>;
+  createdAt: () => Promise<AsyncIterator<DateTimeOutput>>;
+  call_length: () => Promise<AsyncIterator<String>>;
+  description: () => Promise<AsyncIterator<String>>;
+  updatedAt: () => Promise<AsyncIterator<DateTimeOutput>>;
+  mobile: () => Promise<AsyncIterator<String>>;
+  profile_image: () => Promise<AsyncIterator<String>>;
+  lead_source: () => Promise<AsyncIterator<String>>;
+  refferalBonus: () => Promise<AsyncIterator<String>>;
+  profession: () => Promise<AsyncIterator<String>>;
+  outcome: () => Promise<AsyncIterator<String>>;
+  recording: () => Promise<AsyncIterator<Boolean>>;
+  my_emotions: () => Promise<AsyncIterator<String>>;
+  call_conclusion: () => Promise<AsyncIterator<String>>;
+}
+
+export interface PartnerEdge {
+  node: Partner;
   cursor: String;
 }
 
-export interface OfferEdgePromise extends Promise<OfferEdge>, Fragmentable {
-  node: <T = OfferPromise>() => T;
+export interface PartnerEdgePromise extends Promise<PartnerEdge>, Fragmentable {
+  node: <T = PartnerPromise>() => T;
   cursor: () => Promise<String>;
 }
 
-export interface OfferEdgeSubscription
-  extends Promise<AsyncIterator<OfferEdge>>,
+export interface PartnerEdgeSubscription
+  extends Promise<AsyncIterator<PartnerEdge>>,
     Fragmentable {
-  node: <T = OfferSubscription>() => T;
+  node: <T = PartnerSubscription>() => T;
   cursor: () => Promise<AsyncIterator<String>>;
 }
 
-export interface Booking {
-  id: ID_Output;
-  tripdate?: String;
-  trip_start_time?: String;
-  trip_end_time?: String;
-  customer_name?: String;
-  carType?: String;
-  vehicle_number?: String;
-  driver_number?: String;
-  passenger_number?: String;
-  kilometer_number?: String;
-  hour_number?: String;
-  day_number?: String;
-  pickupAddress?: String;
-  pickupCity?: String;
-  dropAddress?: String;
-  dropCity?: String;
-  driver_name?: String;
-  status?: String;
-  trip_cost?: String;
-  discount?: String;
-  payment_status?: String;
-  createdAt: DateTimeOutput;
-  comment?: String;
-}
-
-export interface BookingPromise extends Promise<Booking>, Fragmentable {
-  id: () => Promise<ID_Output>;
-  tripdate: () => Promise<String>;
-  trip_start_time: () => Promise<String>;
-  trip_end_time: () => Promise<String>;
-  customer_name: () => Promise<String>;
-  carType: () => Promise<String>;
-  vehicle_number: () => Promise<String>;
-  driver_number: () => Promise<String>;
-  passenger_number: () => Promise<String>;
-  kilometer_number: () => Promise<String>;
-  hour_number: () => Promise<String>;
-  day_number: () => Promise<String>;
-  pickupAddress: () => Promise<String>;
-  pickupCity: () => Promise<String>;
-  dropAddress: () => Promise<String>;
-  dropCity: () => Promise<String>;
-  driver_name: () => Promise<String>;
-  status: () => Promise<String>;
-  trip_cost: () => Promise<String>;
-  discount: () => Promise<String>;
-  payment_status: () => Promise<String>;
-  createdAt: () => Promise<DateTimeOutput>;
-  comment: () => Promise<String>;
-}
-
-export interface BookingSubscription
-  extends Promise<AsyncIterator<Booking>>,
-    Fragmentable {
-  id: () => Promise<AsyncIterator<ID_Output>>;
-  tripdate: () => Promise<AsyncIterator<String>>;
-  trip_start_time: () => Promise<AsyncIterator<String>>;
-  trip_end_time: () => Promise<AsyncIterator<String>>;
-  customer_name: () => Promise<AsyncIterator<String>>;
-  carType: () => Promise<AsyncIterator<String>>;
-  vehicle_number: () => Promise<AsyncIterator<String>>;
-  driver_number: () => Promise<AsyncIterator<String>>;
-  passenger_number: () => Promise<AsyncIterator<String>>;
-  kilometer_number: () => Promise<AsyncIterator<String>>;
-  hour_number: () => Promise<AsyncIterator<String>>;
-  day_number: () => Promise<AsyncIterator<String>>;
-  pickupAddress: () => Promise<AsyncIterator<String>>;
-  pickupCity: () => Promise<AsyncIterator<String>>;
-  dropAddress: () => Promise<AsyncIterator<String>>;
-  dropCity: () => Promise<AsyncIterator<String>>;
-  driver_name: () => Promise<AsyncIterator<String>>;
-  status: () => Promise<AsyncIterator<String>>;
-  trip_cost: () => Promise<AsyncIterator<String>>;
-  discount: () => Promise<AsyncIterator<String>>;
-  payment_status: () => Promise<AsyncIterator<String>>;
-  createdAt: () => Promise<AsyncIterator<DateTimeOutput>>;
-  comment: () => Promise<AsyncIterator<String>>;
-}
-
-export interface BookingNullablePromise
-  extends Promise<Booking | null>,
-    Fragmentable {
-  id: () => Promise<ID_Output>;
-  tripdate: () => Promise<String>;
-  trip_start_time: () => Promise<String>;
-  trip_end_time: () => Promise<String>;
-  customer_name: () => Promise<String>;
-  carType: () => Promise<String>;
-  vehicle_number: () => Promise<String>;
-  driver_number: () => Promise<String>;
-  passenger_number: () => Promise<String>;
-  kilometer_number: () => Promise<String>;
-  hour_number: () => Promise<String>;
-  day_number: () => Promise<String>;
-  pickupAddress: () => Promise<String>;
-  pickupCity: () => Promise<String>;
-  dropAddress: () => Promise<String>;
-  dropCity: () => Promise<String>;
-  driver_name: () => Promise<String>;
-  status: () => Promise<String>;
-  trip_cost: () => Promise<String>;
-  discount: () => Promise<String>;
-  payment_status: () => Promise<String>;
-  createdAt: () => Promise<DateTimeOutput>;
-  comment: () => Promise<String>;
-}
-
-export interface PageInfo {
-  hasNextPage: Boolean;
-  hasPreviousPage: Boolean;
-  startCursor?: String;
-  endCursor?: String;
-}
-
-export interface PageInfoPromise extends Promise<PageInfo>, Fragmentable {
-  hasNextPage: () => Promise<Boolean>;
-  hasPreviousPage: () => Promise<Boolean>;
-  startCursor: () => Promise<String>;
-  endCursor: () => Promise<String>;
-}
-
-export interface PageInfoSubscription
-  extends Promise<AsyncIterator<PageInfo>>,
-    Fragmentable {
-  hasNextPage: () => Promise<AsyncIterator<Boolean>>;
-  hasPreviousPage: () => Promise<AsyncIterator<Boolean>>;
-  startCursor: () => Promise<AsyncIterator<String>>;
-  endCursor: () => Promise<AsyncIterator<String>>;
-}
-
-export interface BookingSubscriptionPayload {
+export interface ApplicantSubscriptionPayload {
   mutation: MutationType;
-  node: Booking;
+  node: Applicant;
   updatedFields: String[];
-  previousValues: BookingPreviousValues;
+  previousValues: ApplicantPreviousValues;
 }
 
-export interface BookingSubscriptionPayloadPromise
-  extends Promise<BookingSubscriptionPayload>,
+export interface ApplicantSubscriptionPayloadPromise
+  extends Promise<ApplicantSubscriptionPayload>,
     Fragmentable {
   mutation: () => Promise<MutationType>;
-  node: <T = BookingPromise>() => T;
+  node: <T = ApplicantPromise>() => T;
   updatedFields: () => Promise<String[]>;
-  previousValues: <T = BookingPreviousValuesPromise>() => T;
+  previousValues: <T = ApplicantPreviousValuesPromise>() => T;
 }
 
-export interface BookingSubscriptionPayloadSubscription
-  extends Promise<AsyncIterator<BookingSubscriptionPayload>>,
+export interface ApplicantSubscriptionPayloadSubscription
+  extends Promise<AsyncIterator<ApplicantSubscriptionPayload>>,
     Fragmentable {
   mutation: () => Promise<AsyncIterator<MutationType>>;
-  node: <T = BookingSubscription>() => T;
+  node: <T = ApplicantSubscription>() => T;
   updatedFields: () => Promise<AsyncIterator<String[]>>;
-  previousValues: <T = BookingPreviousValuesSubscription>() => T;
+  previousValues: <T = ApplicantPreviousValuesSubscription>() => T;
 }
 
-export interface AggregateCarType {
-  count: Int;
-}
-
-export interface AggregateCarTypePromise
-  extends Promise<AggregateCarType>,
-    Fragmentable {
-  count: () => Promise<Int>;
-}
-
-export interface AggregateCarTypeSubscription
-  extends Promise<AsyncIterator<AggregateCarType>>,
-    Fragmentable {
-  count: () => Promise<AsyncIterator<Int>>;
-}
-
-export interface BookingPreviousValues {
+export interface Partner {
   id: ID_Output;
-  tripdate?: String;
-  trip_start_time?: String;
-  trip_end_time?: String;
-  customer_name?: String;
-  carType?: String;
-  vehicle_number?: String;
-  driver_number?: String;
-  passenger_number?: String;
-  kilometer_number?: String;
-  hour_number?: String;
-  day_number?: String;
-  pickupAddress?: String;
-  pickupCity?: String;
-  dropAddress?: String;
-  dropCity?: String;
-  driver_name?: String;
-  status?: String;
-  trip_cost?: String;
-  discount?: String;
-  payment_status?: String;
+  name: String;
+  lastName?: String;
+  firstName?: String;
+  email: String;
   createdAt: DateTimeOutput;
-  comment?: String;
+  call_length?: String;
+  description?: String;
+  updatedAt?: DateTimeOutput;
+  mobile?: String;
+  profile_image?: String;
+  lead_source?: String;
+  refferalBonus?: String;
+  profession?: String;
+  outcome?: String;
+  recording?: Boolean;
+  my_emotions?: String;
+  call_conclusion?: String;
 }
 
-export interface BookingPreviousValuesPromise
-  extends Promise<BookingPreviousValues>,
-    Fragmentable {
+export interface PartnerPromise extends Promise<Partner>, Fragmentable {
   id: () => Promise<ID_Output>;
-  tripdate: () => Promise<String>;
-  trip_start_time: () => Promise<String>;
-  trip_end_time: () => Promise<String>;
-  customer_name: () => Promise<String>;
-  carType: () => Promise<String>;
-  vehicle_number: () => Promise<String>;
-  driver_number: () => Promise<String>;
-  passenger_number: () => Promise<String>;
-  kilometer_number: () => Promise<String>;
-  hour_number: () => Promise<String>;
-  day_number: () => Promise<String>;
-  pickupAddress: () => Promise<String>;
-  pickupCity: () => Promise<String>;
-  dropAddress: () => Promise<String>;
-  dropCity: () => Promise<String>;
-  driver_name: () => Promise<String>;
-  status: () => Promise<String>;
-  trip_cost: () => Promise<String>;
-  discount: () => Promise<String>;
-  payment_status: () => Promise<String>;
-  createdAt: () => Promise<DateTimeOutput>;
-  comment: () => Promise<String>;
-}
-
-export interface BookingPreviousValuesSubscription
-  extends Promise<AsyncIterator<BookingPreviousValues>>,
-    Fragmentable {
-  id: () => Promise<AsyncIterator<ID_Output>>;
-  tripdate: () => Promise<AsyncIterator<String>>;
-  trip_start_time: () => Promise<AsyncIterator<String>>;
-  trip_end_time: () => Promise<AsyncIterator<String>>;
-  customer_name: () => Promise<AsyncIterator<String>>;
-  carType: () => Promise<AsyncIterator<String>>;
-  vehicle_number: () => Promise<AsyncIterator<String>>;
-  driver_number: () => Promise<AsyncIterator<String>>;
-  passenger_number: () => Promise<AsyncIterator<String>>;
-  kilometer_number: () => Promise<AsyncIterator<String>>;
-  hour_number: () => Promise<AsyncIterator<String>>;
-  day_number: () => Promise<AsyncIterator<String>>;
-  pickupAddress: () => Promise<AsyncIterator<String>>;
-  pickupCity: () => Promise<AsyncIterator<String>>;
-  dropAddress: () => Promise<AsyncIterator<String>>;
-  dropCity: () => Promise<AsyncIterator<String>>;
-  driver_name: () => Promise<AsyncIterator<String>>;
-  status: () => Promise<AsyncIterator<String>>;
-  trip_cost: () => Promise<AsyncIterator<String>>;
-  discount: () => Promise<AsyncIterator<String>>;
-  payment_status: () => Promise<AsyncIterator<String>>;
-  createdAt: () => Promise<AsyncIterator<DateTimeOutput>>;
-  comment: () => Promise<AsyncIterator<String>>;
-}
-
-export interface CarTypeConnection {
-  pageInfo: PageInfo;
-  edges: CarTypeEdge[];
-}
-
-export interface CarTypeConnectionPromise
-  extends Promise<CarTypeConnection>,
-    Fragmentable {
-  pageInfo: <T = PageInfoPromise>() => T;
-  edges: <T = FragmentableArray<CarTypeEdge>>() => T;
-  aggregate: <T = AggregateCarTypePromise>() => T;
-}
-
-export interface CarTypeConnectionSubscription
-  extends Promise<AsyncIterator<CarTypeConnection>>,
-    Fragmentable {
-  pageInfo: <T = PageInfoSubscription>() => T;
-  edges: <T = Promise<AsyncIterator<CarTypeEdgeSubscription>>>() => T;
-  aggregate: <T = AggregateCarTypeSubscription>() => T;
-}
-
-export interface AggregateBooking {
-  count: Int;
-}
-
-export interface AggregateBookingPromise
-  extends Promise<AggregateBooking>,
-    Fragmentable {
-  count: () => Promise<Int>;
-}
-
-export interface AggregateBookingSubscription
-  extends Promise<AsyncIterator<AggregateBooking>>,
-    Fragmentable {
-  count: () => Promise<AsyncIterator<Int>>;
-}
-
-export interface CarType {
-  id: ID_Output;
-  convenience_fees?: Int;
-  image?: String;
-  name?: String;
-  rate_per_hour?: Int;
-  rate_per_kilometer?: String;
-  updatedAt: DateTimeOutput;
-}
-
-export interface CarTypePromise extends Promise<CarType>, Fragmentable {
-  id: () => Promise<ID_Output>;
-  convenience_fees: () => Promise<Int>;
-  image: () => Promise<String>;
   name: () => Promise<String>;
-  rate_per_hour: () => Promise<Int>;
-  rate_per_kilometer: () => Promise<String>;
+  lastName: () => Promise<String>;
+  firstName: () => Promise<String>;
+  email: () => Promise<String>;
+  createdAt: () => Promise<DateTimeOutput>;
+  call_length: () => Promise<String>;
+  description: () => Promise<String>;
   updatedAt: () => Promise<DateTimeOutput>;
+  mobile: () => Promise<String>;
+  profile_image: () => Promise<String>;
+  lead_source: () => Promise<String>;
+  refferalBonus: () => Promise<String>;
+  profession: () => Promise<String>;
+  outcome: () => Promise<String>;
+  recording: () => Promise<Boolean>;
+  my_emotions: () => Promise<String>;
+  call_conclusion: () => Promise<String>;
 }
 
-export interface CarTypeSubscription
-  extends Promise<AsyncIterator<CarType>>,
+export interface PartnerSubscription
+  extends Promise<AsyncIterator<Partner>>,
     Fragmentable {
   id: () => Promise<AsyncIterator<ID_Output>>;
-  convenience_fees: () => Promise<AsyncIterator<Int>>;
-  image: () => Promise<AsyncIterator<String>>;
   name: () => Promise<AsyncIterator<String>>;
-  rate_per_hour: () => Promise<AsyncIterator<Int>>;
-  rate_per_kilometer: () => Promise<AsyncIterator<String>>;
+  lastName: () => Promise<AsyncIterator<String>>;
+  firstName: () => Promise<AsyncIterator<String>>;
+  email: () => Promise<AsyncIterator<String>>;
+  createdAt: () => Promise<AsyncIterator<DateTimeOutput>>;
+  call_length: () => Promise<AsyncIterator<String>>;
+  description: () => Promise<AsyncIterator<String>>;
   updatedAt: () => Promise<AsyncIterator<DateTimeOutput>>;
+  mobile: () => Promise<AsyncIterator<String>>;
+  profile_image: () => Promise<AsyncIterator<String>>;
+  lead_source: () => Promise<AsyncIterator<String>>;
+  refferalBonus: () => Promise<AsyncIterator<String>>;
+  profession: () => Promise<AsyncIterator<String>>;
+  outcome: () => Promise<AsyncIterator<String>>;
+  recording: () => Promise<AsyncIterator<Boolean>>;
+  my_emotions: () => Promise<AsyncIterator<String>>;
+  call_conclusion: () => Promise<AsyncIterator<String>>;
 }
 
-export interface CarTypeNullablePromise
-  extends Promise<CarType | null>,
+export interface PartnerNullablePromise
+  extends Promise<Partner | null>,
     Fragmentable {
   id: () => Promise<ID_Output>;
-  convenience_fees: () => Promise<Int>;
-  image: () => Promise<String>;
   name: () => Promise<String>;
-  rate_per_hour: () => Promise<Int>;
-  rate_per_kilometer: () => Promise<String>;
+  lastName: () => Promise<String>;
+  firstName: () => Promise<String>;
+  email: () => Promise<String>;
+  createdAt: () => Promise<DateTimeOutput>;
+  call_length: () => Promise<String>;
+  description: () => Promise<String>;
   updatedAt: () => Promise<DateTimeOutput>;
+  mobile: () => Promise<String>;
+  profile_image: () => Promise<String>;
+  lead_source: () => Promise<String>;
+  refferalBonus: () => Promise<String>;
+  profession: () => Promise<String>;
+  outcome: () => Promise<String>;
+  recording: () => Promise<Boolean>;
+  my_emotions: () => Promise<String>;
+  call_conclusion: () => Promise<String>;
 }
 
-export interface CancelReasonSubscriptionPayload {
+export interface UserEdge {
+  node: User;
+  cursor: String;
+}
+
+export interface UserEdgePromise extends Promise<UserEdge>, Fragmentable {
+  node: <T = UserPromise>() => T;
+  cursor: () => Promise<String>;
+}
+
+export interface UserEdgeSubscription
+  extends Promise<AsyncIterator<UserEdge>>,
+    Fragmentable {
+  node: <T = UserSubscription>() => T;
+  cursor: () => Promise<AsyncIterator<String>>;
+}
+
+export interface PartnerPreviousValues {
+  id: ID_Output;
+  name: String;
+  lastName?: String;
+  firstName?: String;
+  email: String;
+  createdAt: DateTimeOutput;
+  call_length?: String;
+  description?: String;
+  updatedAt?: DateTimeOutput;
+  mobile?: String;
+  profile_image?: String;
+  lead_source?: String;
+  refferalBonus?: String;
+  profession?: String;
+  outcome?: String;
+  recording?: Boolean;
+  my_emotions?: String;
+  call_conclusion?: String;
+}
+
+export interface PartnerPreviousValuesPromise
+  extends Promise<PartnerPreviousValues>,
+    Fragmentable {
+  id: () => Promise<ID_Output>;
+  name: () => Promise<String>;
+  lastName: () => Promise<String>;
+  firstName: () => Promise<String>;
+  email: () => Promise<String>;
+  createdAt: () => Promise<DateTimeOutput>;
+  call_length: () => Promise<String>;
+  description: () => Promise<String>;
+  updatedAt: () => Promise<DateTimeOutput>;
+  mobile: () => Promise<String>;
+  profile_image: () => Promise<String>;
+  lead_source: () => Promise<String>;
+  refferalBonus: () => Promise<String>;
+  profession: () => Promise<String>;
+  outcome: () => Promise<String>;
+  recording: () => Promise<Boolean>;
+  my_emotions: () => Promise<String>;
+  call_conclusion: () => Promise<String>;
+}
+
+export interface PartnerPreviousValuesSubscription
+  extends Promise<AsyncIterator<PartnerPreviousValues>>,
+    Fragmentable {
+  id: () => Promise<AsyncIterator<ID_Output>>;
+  name: () => Promise<AsyncIterator<String>>;
+  lastName: () => Promise<AsyncIterator<String>>;
+  firstName: () => Promise<AsyncIterator<String>>;
+  email: () => Promise<AsyncIterator<String>>;
+  createdAt: () => Promise<AsyncIterator<DateTimeOutput>>;
+  call_length: () => Promise<AsyncIterator<String>>;
+  description: () => Promise<AsyncIterator<String>>;
+  updatedAt: () => Promise<AsyncIterator<DateTimeOutput>>;
+  mobile: () => Promise<AsyncIterator<String>>;
+  profile_image: () => Promise<AsyncIterator<String>>;
+  lead_source: () => Promise<AsyncIterator<String>>;
+  refferalBonus: () => Promise<AsyncIterator<String>>;
+  profession: () => Promise<AsyncIterator<String>>;
+  outcome: () => Promise<AsyncIterator<String>>;
+  recording: () => Promise<AsyncIterator<Boolean>>;
+  my_emotions: () => Promise<AsyncIterator<String>>;
+  call_conclusion: () => Promise<AsyncIterator<String>>;
+}
+
+export interface PartnerSubscriptionPayload {
   mutation: MutationType;
-  node: CancelReason;
+  node: Partner;
   updatedFields: String[];
-  previousValues: CancelReasonPreviousValues;
+  previousValues: PartnerPreviousValues;
 }
 
-export interface CancelReasonSubscriptionPayloadPromise
-  extends Promise<CancelReasonSubscriptionPayload>,
+export interface PartnerSubscriptionPayloadPromise
+  extends Promise<PartnerSubscriptionPayload>,
     Fragmentable {
   mutation: () => Promise<MutationType>;
-  node: <T = CancelReasonPromise>() => T;
+  node: <T = PartnerPromise>() => T;
   updatedFields: () => Promise<String[]>;
-  previousValues: <T = CancelReasonPreviousValuesPromise>() => T;
+  previousValues: <T = PartnerPreviousValuesPromise>() => T;
 }
 
-export interface CancelReasonSubscriptionPayloadSubscription
-  extends Promise<AsyncIterator<CancelReasonSubscriptionPayload>>,
+export interface PartnerSubscriptionPayloadSubscription
+  extends Promise<AsyncIterator<PartnerSubscriptionPayload>>,
     Fragmentable {
   mutation: () => Promise<AsyncIterator<MutationType>>;
-  node: <T = CancelReasonSubscription>() => T;
+  node: <T = PartnerSubscription>() => T;
   updatedFields: () => Promise<AsyncIterator<String[]>>;
-  previousValues: <T = CancelReasonPreviousValuesSubscription>() => T;
+  previousValues: <T = PartnerPreviousValuesSubscription>() => T;
+}
+
+export interface ProspectSubscriptionPayload {
+  mutation: MutationType;
+  node: Prospect;
+  updatedFields: String[];
+  previousValues: ProspectPreviousValues;
+}
+
+export interface ProspectSubscriptionPayloadPromise
+  extends Promise<ProspectSubscriptionPayload>,
+    Fragmentable {
+  mutation: () => Promise<MutationType>;
+  node: <T = ProspectPromise>() => T;
+  updatedFields: () => Promise<String[]>;
+  previousValues: <T = ProspectPreviousValuesPromise>() => T;
+}
+
+export interface ProspectSubscriptionPayloadSubscription
+  extends Promise<AsyncIterator<ProspectSubscriptionPayload>>,
+    Fragmentable {
+  mutation: () => Promise<AsyncIterator<MutationType>>;
+  node: <T = ProspectSubscription>() => T;
+  updatedFields: () => Promise<AsyncIterator<String[]>>;
+  previousValues: <T = ProspectPreviousValuesSubscription>() => T;
+}
+
+export interface ApplicantPreviousValues {
+  id: ID_Output;
+  name: String;
+  lastName?: String;
+  firstName?: String;
+  email: String;
+  createdAt: DateTimeOutput;
+  call_length?: String;
+  description?: String;
+  updatedAt?: DateTimeOutput;
+  mobile?: String;
+  profile_image?: String;
+  lead_source?: String;
+  refferalBonus?: String;
+  profession?: String;
+  outcome?: String;
+  recording?: Boolean;
+  my_emotions?: String;
+  call_conclusion?: String;
+}
+
+export interface ApplicantPreviousValuesPromise
+  extends Promise<ApplicantPreviousValues>,
+    Fragmentable {
+  id: () => Promise<ID_Output>;
+  name: () => Promise<String>;
+  lastName: () => Promise<String>;
+  firstName: () => Promise<String>;
+  email: () => Promise<String>;
+  createdAt: () => Promise<DateTimeOutput>;
+  call_length: () => Promise<String>;
+  description: () => Promise<String>;
+  updatedAt: () => Promise<DateTimeOutput>;
+  mobile: () => Promise<String>;
+  profile_image: () => Promise<String>;
+  lead_source: () => Promise<String>;
+  refferalBonus: () => Promise<String>;
+  profession: () => Promise<String>;
+  outcome: () => Promise<String>;
+  recording: () => Promise<Boolean>;
+  my_emotions: () => Promise<String>;
+  call_conclusion: () => Promise<String>;
+}
+
+export interface ApplicantPreviousValuesSubscription
+  extends Promise<AsyncIterator<ApplicantPreviousValues>>,
+    Fragmentable {
+  id: () => Promise<AsyncIterator<ID_Output>>;
+  name: () => Promise<AsyncIterator<String>>;
+  lastName: () => Promise<AsyncIterator<String>>;
+  firstName: () => Promise<AsyncIterator<String>>;
+  email: () => Promise<AsyncIterator<String>>;
+  createdAt: () => Promise<AsyncIterator<DateTimeOutput>>;
+  call_length: () => Promise<AsyncIterator<String>>;
+  description: () => Promise<AsyncIterator<String>>;
+  updatedAt: () => Promise<AsyncIterator<DateTimeOutput>>;
+  mobile: () => Promise<AsyncIterator<String>>;
+  profile_image: () => Promise<AsyncIterator<String>>;
+  lead_source: () => Promise<AsyncIterator<String>>;
+  refferalBonus: () => Promise<AsyncIterator<String>>;
+  profession: () => Promise<AsyncIterator<String>>;
+  outcome: () => Promise<AsyncIterator<String>>;
+  recording: () => Promise<AsyncIterator<Boolean>>;
+  my_emotions: () => Promise<AsyncIterator<String>>;
+  call_conclusion: () => Promise<AsyncIterator<String>>;
 }
 
 export interface UserSubscriptionPayload {
@@ -2196,255 +2468,57 @@ export interface UserSubscriptionPayloadSubscription
   previousValues: <T = UserPreviousValuesSubscription>() => T;
 }
 
-export interface Offer {
-  id: ID_Output;
-  max_promo_discount_value?: Int;
-  min_order?: Int;
-  promo_description?: String;
-  promo_discount_type?: String;
-  promo_discount_value?: Int;
-  promo_name?: String;
-  promo_start?: String;
-  promo_usage_limit?: Int;
-  promo_validity?: String;
-}
-
-export interface OfferPromise extends Promise<Offer>, Fragmentable {
-  id: () => Promise<ID_Output>;
-  max_promo_discount_value: () => Promise<Int>;
-  min_order: () => Promise<Int>;
-  promo_description: () => Promise<String>;
-  promo_discount_type: () => Promise<String>;
-  promo_discount_value: () => Promise<Int>;
-  promo_name: () => Promise<String>;
-  promo_start: () => Promise<String>;
-  promo_usage_limit: () => Promise<Int>;
-  promo_validity: () => Promise<String>;
-}
-
-export interface OfferSubscription
-  extends Promise<AsyncIterator<Offer>>,
-    Fragmentable {
-  id: () => Promise<AsyncIterator<ID_Output>>;
-  max_promo_discount_value: () => Promise<AsyncIterator<Int>>;
-  min_order: () => Promise<AsyncIterator<Int>>;
-  promo_description: () => Promise<AsyncIterator<String>>;
-  promo_discount_type: () => Promise<AsyncIterator<String>>;
-  promo_discount_value: () => Promise<AsyncIterator<Int>>;
-  promo_name: () => Promise<AsyncIterator<String>>;
-  promo_start: () => Promise<AsyncIterator<String>>;
-  promo_usage_limit: () => Promise<AsyncIterator<Int>>;
-  promo_validity: () => Promise<AsyncIterator<String>>;
-}
-
-export interface OfferNullablePromise
-  extends Promise<Offer | null>,
-    Fragmentable {
-  id: () => Promise<ID_Output>;
-  max_promo_discount_value: () => Promise<Int>;
-  min_order: () => Promise<Int>;
-  promo_description: () => Promise<String>;
-  promo_discount_type: () => Promise<String>;
-  promo_discount_value: () => Promise<Int>;
-  promo_name: () => Promise<String>;
-  promo_start: () => Promise<String>;
-  promo_usage_limit: () => Promise<Int>;
-  promo_validity: () => Promise<String>;
-}
-
-export interface CarTypePreviousValues {
-  id: ID_Output;
-  convenience_fees?: Int;
-  image?: String;
-  name?: String;
-  rate_per_hour?: Int;
-  rate_per_kilometer?: String;
-  updatedAt: DateTimeOutput;
-}
-
-export interface CarTypePreviousValuesPromise
-  extends Promise<CarTypePreviousValues>,
-    Fragmentable {
-  id: () => Promise<ID_Output>;
-  convenience_fees: () => Promise<Int>;
-  image: () => Promise<String>;
-  name: () => Promise<String>;
-  rate_per_hour: () => Promise<Int>;
-  rate_per_kilometer: () => Promise<String>;
-  updatedAt: () => Promise<DateTimeOutput>;
-}
-
-export interface CarTypePreviousValuesSubscription
-  extends Promise<AsyncIterator<CarTypePreviousValues>>,
-    Fragmentable {
-  id: () => Promise<AsyncIterator<ID_Output>>;
-  convenience_fees: () => Promise<AsyncIterator<Int>>;
-  image: () => Promise<AsyncIterator<String>>;
-  name: () => Promise<AsyncIterator<String>>;
-  rate_per_hour: () => Promise<AsyncIterator<Int>>;
-  rate_per_kilometer: () => Promise<AsyncIterator<String>>;
-  updatedAt: () => Promise<AsyncIterator<DateTimeOutput>>;
-}
-
-export interface CarTypeSubscriptionPayload {
-  mutation: MutationType;
-  node: CarType;
-  updatedFields: String[];
-  previousValues: CarTypePreviousValues;
-}
-
-export interface CarTypeSubscriptionPayloadPromise
-  extends Promise<CarTypeSubscriptionPayload>,
-    Fragmentable {
-  mutation: () => Promise<MutationType>;
-  node: <T = CarTypePromise>() => T;
-  updatedFields: () => Promise<String[]>;
-  previousValues: <T = CarTypePreviousValuesPromise>() => T;
-}
-
-export interface CarTypeSubscriptionPayloadSubscription
-  extends Promise<AsyncIterator<CarTypeSubscriptionPayload>>,
-    Fragmentable {
-  mutation: () => Promise<AsyncIterator<MutationType>>;
-  node: <T = CarTypeSubscription>() => T;
-  updatedFields: () => Promise<AsyncIterator<String[]>>;
-  previousValues: <T = CarTypePreviousValuesSubscription>() => T;
-}
-
-export interface BookingEdge {
-  node: Booking;
-  cursor: String;
-}
-
-export interface BookingEdgePromise extends Promise<BookingEdge>, Fragmentable {
-  node: <T = BookingPromise>() => T;
-  cursor: () => Promise<String>;
-}
-
-export interface BookingEdgeSubscription
-  extends Promise<AsyncIterator<BookingEdge>>,
-    Fragmentable {
-  node: <T = BookingSubscription>() => T;
-  cursor: () => Promise<AsyncIterator<String>>;
-}
-
-export interface CancelReasonPreviousValues {
-  id: ID_Output;
-  value: String;
-  label: String;
-}
-
-export interface CancelReasonPreviousValuesPromise
-  extends Promise<CancelReasonPreviousValues>,
-    Fragmentable {
-  id: () => Promise<ID_Output>;
-  value: () => Promise<String>;
-  label: () => Promise<String>;
-}
-
-export interface CancelReasonPreviousValuesSubscription
-  extends Promise<AsyncIterator<CancelReasonPreviousValues>>,
-    Fragmentable {
-  id: () => Promise<AsyncIterator<ID_Output>>;
-  value: () => Promise<AsyncIterator<String>>;
-  label: () => Promise<AsyncIterator<String>>;
-}
-
-export interface CarTypeEdge {
-  node: CarType;
-  cursor: String;
-}
-
-export interface CarTypeEdgePromise extends Promise<CarTypeEdge>, Fragmentable {
-  node: <T = CarTypePromise>() => T;
-  cursor: () => Promise<String>;
-}
-
-export interface CarTypeEdgeSubscription
-  extends Promise<AsyncIterator<CarTypeEdge>>,
-    Fragmentable {
-  node: <T = CarTypeSubscription>() => T;
-  cursor: () => Promise<AsyncIterator<String>>;
-}
-
-export interface OfferConnection {
-  pageInfo: PageInfo;
-  edges: OfferEdge[];
-}
-
-export interface OfferConnectionPromise
-  extends Promise<OfferConnection>,
-    Fragmentable {
-  pageInfo: <T = PageInfoPromise>() => T;
-  edges: <T = FragmentableArray<OfferEdge>>() => T;
-  aggregate: <T = AggregateOfferPromise>() => T;
-}
-
-export interface OfferConnectionSubscription
-  extends Promise<AsyncIterator<OfferConnection>>,
-    Fragmentable {
-  pageInfo: <T = PageInfoSubscription>() => T;
-  edges: <T = Promise<AsyncIterator<OfferEdgeSubscription>>>() => T;
-  aggregate: <T = AggregateOfferSubscription>() => T;
-}
-
-export interface AggregateOffer {
+export interface AggregateApplicant {
   count: Int;
 }
 
-export interface AggregateOfferPromise
-  extends Promise<AggregateOffer>,
+export interface AggregateApplicantPromise
+  extends Promise<AggregateApplicant>,
     Fragmentable {
   count: () => Promise<Int>;
 }
 
-export interface AggregateOfferSubscription
-  extends Promise<AsyncIterator<AggregateOffer>>,
+export interface AggregateApplicantSubscription
+  extends Promise<AsyncIterator<AggregateApplicant>>,
     Fragmentable {
   count: () => Promise<AsyncIterator<Int>>;
 }
 
-export interface OfferPreviousValues {
-  id: ID_Output;
-  max_promo_discount_value?: Int;
-  min_order?: Int;
-  promo_description?: String;
-  promo_discount_type?: String;
-  promo_discount_value?: Int;
-  promo_name?: String;
-  promo_start?: String;
-  promo_usage_limit?: Int;
-  promo_validity?: String;
+export interface PartnerConnection {
+  pageInfo: PageInfo;
+  edges: PartnerEdge[];
 }
 
-export interface OfferPreviousValuesPromise
-  extends Promise<OfferPreviousValues>,
+export interface PartnerConnectionPromise
+  extends Promise<PartnerConnection>,
     Fragmentable {
-  id: () => Promise<ID_Output>;
-  max_promo_discount_value: () => Promise<Int>;
-  min_order: () => Promise<Int>;
-  promo_description: () => Promise<String>;
-  promo_discount_type: () => Promise<String>;
-  promo_discount_value: () => Promise<Int>;
-  promo_name: () => Promise<String>;
-  promo_start: () => Promise<String>;
-  promo_usage_limit: () => Promise<Int>;
-  promo_validity: () => Promise<String>;
+  pageInfo: <T = PageInfoPromise>() => T;
+  edges: <T = FragmentableArray<PartnerEdge>>() => T;
+  aggregate: <T = AggregatePartnerPromise>() => T;
 }
 
-export interface OfferPreviousValuesSubscription
-  extends Promise<AsyncIterator<OfferPreviousValues>>,
+export interface PartnerConnectionSubscription
+  extends Promise<AsyncIterator<PartnerConnection>>,
     Fragmentable {
-  id: () => Promise<AsyncIterator<ID_Output>>;
-  max_promo_discount_value: () => Promise<AsyncIterator<Int>>;
-  min_order: () => Promise<AsyncIterator<Int>>;
-  promo_description: () => Promise<AsyncIterator<String>>;
-  promo_discount_type: () => Promise<AsyncIterator<String>>;
-  promo_discount_value: () => Promise<AsyncIterator<Int>>;
-  promo_name: () => Promise<AsyncIterator<String>>;
-  promo_start: () => Promise<AsyncIterator<String>>;
-  promo_usage_limit: () => Promise<AsyncIterator<Int>>;
-  promo_validity: () => Promise<AsyncIterator<String>>;
+  pageInfo: <T = PageInfoSubscription>() => T;
+  edges: <T = Promise<AsyncIterator<PartnerEdgeSubscription>>>() => T;
+  aggregate: <T = AggregatePartnerSubscription>() => T;
+}
+
+export interface AggregatePartner {
+  count: Int;
+}
+
+export interface AggregatePartnerPromise
+  extends Promise<AggregatePartner>,
+    Fragmentable {
+  count: () => Promise<Int>;
+}
+
+export interface AggregatePartnerSubscription
+  extends Promise<AsyncIterator<AggregatePartner>>,
+    Fragmentable {
+  count: () => Promise<AsyncIterator<Int>>;
 }
 
 /*
@@ -2466,6 +2540,11 @@ The `String` scalar type represents textual data, represented as UTF-8 character
 export type String = string;
 
 /*
+The `Boolean` scalar type represents `true` or `false`.
+*/
+export type Boolean = boolean;
+
+/*
 DateTime scalar input type, allowing Date
 */
 export type DateTimeInput = Date | string;
@@ -2474,11 +2553,6 @@ export type DateTimeInput = Date | string;
 DateTime scalar output type, which is always a string
 */
 export type DateTimeOutput = string;
-
-/*
-The `Boolean` scalar type represents `true` or `false`.
-*/
-export type Boolean = boolean;
 
 /**
  * Model Metadata
@@ -2490,19 +2564,15 @@ export const models: Model[] = [
     embedded: false
   },
   {
-    name: "CancelReason",
+    name: "Prospect",
     embedded: false
   },
   {
-    name: "Offer",
+    name: "Applicant",
     embedded: false
   },
   {
-    name: "CarType",
-    embedded: false
-  },
-  {
-    name: "Booking",
+    name: "Partner",
     embedded: false
   }
 ];

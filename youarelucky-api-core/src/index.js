@@ -10,7 +10,7 @@ const Mutation = require("./resolvers/Mutation");
 // l'argument context accède à prisma, prisma objet est en réalité une  instance Prisma client importée de la bibliothèque générée prisma-client. Cette instance nous permet d'acceder à notre base de donnée
 const resolvers = {
   Query,
-  Mutation,
+  Mutation
 };
 
 //Cela indique au serveur quelles opérations d'API sont acceptées et comment elles doivent être résolues.

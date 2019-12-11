@@ -9,25 +9,21 @@ var models = [
     embedded: false
   },
   {
-    name: "CancelReason",
+    name: "Prospect",
     embedded: false
   },
   {
-    name: "Offer",
+    name: "Applicant",
     embedded: false
   },
   {
-    name: "CarType",
-    embedded: false
-  },
-  {
-    name: "Booking",
+    name: "Partner",
     embedded: false
   }
 ];
 exports.Prisma = prisma_lib_1.makePrismaClientClass({
   typeDefs,
   models,
-  endpoint: `https://eu1.prisma.sh/yohann-loic-ravino-51f9e2/sosam-api-core/dev`
+  endpoint: `https://eu1.prisma.sh/yohann-loic-ravino-51f9e2/youarelucky-api-core/dev`
 });
 exports.prisma = new exports.Prisma();

@@ -13,16 +13,6 @@ type Query {
     first: Int
     orderBy: UserOrderByInput
   ): Feed!
-  getBookings(
-    filter: String
-    skip: Int
-    first: Int
-    orderBy: BookingOrderByInput
-  ): FeedBooking!
-  getCancelReason: [CancelReason]
-  getOffers: [Offer]
-  getCarType: [CarType]
-  getReward: [Reward]
 }
 
 # post: Permet aux utilisateurs authentifiés de créer un nouveau lien
@@ -46,75 +36,6 @@ type Mutation {
     refferalBonus: String
     profession: String
   ): User
-  # BOOKING CRUD
-  postBooking(
-    carType: String
-    customer_name: String
-    vehicle_number: String
-    driver_number: String
-    passenger_number: String
-    kilometer_number: String
-    hour_number: String
-    day_number: String
-    pickupAddress: String
-    pickupCity: String
-    dropAddress: String
-    dropCity: String
-    driver_name: String
-    status: String
-    trip_cost: String
-    discount: String
-    payment_status: String
-    comment: String
-  ): Booking
-  updateBooking(
-    id: ID!
-    tripdate: String
-    trip_start_time: String
-    trip_end_time: String
-    customer_name: String
-    carType: String
-    vehicle_number: String
-    driver_number: String
-    passenger_number: String
-    kilometer_number: String
-    hour_number: String
-    day_number: String
-    pickupAddress: String
-    pickupCity: String
-    dropAddress: String
-    dropCity: String
-    driver_name: String
-    status: String
-    trip_cost: String
-    discount: String
-    payment_status: String
-    comment: String
-  ): Booking
-
-  deleteBooking(id: ID!): Booking
-
-  postCancelReason(value: String!, label: String!): CancelReason
-  postOffer(
-    max_promo_discount_value: Int
-    min_order: Int
-    promo_description: String
-    promo_discount_type: String
-    promo_discount_value: Int
-    promo_name: String
-    promo_start: String
-    promo_usage_limit: Int
-    promo_validity: String
-  ): Offer
-  postCarType(
-    convenience_fees: Int
-    image: String
-    name: String
-    rate_per_hour: Int
-    rate_per_kilometer: String
-  ): CarType
-
-  postReward(amount: String, key: String): Reward
 
   updateUser(
     name: String
@@ -131,38 +52,7 @@ type Mutation {
     profession: String
   ): User
 
-  updateCancelReason(id: ID!, value: String, label: String): CancelReason
-
-  updateOffer(
-    id: ID!
-    max_promo_discount_value: Int
-    min_order: Int
-    promo_description: String
-    promo_discount_type: String
-    promo_discount_value: Int
-    promo_name: String
-    promo_start: String
-    promo_usage_limit: Int
-    promo_validity: String
-  ): Offer
-
-  updateCarType(
-    id: ID!
-    convenience_fees: Int
-    image: String
-    name: String
-    rate_per_hour: Int
-    rate_per_kilometer: String
-    updatedAt: DateTime
-  ): CarType
-
-  updateReward(id: ID!, amount: String, key: String): Reward
-
   deleteUser(email: String!): User
-  deleteCancelReason(id: ID!): CancelReason
-  deleteOffer(id: ID!): Offer
-  deleteCarType(id: ID!): CarType
-  deleteReward(id: ID!): Reward
 
   signup(email: String!, password: String!, name: String!): AuthPayload
   login(email: String!, password: String!): AuthPayload
@@ -176,11 +66,6 @@ type AuthPayload {
 # Récupère tous les liens du backend, notez que cette requête autorise également les arguments de filtrage, de tri et de pagination
 type Feed {
   users: [User!]!
-  count: Int!
-}
-
-type FeedBooking {
-  bookings: [Booking!]!
   count: Int!
 }
 
@@ -202,66 +87,6 @@ type User {
   profession: String
 }
 
-type Booking {
-  id: ID!
-  tripdate: String
-  trip_start_time: String
-  trip_end_time: String
-  customer_name: String
-  carType: String
-  vehicle_number: String
-  driver_number: String
-  passenger_number: String
-  kilometer_number: String
-  hour_number: String
-  day_number: String
-  pickupAddress: String
-  pickupCity: String
-  dropAddress: String
-  dropCity: String
-  driver_name: String
-  status: String
-  trip_cost: String
-  discount: String
-  payment_status: String
-  createdAt: DateTime!
-  comment: String
-}
-
-type CancelReasons {
-  cancelReasons: [CancelReasons!]!
-  count: Int!
-}
-
-type CancelReason {
-  id: ID!
-  value: String!
-  label: String!
-}
-
-type Offer {
-  id: ID!
-  max_promo_discount_value: Int
-  min_order: Int
-  promo_description: String
-  promo_discount_type: String
-  promo_discount_value: Int
-  promo_name: String
-  promo_start: String
-  promo_usage_limit: Int
-  promo_validity: String
-}
-
-type CarType {
-  id: ID!
-  convenience_fees: Int
-  image: String
-  name: String
-  rate_per_hour: Int
-  rate_per_kilometer: String
-  updatedAt: DateTime
-}
-
 type Reward {
   id: ID!
   amount: String
@@ -270,15 +95,6 @@ type Reward {
 }
 
 enum UserOrderByInput {
-  description_ASC
-  description_DESC
-  url_ASC
-  url_DESC
-  createdAt_ASC
-  createdAt_DESC
-}
-
-enum BookingOrderByInput {
   description_ASC
   description_DESC
   url_ASC

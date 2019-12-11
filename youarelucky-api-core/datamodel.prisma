@@ -17,57 +17,68 @@ type User {
   profession: String
 }
 
-type CancelReason {
-  id: ID! @id
-  value: String!
-  label: String!
-}
 
-type Offer {
+type Prospect {
   id: ID! @id
-  max_promo_discount_value: Int
-  min_order: Int
-  promo_description: String
-  promo_discount_type: String
-  promo_discount_value: Int
-  promo_name: String
-  promo_start: String
-  promo_usage_limit: Int
-  promo_validity: String
-}
-
-type CarType {
-  id: ID! @id
-  convenience_fees: Int
-  image: String
-  name: String
-  rate_per_hour: Int
-  rate_per_kilometer: String
-  updatedAt: DateTime! @updatedAt
-}
-
-type Booking {
-  id: ID! @id
-  tripdate: String
-  trip_start_time: String
-  trip_end_time: String
-  customer_name: String
-  carType: String
-  vehicle_number: String
-  driver_number: String
-  passenger_number: String
-  kilometer_number: String
-  hour_number: String
-  day_number: String
-  pickupAddress: String
-  pickupCity: String
-  dropAddress: String
-  dropCity: String
-  driver_name: String
-  status: String
-  trip_cost: String
-  discount: String
-  payment_status: String
+  name: String!
+  lastName: String
+  firstName: String
+  email: String! @unique  
   createdAt: DateTime! @createdAt
-  comment: String
+  call_length: String
+  description: String
+  updatedAt: DateTime @updatedAt
+  mobile: String
+  profile_image: String
+  lead_source: String
+  refferalBonus: String
+  profession: String
+  outcome: String
+  recording: Boolean
+  my_emotions: String
+  call_conclusion: String
+}
+
+
+type Applicant {
+  id: ID! @id
+  name: String!
+  lastName: String
+  firstName: String
+  email: String! @unique  
+  createdAt: DateTime! @createdAt
+  call_length: String
+  description: String
+  updatedAt: DateTime @updatedAt
+  mobile: String
+  profile_image: String
+  lead_source: String
+  refferalBonus: String
+  profession: String
+  outcome: String
+  recording: Boolean
+  my_emotions: String
+  call_conclusion: String
+}
+
+
+type Partner {
+  id: ID! @id
+  name: String!
+  lastName: String
+  firstName: String
+  email: String! @unique  
+  createdAt: DateTime! @createdAt
+  call_length: String
+  description: String
+  updatedAt: DateTime @updatedAt
+  mobile: String
+  profile_image: String
+  lead_source: String
+  refferalBonus: String
+  profession: String
+  outcome: String
+  recording: Boolean
+  my_emotions: String
+  call_conclusion: String
 }

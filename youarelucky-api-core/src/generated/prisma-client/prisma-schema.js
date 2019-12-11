@@ -3,19 +3,15 @@ module.exports = {
   // Please don't change this file manually but run `prisma generate` to update it.
   // For more information, please read the docs: https://www.prisma.io/docs/prisma-client/
 
-/* GraphQL */ `type AggregateBooking {
+/* GraphQL */ `type AggregateApplicant {
   count: Int!
 }
 
-type AggregateCancelReason {
+type AggregatePartner {
   count: Int!
 }
 
-type AggregateCarType {
-  count: Int!
-}
-
-type AggregateOffer {
+type AggregateProspect {
   count: Int!
 }
 
@@ -23,749 +19,172 @@ type AggregateUser {
   count: Int!
 }
 
-type BatchPayload {
-  count: Long!
-}
-
-type Booking {
+type Applicant {
   id: ID!
-  tripdate: String
-  trip_start_time: String
-  trip_end_time: String
-  customer_name: String
-  carType: String
-  vehicle_number: String
-  driver_number: String
-  passenger_number: String
-  kilometer_number: String
-  hour_number: String
-  day_number: String
-  pickupAddress: String
-  pickupCity: String
-  dropAddress: String
-  dropCity: String
-  driver_name: String
-  status: String
-  trip_cost: String
-  discount: String
-  payment_status: String
+  name: String!
+  lastName: String
+  firstName: String
+  email: String!
   createdAt: DateTime!
-  comment: String
+  call_length: String
+  description: String
+  updatedAt: DateTime
+  mobile: String
+  profile_image: String
+  lead_source: String
+  refferalBonus: String
+  profession: String
+  outcome: String
+  recording: Boolean
+  my_emotions: String
+  call_conclusion: String
 }
 
-type BookingConnection {
+type ApplicantConnection {
   pageInfo: PageInfo!
-  edges: [BookingEdge]!
-  aggregate: AggregateBooking!
+  edges: [ApplicantEdge]!
+  aggregate: AggregateApplicant!
 }
 
-input BookingCreateInput {
+input ApplicantCreateInput {
   id: ID
-  tripdate: String
-  trip_start_time: String
-  trip_end_time: String
-  customer_name: String
-  carType: String
-  vehicle_number: String
-  driver_number: String
-  passenger_number: String
-  kilometer_number: String
-  hour_number: String
-  day_number: String
-  pickupAddress: String
-  pickupCity: String
-  dropAddress: String
-  dropCity: String
-  driver_name: String
-  status: String
-  trip_cost: String
-  discount: String
-  payment_status: String
-  comment: String
+  name: String!
+  lastName: String
+  firstName: String
+  email: String!
+  call_length: String
+  description: String
+  mobile: String
+  profile_image: String
+  lead_source: String
+  refferalBonus: String
+  profession: String
+  outcome: String
+  recording: Boolean
+  my_emotions: String
+  call_conclusion: String
 }
 
-type BookingEdge {
-  node: Booking!
+type ApplicantEdge {
+  node: Applicant!
   cursor: String!
 }
 
-enum BookingOrderByInput {
+enum ApplicantOrderByInput {
   id_ASC
   id_DESC
-  tripdate_ASC
-  tripdate_DESC
-  trip_start_time_ASC
-  trip_start_time_DESC
-  trip_end_time_ASC
-  trip_end_time_DESC
-  customer_name_ASC
-  customer_name_DESC
-  carType_ASC
-  carType_DESC
-  vehicle_number_ASC
-  vehicle_number_DESC
-  driver_number_ASC
-  driver_number_DESC
-  passenger_number_ASC
-  passenger_number_DESC
-  kilometer_number_ASC
-  kilometer_number_DESC
-  hour_number_ASC
-  hour_number_DESC
-  day_number_ASC
-  day_number_DESC
-  pickupAddress_ASC
-  pickupAddress_DESC
-  pickupCity_ASC
-  pickupCity_DESC
-  dropAddress_ASC
-  dropAddress_DESC
-  dropCity_ASC
-  dropCity_DESC
-  driver_name_ASC
-  driver_name_DESC
-  status_ASC
-  status_DESC
-  trip_cost_ASC
-  trip_cost_DESC
-  discount_ASC
-  discount_DESC
-  payment_status_ASC
-  payment_status_DESC
-  createdAt_ASC
-  createdAt_DESC
-  comment_ASC
-  comment_DESC
-}
-
-type BookingPreviousValues {
-  id: ID!
-  tripdate: String
-  trip_start_time: String
-  trip_end_time: String
-  customer_name: String
-  carType: String
-  vehicle_number: String
-  driver_number: String
-  passenger_number: String
-  kilometer_number: String
-  hour_number: String
-  day_number: String
-  pickupAddress: String
-  pickupCity: String
-  dropAddress: String
-  dropCity: String
-  driver_name: String
-  status: String
-  trip_cost: String
-  discount: String
-  payment_status: String
-  createdAt: DateTime!
-  comment: String
-}
-
-type BookingSubscriptionPayload {
-  mutation: MutationType!
-  node: Booking
-  updatedFields: [String!]
-  previousValues: BookingPreviousValues
-}
-
-input BookingSubscriptionWhereInput {
-  mutation_in: [MutationType!]
-  updatedFields_contains: String
-  updatedFields_contains_every: [String!]
-  updatedFields_contains_some: [String!]
-  node: BookingWhereInput
-  AND: [BookingSubscriptionWhereInput!]
-  OR: [BookingSubscriptionWhereInput!]
-  NOT: [BookingSubscriptionWhereInput!]
-}
-
-input BookingUpdateInput {
-  tripdate: String
-  trip_start_time: String
-  trip_end_time: String
-  customer_name: String
-  carType: String
-  vehicle_number: String
-  driver_number: String
-  passenger_number: String
-  kilometer_number: String
-  hour_number: String
-  day_number: String
-  pickupAddress: String
-  pickupCity: String
-  dropAddress: String
-  dropCity: String
-  driver_name: String
-  status: String
-  trip_cost: String
-  discount: String
-  payment_status: String
-  comment: String
-}
-
-input BookingUpdateManyMutationInput {
-  tripdate: String
-  trip_start_time: String
-  trip_end_time: String
-  customer_name: String
-  carType: String
-  vehicle_number: String
-  driver_number: String
-  passenger_number: String
-  kilometer_number: String
-  hour_number: String
-  day_number: String
-  pickupAddress: String
-  pickupCity: String
-  dropAddress: String
-  dropCity: String
-  driver_name: String
-  status: String
-  trip_cost: String
-  discount: String
-  payment_status: String
-  comment: String
-}
-
-input BookingWhereInput {
-  id: ID
-  id_not: ID
-  id_in: [ID!]
-  id_not_in: [ID!]
-  id_lt: ID
-  id_lte: ID
-  id_gt: ID
-  id_gte: ID
-  id_contains: ID
-  id_not_contains: ID
-  id_starts_with: ID
-  id_not_starts_with: ID
-  id_ends_with: ID
-  id_not_ends_with: ID
-  tripdate: String
-  tripdate_not: String
-  tripdate_in: [String!]
-  tripdate_not_in: [String!]
-  tripdate_lt: String
-  tripdate_lte: String
-  tripdate_gt: String
-  tripdate_gte: String
-  tripdate_contains: String
-  tripdate_not_contains: String
-  tripdate_starts_with: String
-  tripdate_not_starts_with: String
-  tripdate_ends_with: String
-  tripdate_not_ends_with: String
-  trip_start_time: String
-  trip_start_time_not: String
-  trip_start_time_in: [String!]
-  trip_start_time_not_in: [String!]
-  trip_start_time_lt: String
-  trip_start_time_lte: String
-  trip_start_time_gt: String
-  trip_start_time_gte: String
-  trip_start_time_contains: String
-  trip_start_time_not_contains: String
-  trip_start_time_starts_with: String
-  trip_start_time_not_starts_with: String
-  trip_start_time_ends_with: String
-  trip_start_time_not_ends_with: String
-  trip_end_time: String
-  trip_end_time_not: String
-  trip_end_time_in: [String!]
-  trip_end_time_not_in: [String!]
-  trip_end_time_lt: String
-  trip_end_time_lte: String
-  trip_end_time_gt: String
-  trip_end_time_gte: String
-  trip_end_time_contains: String
-  trip_end_time_not_contains: String
-  trip_end_time_starts_with: String
-  trip_end_time_not_starts_with: String
-  trip_end_time_ends_with: String
-  trip_end_time_not_ends_with: String
-  customer_name: String
-  customer_name_not: String
-  customer_name_in: [String!]
-  customer_name_not_in: [String!]
-  customer_name_lt: String
-  customer_name_lte: String
-  customer_name_gt: String
-  customer_name_gte: String
-  customer_name_contains: String
-  customer_name_not_contains: String
-  customer_name_starts_with: String
-  customer_name_not_starts_with: String
-  customer_name_ends_with: String
-  customer_name_not_ends_with: String
-  carType: String
-  carType_not: String
-  carType_in: [String!]
-  carType_not_in: [String!]
-  carType_lt: String
-  carType_lte: String
-  carType_gt: String
-  carType_gte: String
-  carType_contains: String
-  carType_not_contains: String
-  carType_starts_with: String
-  carType_not_starts_with: String
-  carType_ends_with: String
-  carType_not_ends_with: String
-  vehicle_number: String
-  vehicle_number_not: String
-  vehicle_number_in: [String!]
-  vehicle_number_not_in: [String!]
-  vehicle_number_lt: String
-  vehicle_number_lte: String
-  vehicle_number_gt: String
-  vehicle_number_gte: String
-  vehicle_number_contains: String
-  vehicle_number_not_contains: String
-  vehicle_number_starts_with: String
-  vehicle_number_not_starts_with: String
-  vehicle_number_ends_with: String
-  vehicle_number_not_ends_with: String
-  driver_number: String
-  driver_number_not: String
-  driver_number_in: [String!]
-  driver_number_not_in: [String!]
-  driver_number_lt: String
-  driver_number_lte: String
-  driver_number_gt: String
-  driver_number_gte: String
-  driver_number_contains: String
-  driver_number_not_contains: String
-  driver_number_starts_with: String
-  driver_number_not_starts_with: String
-  driver_number_ends_with: String
-  driver_number_not_ends_with: String
-  passenger_number: String
-  passenger_number_not: String
-  passenger_number_in: [String!]
-  passenger_number_not_in: [String!]
-  passenger_number_lt: String
-  passenger_number_lte: String
-  passenger_number_gt: String
-  passenger_number_gte: String
-  passenger_number_contains: String
-  passenger_number_not_contains: String
-  passenger_number_starts_with: String
-  passenger_number_not_starts_with: String
-  passenger_number_ends_with: String
-  passenger_number_not_ends_with: String
-  kilometer_number: String
-  kilometer_number_not: String
-  kilometer_number_in: [String!]
-  kilometer_number_not_in: [String!]
-  kilometer_number_lt: String
-  kilometer_number_lte: String
-  kilometer_number_gt: String
-  kilometer_number_gte: String
-  kilometer_number_contains: String
-  kilometer_number_not_contains: String
-  kilometer_number_starts_with: String
-  kilometer_number_not_starts_with: String
-  kilometer_number_ends_with: String
-  kilometer_number_not_ends_with: String
-  hour_number: String
-  hour_number_not: String
-  hour_number_in: [String!]
-  hour_number_not_in: [String!]
-  hour_number_lt: String
-  hour_number_lte: String
-  hour_number_gt: String
-  hour_number_gte: String
-  hour_number_contains: String
-  hour_number_not_contains: String
-  hour_number_starts_with: String
-  hour_number_not_starts_with: String
-  hour_number_ends_with: String
-  hour_number_not_ends_with: String
-  day_number: String
-  day_number_not: String
-  day_number_in: [String!]
-  day_number_not_in: [String!]
-  day_number_lt: String
-  day_number_lte: String
-  day_number_gt: String
-  day_number_gte: String
-  day_number_contains: String
-  day_number_not_contains: String
-  day_number_starts_with: String
-  day_number_not_starts_with: String
-  day_number_ends_with: String
-  day_number_not_ends_with: String
-  pickupAddress: String
-  pickupAddress_not: String
-  pickupAddress_in: [String!]
-  pickupAddress_not_in: [String!]
-  pickupAddress_lt: String
-  pickupAddress_lte: String
-  pickupAddress_gt: String
-  pickupAddress_gte: String
-  pickupAddress_contains: String
-  pickupAddress_not_contains: String
-  pickupAddress_starts_with: String
-  pickupAddress_not_starts_with: String
-  pickupAddress_ends_with: String
-  pickupAddress_not_ends_with: String
-  pickupCity: String
-  pickupCity_not: String
-  pickupCity_in: [String!]
-  pickupCity_not_in: [String!]
-  pickupCity_lt: String
-  pickupCity_lte: String
-  pickupCity_gt: String
-  pickupCity_gte: String
-  pickupCity_contains: String
-  pickupCity_not_contains: String
-  pickupCity_starts_with: String
-  pickupCity_not_starts_with: String
-  pickupCity_ends_with: String
-  pickupCity_not_ends_with: String
-  dropAddress: String
-  dropAddress_not: String
-  dropAddress_in: [String!]
-  dropAddress_not_in: [String!]
-  dropAddress_lt: String
-  dropAddress_lte: String
-  dropAddress_gt: String
-  dropAddress_gte: String
-  dropAddress_contains: String
-  dropAddress_not_contains: String
-  dropAddress_starts_with: String
-  dropAddress_not_starts_with: String
-  dropAddress_ends_with: String
-  dropAddress_not_ends_with: String
-  dropCity: String
-  dropCity_not: String
-  dropCity_in: [String!]
-  dropCity_not_in: [String!]
-  dropCity_lt: String
-  dropCity_lte: String
-  dropCity_gt: String
-  dropCity_gte: String
-  dropCity_contains: String
-  dropCity_not_contains: String
-  dropCity_starts_with: String
-  dropCity_not_starts_with: String
-  dropCity_ends_with: String
-  dropCity_not_ends_with: String
-  driver_name: String
-  driver_name_not: String
-  driver_name_in: [String!]
-  driver_name_not_in: [String!]
-  driver_name_lt: String
-  driver_name_lte: String
-  driver_name_gt: String
-  driver_name_gte: String
-  driver_name_contains: String
-  driver_name_not_contains: String
-  driver_name_starts_with: String
-  driver_name_not_starts_with: String
-  driver_name_ends_with: String
-  driver_name_not_ends_with: String
-  status: String
-  status_not: String
-  status_in: [String!]
-  status_not_in: [String!]
-  status_lt: String
-  status_lte: String
-  status_gt: String
-  status_gte: String
-  status_contains: String
-  status_not_contains: String
-  status_starts_with: String
-  status_not_starts_with: String
-  status_ends_with: String
-  status_not_ends_with: String
-  trip_cost: String
-  trip_cost_not: String
-  trip_cost_in: [String!]
-  trip_cost_not_in: [String!]
-  trip_cost_lt: String
-  trip_cost_lte: String
-  trip_cost_gt: String
-  trip_cost_gte: String
-  trip_cost_contains: String
-  trip_cost_not_contains: String
-  trip_cost_starts_with: String
-  trip_cost_not_starts_with: String
-  trip_cost_ends_with: String
-  trip_cost_not_ends_with: String
-  discount: String
-  discount_not: String
-  discount_in: [String!]
-  discount_not_in: [String!]
-  discount_lt: String
-  discount_lte: String
-  discount_gt: String
-  discount_gte: String
-  discount_contains: String
-  discount_not_contains: String
-  discount_starts_with: String
-  discount_not_starts_with: String
-  discount_ends_with: String
-  discount_not_ends_with: String
-  payment_status: String
-  payment_status_not: String
-  payment_status_in: [String!]
-  payment_status_not_in: [String!]
-  payment_status_lt: String
-  payment_status_lte: String
-  payment_status_gt: String
-  payment_status_gte: String
-  payment_status_contains: String
-  payment_status_not_contains: String
-  payment_status_starts_with: String
-  payment_status_not_starts_with: String
-  payment_status_ends_with: String
-  payment_status_not_ends_with: String
-  createdAt: DateTime
-  createdAt_not: DateTime
-  createdAt_in: [DateTime!]
-  createdAt_not_in: [DateTime!]
-  createdAt_lt: DateTime
-  createdAt_lte: DateTime
-  createdAt_gt: DateTime
-  createdAt_gte: DateTime
-  comment: String
-  comment_not: String
-  comment_in: [String!]
-  comment_not_in: [String!]
-  comment_lt: String
-  comment_lte: String
-  comment_gt: String
-  comment_gte: String
-  comment_contains: String
-  comment_not_contains: String
-  comment_starts_with: String
-  comment_not_starts_with: String
-  comment_ends_with: String
-  comment_not_ends_with: String
-  AND: [BookingWhereInput!]
-  OR: [BookingWhereInput!]
-  NOT: [BookingWhereInput!]
-}
-
-input BookingWhereUniqueInput {
-  id: ID
-}
-
-type CancelReason {
-  id: ID!
-  value: String!
-  label: String!
-}
-
-type CancelReasonConnection {
-  pageInfo: PageInfo!
-  edges: [CancelReasonEdge]!
-  aggregate: AggregateCancelReason!
-}
-
-input CancelReasonCreateInput {
-  id: ID
-  value: String!
-  label: String!
-}
-
-type CancelReasonEdge {
-  node: CancelReason!
-  cursor: String!
-}
-
-enum CancelReasonOrderByInput {
-  id_ASC
-  id_DESC
-  value_ASC
-  value_DESC
-  label_ASC
-  label_DESC
-}
-
-type CancelReasonPreviousValues {
-  id: ID!
-  value: String!
-  label: String!
-}
-
-type CancelReasonSubscriptionPayload {
-  mutation: MutationType!
-  node: CancelReason
-  updatedFields: [String!]
-  previousValues: CancelReasonPreviousValues
-}
-
-input CancelReasonSubscriptionWhereInput {
-  mutation_in: [MutationType!]
-  updatedFields_contains: String
-  updatedFields_contains_every: [String!]
-  updatedFields_contains_some: [String!]
-  node: CancelReasonWhereInput
-  AND: [CancelReasonSubscriptionWhereInput!]
-  OR: [CancelReasonSubscriptionWhereInput!]
-  NOT: [CancelReasonSubscriptionWhereInput!]
-}
-
-input CancelReasonUpdateInput {
-  value: String
-  label: String
-}
-
-input CancelReasonUpdateManyMutationInput {
-  value: String
-  label: String
-}
-
-input CancelReasonWhereInput {
-  id: ID
-  id_not: ID
-  id_in: [ID!]
-  id_not_in: [ID!]
-  id_lt: ID
-  id_lte: ID
-  id_gt: ID
-  id_gte: ID
-  id_contains: ID
-  id_not_contains: ID
-  id_starts_with: ID
-  id_not_starts_with: ID
-  id_ends_with: ID
-  id_not_ends_with: ID
-  value: String
-  value_not: String
-  value_in: [String!]
-  value_not_in: [String!]
-  value_lt: String
-  value_lte: String
-  value_gt: String
-  value_gte: String
-  value_contains: String
-  value_not_contains: String
-  value_starts_with: String
-  value_not_starts_with: String
-  value_ends_with: String
-  value_not_ends_with: String
-  label: String
-  label_not: String
-  label_in: [String!]
-  label_not_in: [String!]
-  label_lt: String
-  label_lte: String
-  label_gt: String
-  label_gte: String
-  label_contains: String
-  label_not_contains: String
-  label_starts_with: String
-  label_not_starts_with: String
-  label_ends_with: String
-  label_not_ends_with: String
-  AND: [CancelReasonWhereInput!]
-  OR: [CancelReasonWhereInput!]
-  NOT: [CancelReasonWhereInput!]
-}
-
-input CancelReasonWhereUniqueInput {
-  id: ID
-}
-
-type CarType {
-  id: ID!
-  convenience_fees: Int
-  image: String
-  name: String
-  rate_per_hour: Int
-  rate_per_kilometer: String
-  updatedAt: DateTime!
-}
-
-type CarTypeConnection {
-  pageInfo: PageInfo!
-  edges: [CarTypeEdge]!
-  aggregate: AggregateCarType!
-}
-
-input CarTypeCreateInput {
-  id: ID
-  convenience_fees: Int
-  image: String
-  name: String
-  rate_per_hour: Int
-  rate_per_kilometer: String
-}
-
-type CarTypeEdge {
-  node: CarType!
-  cursor: String!
-}
-
-enum CarTypeOrderByInput {
-  id_ASC
-  id_DESC
-  convenience_fees_ASC
-  convenience_fees_DESC
-  image_ASC
-  image_DESC
   name_ASC
   name_DESC
-  rate_per_hour_ASC
-  rate_per_hour_DESC
-  rate_per_kilometer_ASC
-  rate_per_kilometer_DESC
+  lastName_ASC
+  lastName_DESC
+  firstName_ASC
+  firstName_DESC
+  email_ASC
+  email_DESC
+  createdAt_ASC
+  createdAt_DESC
+  call_length_ASC
+  call_length_DESC
+  description_ASC
+  description_DESC
   updatedAt_ASC
   updatedAt_DESC
+  mobile_ASC
+  mobile_DESC
+  profile_image_ASC
+  profile_image_DESC
+  lead_source_ASC
+  lead_source_DESC
+  refferalBonus_ASC
+  refferalBonus_DESC
+  profession_ASC
+  profession_DESC
+  outcome_ASC
+  outcome_DESC
+  recording_ASC
+  recording_DESC
+  my_emotions_ASC
+  my_emotions_DESC
+  call_conclusion_ASC
+  call_conclusion_DESC
 }
 
-type CarTypePreviousValues {
+type ApplicantPreviousValues {
   id: ID!
-  convenience_fees: Int
-  image: String
-  name: String
-  rate_per_hour: Int
-  rate_per_kilometer: String
-  updatedAt: DateTime!
+  name: String!
+  lastName: String
+  firstName: String
+  email: String!
+  createdAt: DateTime!
+  call_length: String
+  description: String
+  updatedAt: DateTime
+  mobile: String
+  profile_image: String
+  lead_source: String
+  refferalBonus: String
+  profession: String
+  outcome: String
+  recording: Boolean
+  my_emotions: String
+  call_conclusion: String
 }
 
-type CarTypeSubscriptionPayload {
+type ApplicantSubscriptionPayload {
   mutation: MutationType!
-  node: CarType
+  node: Applicant
   updatedFields: [String!]
-  previousValues: CarTypePreviousValues
+  previousValues: ApplicantPreviousValues
 }
 
-input CarTypeSubscriptionWhereInput {
+input ApplicantSubscriptionWhereInput {
   mutation_in: [MutationType!]
   updatedFields_contains: String
   updatedFields_contains_every: [String!]
   updatedFields_contains_some: [String!]
-  node: CarTypeWhereInput
-  AND: [CarTypeSubscriptionWhereInput!]
-  OR: [CarTypeSubscriptionWhereInput!]
-  NOT: [CarTypeSubscriptionWhereInput!]
+  node: ApplicantWhereInput
+  AND: [ApplicantSubscriptionWhereInput!]
+  OR: [ApplicantSubscriptionWhereInput!]
+  NOT: [ApplicantSubscriptionWhereInput!]
 }
 
-input CarTypeUpdateInput {
-  convenience_fees: Int
-  image: String
+input ApplicantUpdateInput {
   name: String
-  rate_per_hour: Int
-  rate_per_kilometer: String
+  lastName: String
+  firstName: String
+  email: String
+  call_length: String
+  description: String
+  mobile: String
+  profile_image: String
+  lead_source: String
+  refferalBonus: String
+  profession: String
+  outcome: String
+  recording: Boolean
+  my_emotions: String
+  call_conclusion: String
 }
 
-input CarTypeUpdateManyMutationInput {
-  convenience_fees: Int
-  image: String
+input ApplicantUpdateManyMutationInput {
   name: String
-  rate_per_hour: Int
-  rate_per_kilometer: String
+  lastName: String
+  firstName: String
+  email: String
+  call_length: String
+  description: String
+  mobile: String
+  profile_image: String
+  lead_source: String
+  refferalBonus: String
+  profession: String
+  outcome: String
+  recording: Boolean
+  my_emotions: String
+  call_conclusion: String
 }
 
-input CarTypeWhereInput {
+input ApplicantWhereInput {
   id: ID
   id_not: ID
   id_in: [ID!]
@@ -780,28 +199,6 @@ input CarTypeWhereInput {
   id_not_starts_with: ID
   id_ends_with: ID
   id_not_ends_with: ID
-  convenience_fees: Int
-  convenience_fees_not: Int
-  convenience_fees_in: [Int!]
-  convenience_fees_not_in: [Int!]
-  convenience_fees_lt: Int
-  convenience_fees_lte: Int
-  convenience_fees_gt: Int
-  convenience_fees_gte: Int
-  image: String
-  image_not: String
-  image_in: [String!]
-  image_not_in: [String!]
-  image_lt: String
-  image_lte: String
-  image_gt: String
-  image_gte: String
-  image_contains: String
-  image_not_contains: String
-  image_starts_with: String
-  image_not_starts_with: String
-  image_ends_with: String
-  image_not_ends_with: String
   name: String
   name_not: String
   name_in: [String!]
@@ -816,28 +213,84 @@ input CarTypeWhereInput {
   name_not_starts_with: String
   name_ends_with: String
   name_not_ends_with: String
-  rate_per_hour: Int
-  rate_per_hour_not: Int
-  rate_per_hour_in: [Int!]
-  rate_per_hour_not_in: [Int!]
-  rate_per_hour_lt: Int
-  rate_per_hour_lte: Int
-  rate_per_hour_gt: Int
-  rate_per_hour_gte: Int
-  rate_per_kilometer: String
-  rate_per_kilometer_not: String
-  rate_per_kilometer_in: [String!]
-  rate_per_kilometer_not_in: [String!]
-  rate_per_kilometer_lt: String
-  rate_per_kilometer_lte: String
-  rate_per_kilometer_gt: String
-  rate_per_kilometer_gte: String
-  rate_per_kilometer_contains: String
-  rate_per_kilometer_not_contains: String
-  rate_per_kilometer_starts_with: String
-  rate_per_kilometer_not_starts_with: String
-  rate_per_kilometer_ends_with: String
-  rate_per_kilometer_not_ends_with: String
+  lastName: String
+  lastName_not: String
+  lastName_in: [String!]
+  lastName_not_in: [String!]
+  lastName_lt: String
+  lastName_lte: String
+  lastName_gt: String
+  lastName_gte: String
+  lastName_contains: String
+  lastName_not_contains: String
+  lastName_starts_with: String
+  lastName_not_starts_with: String
+  lastName_ends_with: String
+  lastName_not_ends_with: String
+  firstName: String
+  firstName_not: String
+  firstName_in: [String!]
+  firstName_not_in: [String!]
+  firstName_lt: String
+  firstName_lte: String
+  firstName_gt: String
+  firstName_gte: String
+  firstName_contains: String
+  firstName_not_contains: String
+  firstName_starts_with: String
+  firstName_not_starts_with: String
+  firstName_ends_with: String
+  firstName_not_ends_with: String
+  email: String
+  email_not: String
+  email_in: [String!]
+  email_not_in: [String!]
+  email_lt: String
+  email_lte: String
+  email_gt: String
+  email_gte: String
+  email_contains: String
+  email_not_contains: String
+  email_starts_with: String
+  email_not_starts_with: String
+  email_ends_with: String
+  email_not_ends_with: String
+  createdAt: DateTime
+  createdAt_not: DateTime
+  createdAt_in: [DateTime!]
+  createdAt_not_in: [DateTime!]
+  createdAt_lt: DateTime
+  createdAt_lte: DateTime
+  createdAt_gt: DateTime
+  createdAt_gte: DateTime
+  call_length: String
+  call_length_not: String
+  call_length_in: [String!]
+  call_length_not_in: [String!]
+  call_length_lt: String
+  call_length_lte: String
+  call_length_gt: String
+  call_length_gte: String
+  call_length_contains: String
+  call_length_not_contains: String
+  call_length_starts_with: String
+  call_length_not_starts_with: String
+  call_length_ends_with: String
+  call_length_not_ends_with: String
+  description: String
+  description_not: String
+  description_in: [String!]
+  description_not_in: [String!]
+  description_lt: String
+  description_lte: String
+  description_gt: String
+  description_gte: String
+  description_contains: String
+  description_not_contains: String
+  description_starts_with: String
+  description_not_starts_with: String
+  description_ends_with: String
+  description_not_ends_with: String
   updatedAt: DateTime
   updatedAt_not: DateTime
   updatedAt_in: [DateTime!]
@@ -846,13 +299,132 @@ input CarTypeWhereInput {
   updatedAt_lte: DateTime
   updatedAt_gt: DateTime
   updatedAt_gte: DateTime
-  AND: [CarTypeWhereInput!]
-  OR: [CarTypeWhereInput!]
-  NOT: [CarTypeWhereInput!]
+  mobile: String
+  mobile_not: String
+  mobile_in: [String!]
+  mobile_not_in: [String!]
+  mobile_lt: String
+  mobile_lte: String
+  mobile_gt: String
+  mobile_gte: String
+  mobile_contains: String
+  mobile_not_contains: String
+  mobile_starts_with: String
+  mobile_not_starts_with: String
+  mobile_ends_with: String
+  mobile_not_ends_with: String
+  profile_image: String
+  profile_image_not: String
+  profile_image_in: [String!]
+  profile_image_not_in: [String!]
+  profile_image_lt: String
+  profile_image_lte: String
+  profile_image_gt: String
+  profile_image_gte: String
+  profile_image_contains: String
+  profile_image_not_contains: String
+  profile_image_starts_with: String
+  profile_image_not_starts_with: String
+  profile_image_ends_with: String
+  profile_image_not_ends_with: String
+  lead_source: String
+  lead_source_not: String
+  lead_source_in: [String!]
+  lead_source_not_in: [String!]
+  lead_source_lt: String
+  lead_source_lte: String
+  lead_source_gt: String
+  lead_source_gte: String
+  lead_source_contains: String
+  lead_source_not_contains: String
+  lead_source_starts_with: String
+  lead_source_not_starts_with: String
+  lead_source_ends_with: String
+  lead_source_not_ends_with: String
+  refferalBonus: String
+  refferalBonus_not: String
+  refferalBonus_in: [String!]
+  refferalBonus_not_in: [String!]
+  refferalBonus_lt: String
+  refferalBonus_lte: String
+  refferalBonus_gt: String
+  refferalBonus_gte: String
+  refferalBonus_contains: String
+  refferalBonus_not_contains: String
+  refferalBonus_starts_with: String
+  refferalBonus_not_starts_with: String
+  refferalBonus_ends_with: String
+  refferalBonus_not_ends_with: String
+  profession: String
+  profession_not: String
+  profession_in: [String!]
+  profession_not_in: [String!]
+  profession_lt: String
+  profession_lte: String
+  profession_gt: String
+  profession_gte: String
+  profession_contains: String
+  profession_not_contains: String
+  profession_starts_with: String
+  profession_not_starts_with: String
+  profession_ends_with: String
+  profession_not_ends_with: String
+  outcome: String
+  outcome_not: String
+  outcome_in: [String!]
+  outcome_not_in: [String!]
+  outcome_lt: String
+  outcome_lte: String
+  outcome_gt: String
+  outcome_gte: String
+  outcome_contains: String
+  outcome_not_contains: String
+  outcome_starts_with: String
+  outcome_not_starts_with: String
+  outcome_ends_with: String
+  outcome_not_ends_with: String
+  recording: Boolean
+  recording_not: Boolean
+  my_emotions: String
+  my_emotions_not: String
+  my_emotions_in: [String!]
+  my_emotions_not_in: [String!]
+  my_emotions_lt: String
+  my_emotions_lte: String
+  my_emotions_gt: String
+  my_emotions_gte: String
+  my_emotions_contains: String
+  my_emotions_not_contains: String
+  my_emotions_starts_with: String
+  my_emotions_not_starts_with: String
+  my_emotions_ends_with: String
+  my_emotions_not_ends_with: String
+  call_conclusion: String
+  call_conclusion_not: String
+  call_conclusion_in: [String!]
+  call_conclusion_not_in: [String!]
+  call_conclusion_lt: String
+  call_conclusion_lte: String
+  call_conclusion_gt: String
+  call_conclusion_gte: String
+  call_conclusion_contains: String
+  call_conclusion_not_contains: String
+  call_conclusion_starts_with: String
+  call_conclusion_not_starts_with: String
+  call_conclusion_ends_with: String
+  call_conclusion_not_ends_with: String
+  AND: [ApplicantWhereInput!]
+  OR: [ApplicantWhereInput!]
+  NOT: [ApplicantWhereInput!]
 }
 
-input CarTypeWhereUniqueInput {
+input ApplicantWhereUniqueInput {
   id: ID
+  email: String
+}
+
+type BatchPayload {
+  count: Long!
 }
 
 scalar DateTime
@@ -860,30 +432,24 @@ scalar DateTime
 scalar Long
 
 type Mutation {
-  createBooking(data: BookingCreateInput!): Booking!
-  updateBooking(data: BookingUpdateInput!, where: BookingWhereUniqueInput!): Booking
-  updateManyBookings(data: BookingUpdateManyMutationInput!, where: BookingWhereInput): BatchPayload!
-  upsertBooking(where: BookingWhereUniqueInput!, create: BookingCreateInput!, update: BookingUpdateInput!): Booking!
-  deleteBooking(where: BookingWhereUniqueInput!): Booking
-  deleteManyBookings(where: BookingWhereInput): BatchPayload!
-  createCancelReason(data: CancelReasonCreateInput!): CancelReason!
-  updateCancelReason(data: CancelReasonUpdateInput!, where: CancelReasonWhereUniqueInput!): CancelReason
-  updateManyCancelReasons(data: CancelReasonUpdateManyMutationInput!, where: CancelReasonWhereInput): BatchPayload!
-  upsertCancelReason(where: CancelReasonWhereUniqueInput!, create: CancelReasonCreateInput!, update: CancelReasonUpdateInput!): CancelReason!
-  deleteCancelReason(where: CancelReasonWhereUniqueInput!): CancelReason
-  deleteManyCancelReasons(where: CancelReasonWhereInput): BatchPayload!
-  createCarType(data: CarTypeCreateInput!): CarType!
-  updateCarType(data: CarTypeUpdateInput!, where: CarTypeWhereUniqueInput!): CarType
-  updateManyCarTypes(data: CarTypeUpdateManyMutationInput!, where: CarTypeWhereInput): BatchPayload!
-  upsertCarType(where: CarTypeWhereUniqueInput!, create: CarTypeCreateInput!, update: CarTypeUpdateInput!): CarType!
-  deleteCarType(where: CarTypeWhereUniqueInput!): CarType
-  deleteManyCarTypes(where: CarTypeWhereInput): BatchPayload!
-  createOffer(data: OfferCreateInput!): Offer!
-  updateOffer(data: OfferUpdateInput!, where: OfferWhereUniqueInput!): Offer
-  updateManyOffers(data: OfferUpdateManyMutationInput!, where: OfferWhereInput): BatchPayload!
-  upsertOffer(where: OfferWhereUniqueInput!, create: OfferCreateInput!, update: OfferUpdateInput!): Offer!
-  deleteOffer(where: OfferWhereUniqueInput!): Offer
-  deleteManyOffers(where: OfferWhereInput): BatchPayload!
+  createApplicant(data: ApplicantCreateInput!): Applicant!
+  updateApplicant(data: ApplicantUpdateInput!, where: ApplicantWhereUniqueInput!): Applicant
+  updateManyApplicants(data: ApplicantUpdateManyMutationInput!, where: ApplicantWhereInput): BatchPayload!
+  upsertApplicant(where: ApplicantWhereUniqueInput!, create: ApplicantCreateInput!, update: ApplicantUpdateInput!): Applicant!
+  deleteApplicant(where: ApplicantWhereUniqueInput!): Applicant
+  deleteManyApplicants(where: ApplicantWhereInput): BatchPayload!
+  createPartner(data: PartnerCreateInput!): Partner!
+  updatePartner(data: PartnerUpdateInput!, where: PartnerWhereUniqueInput!): Partner
+  updateManyPartners(data: PartnerUpdateManyMutationInput!, where: PartnerWhereInput): BatchPayload!
+  upsertPartner(where: PartnerWhereUniqueInput!, create: PartnerCreateInput!, update: PartnerUpdateInput!): Partner!
+  deletePartner(where: PartnerWhereUniqueInput!): Partner
+  deleteManyPartners(where: PartnerWhereInput): BatchPayload!
+  createProspect(data: ProspectCreateInput!): Prospect!
+  updateProspect(data: ProspectUpdateInput!, where: ProspectWhereUniqueInput!): Prospect
+  updateManyProspects(data: ProspectUpdateManyMutationInput!, where: ProspectWhereInput): BatchPayload!
+  upsertProspect(where: ProspectWhereUniqueInput!, create: ProspectCreateInput!, update: ProspectUpdateInput!): Prospect!
+  deleteProspect(where: ProspectWhereUniqueInput!): Prospect
+  deleteManyProspects(where: ProspectWhereInput): BatchPayload!
   createUser(data: UserCreateInput!): User!
   updateUser(data: UserUpdateInput!, where: UserWhereUniqueInput!): User
   updateManyUsers(data: UserUpdateManyMutationInput!, where: UserWhereInput): BatchPayload!
@@ -902,122 +468,179 @@ interface Node {
   id: ID!
 }
 
-type Offer {
+type PageInfo {
+  hasNextPage: Boolean!
+  hasPreviousPage: Boolean!
+  startCursor: String
+  endCursor: String
+}
+
+type Partner {
   id: ID!
-  max_promo_discount_value: Int
-  min_order: Int
-  promo_description: String
-  promo_discount_type: String
-  promo_discount_value: Int
-  promo_name: String
-  promo_start: String
-  promo_usage_limit: Int
-  promo_validity: String
+  name: String!
+  lastName: String
+  firstName: String
+  email: String!
+  createdAt: DateTime!
+  call_length: String
+  description: String
+  updatedAt: DateTime
+  mobile: String
+  profile_image: String
+  lead_source: String
+  refferalBonus: String
+  profession: String
+  outcome: String
+  recording: Boolean
+  my_emotions: String
+  call_conclusion: String
 }
 
-type OfferConnection {
+type PartnerConnection {
   pageInfo: PageInfo!
-  edges: [OfferEdge]!
-  aggregate: AggregateOffer!
+  edges: [PartnerEdge]!
+  aggregate: AggregatePartner!
 }
 
-input OfferCreateInput {
+input PartnerCreateInput {
   id: ID
-  max_promo_discount_value: Int
-  min_order: Int
-  promo_description: String
-  promo_discount_type: String
-  promo_discount_value: Int
-  promo_name: String
-  promo_start: String
-  promo_usage_limit: Int
-  promo_validity: String
+  name: String!
+  lastName: String
+  firstName: String
+  email: String!
+  call_length: String
+  description: String
+  mobile: String
+  profile_image: String
+  lead_source: String
+  refferalBonus: String
+  profession: String
+  outcome: String
+  recording: Boolean
+  my_emotions: String
+  call_conclusion: String
 }
 
-type OfferEdge {
-  node: Offer!
+type PartnerEdge {
+  node: Partner!
   cursor: String!
 }
 
-enum OfferOrderByInput {
+enum PartnerOrderByInput {
   id_ASC
   id_DESC
-  max_promo_discount_value_ASC
-  max_promo_discount_value_DESC
-  min_order_ASC
-  min_order_DESC
-  promo_description_ASC
-  promo_description_DESC
-  promo_discount_type_ASC
-  promo_discount_type_DESC
-  promo_discount_value_ASC
-  promo_discount_value_DESC
-  promo_name_ASC
-  promo_name_DESC
-  promo_start_ASC
-  promo_start_DESC
-  promo_usage_limit_ASC
-  promo_usage_limit_DESC
-  promo_validity_ASC
-  promo_validity_DESC
+  name_ASC
+  name_DESC
+  lastName_ASC
+  lastName_DESC
+  firstName_ASC
+  firstName_DESC
+  email_ASC
+  email_DESC
+  createdAt_ASC
+  createdAt_DESC
+  call_length_ASC
+  call_length_DESC
+  description_ASC
+  description_DESC
+  updatedAt_ASC
+  updatedAt_DESC
+  mobile_ASC
+  mobile_DESC
+  profile_image_ASC
+  profile_image_DESC
+  lead_source_ASC
+  lead_source_DESC
+  refferalBonus_ASC
+  refferalBonus_DESC
+  profession_ASC
+  profession_DESC
+  outcome_ASC
+  outcome_DESC
+  recording_ASC
+  recording_DESC
+  my_emotions_ASC
+  my_emotions_DESC
+  call_conclusion_ASC
+  call_conclusion_DESC
 }
 
-type OfferPreviousValues {
+type PartnerPreviousValues {
   id: ID!
-  max_promo_discount_value: Int
-  min_order: Int
-  promo_description: String
-  promo_discount_type: String
-  promo_discount_value: Int
-  promo_name: String
-  promo_start: String
-  promo_usage_limit: Int
-  promo_validity: String
+  name: String!
+  lastName: String
+  firstName: String
+  email: String!
+  createdAt: DateTime!
+  call_length: String
+  description: String
+  updatedAt: DateTime
+  mobile: String
+  profile_image: String
+  lead_source: String
+  refferalBonus: String
+  profession: String
+  outcome: String
+  recording: Boolean
+  my_emotions: String
+  call_conclusion: String
 }
 
-type OfferSubscriptionPayload {
+type PartnerSubscriptionPayload {
   mutation: MutationType!
-  node: Offer
+  node: Partner
   updatedFields: [String!]
-  previousValues: OfferPreviousValues
+  previousValues: PartnerPreviousValues
 }
 
-input OfferSubscriptionWhereInput {
+input PartnerSubscriptionWhereInput {
   mutation_in: [MutationType!]
   updatedFields_contains: String
   updatedFields_contains_every: [String!]
   updatedFields_contains_some: [String!]
-  node: OfferWhereInput
-  AND: [OfferSubscriptionWhereInput!]
-  OR: [OfferSubscriptionWhereInput!]
-  NOT: [OfferSubscriptionWhereInput!]
+  node: PartnerWhereInput
+  AND: [PartnerSubscriptionWhereInput!]
+  OR: [PartnerSubscriptionWhereInput!]
+  NOT: [PartnerSubscriptionWhereInput!]
 }
 
-input OfferUpdateInput {
-  max_promo_discount_value: Int
-  min_order: Int
-  promo_description: String
-  promo_discount_type: String
-  promo_discount_value: Int
-  promo_name: String
-  promo_start: String
-  promo_usage_limit: Int
-  promo_validity: String
+input PartnerUpdateInput {
+  name: String
+  lastName: String
+  firstName: String
+  email: String
+  call_length: String
+  description: String
+  mobile: String
+  profile_image: String
+  lead_source: String
+  refferalBonus: String
+  profession: String
+  outcome: String
+  recording: Boolean
+  my_emotions: String
+  call_conclusion: String
 }
 
-input OfferUpdateManyMutationInput {
-  max_promo_discount_value: Int
-  min_order: Int
-  promo_description: String
-  promo_discount_type: String
-  promo_discount_value: Int
-  promo_name: String
-  promo_start: String
-  promo_usage_limit: Int
-  promo_validity: String
+input PartnerUpdateManyMutationInput {
+  name: String
+  lastName: String
+  firstName: String
+  email: String
+  call_length: String
+  description: String
+  mobile: String
+  profile_image: String
+  lead_source: String
+  refferalBonus: String
+  profession: String
+  outcome: String
+  recording: Boolean
+  my_emotions: String
+  call_conclusion: String
 }
 
-input OfferWhereInput {
+input PartnerWhereInput {
   id: ID
   id_not: ID
   id_in: [ID!]
@@ -1032,137 +655,644 @@ input OfferWhereInput {
   id_not_starts_with: ID
   id_ends_with: ID
   id_not_ends_with: ID
-  max_promo_discount_value: Int
-  max_promo_discount_value_not: Int
-  max_promo_discount_value_in: [Int!]
-  max_promo_discount_value_not_in: [Int!]
-  max_promo_discount_value_lt: Int
-  max_promo_discount_value_lte: Int
-  max_promo_discount_value_gt: Int
-  max_promo_discount_value_gte: Int
-  min_order: Int
-  min_order_not: Int
-  min_order_in: [Int!]
-  min_order_not_in: [Int!]
-  min_order_lt: Int
-  min_order_lte: Int
-  min_order_gt: Int
-  min_order_gte: Int
-  promo_description: String
-  promo_description_not: String
-  promo_description_in: [String!]
-  promo_description_not_in: [String!]
-  promo_description_lt: String
-  promo_description_lte: String
-  promo_description_gt: String
-  promo_description_gte: String
-  promo_description_contains: String
-  promo_description_not_contains: String
-  promo_description_starts_with: String
-  promo_description_not_starts_with: String
-  promo_description_ends_with: String
-  promo_description_not_ends_with: String
-  promo_discount_type: String
-  promo_discount_type_not: String
-  promo_discount_type_in: [String!]
-  promo_discount_type_not_in: [String!]
-  promo_discount_type_lt: String
-  promo_discount_type_lte: String
-  promo_discount_type_gt: String
-  promo_discount_type_gte: String
-  promo_discount_type_contains: String
-  promo_discount_type_not_contains: String
-  promo_discount_type_starts_with: String
-  promo_discount_type_not_starts_with: String
-  promo_discount_type_ends_with: String
-  promo_discount_type_not_ends_with: String
-  promo_discount_value: Int
-  promo_discount_value_not: Int
-  promo_discount_value_in: [Int!]
-  promo_discount_value_not_in: [Int!]
-  promo_discount_value_lt: Int
-  promo_discount_value_lte: Int
-  promo_discount_value_gt: Int
-  promo_discount_value_gte: Int
-  promo_name: String
-  promo_name_not: String
-  promo_name_in: [String!]
-  promo_name_not_in: [String!]
-  promo_name_lt: String
-  promo_name_lte: String
-  promo_name_gt: String
-  promo_name_gte: String
-  promo_name_contains: String
-  promo_name_not_contains: String
-  promo_name_starts_with: String
-  promo_name_not_starts_with: String
-  promo_name_ends_with: String
-  promo_name_not_ends_with: String
-  promo_start: String
-  promo_start_not: String
-  promo_start_in: [String!]
-  promo_start_not_in: [String!]
-  promo_start_lt: String
-  promo_start_lte: String
-  promo_start_gt: String
-  promo_start_gte: String
-  promo_start_contains: String
-  promo_start_not_contains: String
-  promo_start_starts_with: String
-  promo_start_not_starts_with: String
-  promo_start_ends_with: String
-  promo_start_not_ends_with: String
-  promo_usage_limit: Int
-  promo_usage_limit_not: Int
-  promo_usage_limit_in: [Int!]
-  promo_usage_limit_not_in: [Int!]
-  promo_usage_limit_lt: Int
-  promo_usage_limit_lte: Int
-  promo_usage_limit_gt: Int
-  promo_usage_limit_gte: Int
-  promo_validity: String
-  promo_validity_not: String
-  promo_validity_in: [String!]
-  promo_validity_not_in: [String!]
-  promo_validity_lt: String
-  promo_validity_lte: String
-  promo_validity_gt: String
-  promo_validity_gte: String
-  promo_validity_contains: String
-  promo_validity_not_contains: String
-  promo_validity_starts_with: String
-  promo_validity_not_starts_with: String
-  promo_validity_ends_with: String
-  promo_validity_not_ends_with: String
-  AND: [OfferWhereInput!]
-  OR: [OfferWhereInput!]
-  NOT: [OfferWhereInput!]
+  name: String
+  name_not: String
+  name_in: [String!]
+  name_not_in: [String!]
+  name_lt: String
+  name_lte: String
+  name_gt: String
+  name_gte: String
+  name_contains: String
+  name_not_contains: String
+  name_starts_with: String
+  name_not_starts_with: String
+  name_ends_with: String
+  name_not_ends_with: String
+  lastName: String
+  lastName_not: String
+  lastName_in: [String!]
+  lastName_not_in: [String!]
+  lastName_lt: String
+  lastName_lte: String
+  lastName_gt: String
+  lastName_gte: String
+  lastName_contains: String
+  lastName_not_contains: String
+  lastName_starts_with: String
+  lastName_not_starts_with: String
+  lastName_ends_with: String
+  lastName_not_ends_with: String
+  firstName: String
+  firstName_not: String
+  firstName_in: [String!]
+  firstName_not_in: [String!]
+  firstName_lt: String
+  firstName_lte: String
+  firstName_gt: String
+  firstName_gte: String
+  firstName_contains: String
+  firstName_not_contains: String
+  firstName_starts_with: String
+  firstName_not_starts_with: String
+  firstName_ends_with: String
+  firstName_not_ends_with: String
+  email: String
+  email_not: String
+  email_in: [String!]
+  email_not_in: [String!]
+  email_lt: String
+  email_lte: String
+  email_gt: String
+  email_gte: String
+  email_contains: String
+  email_not_contains: String
+  email_starts_with: String
+  email_not_starts_with: String
+  email_ends_with: String
+  email_not_ends_with: String
+  createdAt: DateTime
+  createdAt_not: DateTime
+  createdAt_in: [DateTime!]
+  createdAt_not_in: [DateTime!]
+  createdAt_lt: DateTime
+  createdAt_lte: DateTime
+  createdAt_gt: DateTime
+  createdAt_gte: DateTime
+  call_length: String
+  call_length_not: String
+  call_length_in: [String!]
+  call_length_not_in: [String!]
+  call_length_lt: String
+  call_length_lte: String
+  call_length_gt: String
+  call_length_gte: String
+  call_length_contains: String
+  call_length_not_contains: String
+  call_length_starts_with: String
+  call_length_not_starts_with: String
+  call_length_ends_with: String
+  call_length_not_ends_with: String
+  description: String
+  description_not: String
+  description_in: [String!]
+  description_not_in: [String!]
+  description_lt: String
+  description_lte: String
+  description_gt: String
+  description_gte: String
+  description_contains: String
+  description_not_contains: String
+  description_starts_with: String
+  description_not_starts_with: String
+  description_ends_with: String
+  description_not_ends_with: String
+  updatedAt: DateTime
+  updatedAt_not: DateTime
+  updatedAt_in: [DateTime!]
+  updatedAt_not_in: [DateTime!]
+  updatedAt_lt: DateTime
+  updatedAt_lte: DateTime
+  updatedAt_gt: DateTime
+  updatedAt_gte: DateTime
+  mobile: String
+  mobile_not: String
+  mobile_in: [String!]
+  mobile_not_in: [String!]
+  mobile_lt: String
+  mobile_lte: String
+  mobile_gt: String
+  mobile_gte: String
+  mobile_contains: String
+  mobile_not_contains: String
+  mobile_starts_with: String
+  mobile_not_starts_with: String
+  mobile_ends_with: String
+  mobile_not_ends_with: String
+  profile_image: String
+  profile_image_not: String
+  profile_image_in: [String!]
+  profile_image_not_in: [String!]
+  profile_image_lt: String
+  profile_image_lte: String
+  profile_image_gt: String
+  profile_image_gte: String
+  profile_image_contains: String
+  profile_image_not_contains: String
+  profile_image_starts_with: String
+  profile_image_not_starts_with: String
+  profile_image_ends_with: String
+  profile_image_not_ends_with: String
+  lead_source: String
+  lead_source_not: String
+  lead_source_in: [String!]
+  lead_source_not_in: [String!]
+  lead_source_lt: String
+  lead_source_lte: String
+  lead_source_gt: String
+  lead_source_gte: String
+  lead_source_contains: String
+  lead_source_not_contains: String
+  lead_source_starts_with: String
+  lead_source_not_starts_with: String
+  lead_source_ends_with: String
+  lead_source_not_ends_with: String
+  refferalBonus: String
+  refferalBonus_not: String
+  refferalBonus_in: [String!]
+  refferalBonus_not_in: [String!]
+  refferalBonus_lt: String
+  refferalBonus_lte: String
+  refferalBonus_gt: String
+  refferalBonus_gte: String
+  refferalBonus_contains: String
+  refferalBonus_not_contains: String
+  refferalBonus_starts_with: String
+  refferalBonus_not_starts_with: String
+  refferalBonus_ends_with: String
+  refferalBonus_not_ends_with: String
+  profession: String
+  profession_not: String
+  profession_in: [String!]
+  profession_not_in: [String!]
+  profession_lt: String
+  profession_lte: String
+  profession_gt: String
+  profession_gte: String
+  profession_contains: String
+  profession_not_contains: String
+  profession_starts_with: String
+  profession_not_starts_with: String
+  profession_ends_with: String
+  profession_not_ends_with: String
+  outcome: String
+  outcome_not: String
+  outcome_in: [String!]
+  outcome_not_in: [String!]
+  outcome_lt: String
+  outcome_lte: String
+  outcome_gt: String
+  outcome_gte: String
+  outcome_contains: String
+  outcome_not_contains: String
+  outcome_starts_with: String
+  outcome_not_starts_with: String
+  outcome_ends_with: String
+  outcome_not_ends_with: String
+  recording: Boolean
+  recording_not: Boolean
+  my_emotions: String
+  my_emotions_not: String
+  my_emotions_in: [String!]
+  my_emotions_not_in: [String!]
+  my_emotions_lt: String
+  my_emotions_lte: String
+  my_emotions_gt: String
+  my_emotions_gte: String
+  my_emotions_contains: String
+  my_emotions_not_contains: String
+  my_emotions_starts_with: String
+  my_emotions_not_starts_with: String
+  my_emotions_ends_with: String
+  my_emotions_not_ends_with: String
+  call_conclusion: String
+  call_conclusion_not: String
+  call_conclusion_in: [String!]
+  call_conclusion_not_in: [String!]
+  call_conclusion_lt: String
+  call_conclusion_lte: String
+  call_conclusion_gt: String
+  call_conclusion_gte: String
+  call_conclusion_contains: String
+  call_conclusion_not_contains: String
+  call_conclusion_starts_with: String
+  call_conclusion_not_starts_with: String
+  call_conclusion_ends_with: String
+  call_conclusion_not_ends_with: String
+  AND: [PartnerWhereInput!]
+  OR: [PartnerWhereInput!]
+  NOT: [PartnerWhereInput!]
 }
 
-input OfferWhereUniqueInput {
+input PartnerWhereUniqueInput {
   id: ID
+  email: String
 }
 
-type PageInfo {
-  hasNextPage: Boolean!
-  hasPreviousPage: Boolean!
-  startCursor: String
-  endCursor: String
+type Prospect {
+  id: ID!
+  name: String!
+  lastName: String
+  firstName: String
+  email: String!
+  createdAt: DateTime!
+  call_length: String
+  description: String
+  updatedAt: DateTime
+  mobile: String
+  profile_image: String
+  lead_source: String
+  refferalBonus: String
+  profession: String
+  outcome: String
+  recording: Boolean
+  my_emotions: String
+  call_conclusion: String
+}
+
+type ProspectConnection {
+  pageInfo: PageInfo!
+  edges: [ProspectEdge]!
+  aggregate: AggregateProspect!
+}
+
+input ProspectCreateInput {
+  id: ID
+  name: String!
+  lastName: String
+  firstName: String
+  email: String!
+  call_length: String
+  description: String
+  mobile: String
+  profile_image: String
+  lead_source: String
+  refferalBonus: String
+  profession: String
+  outcome: String
+  recording: Boolean
+  my_emotions: String
+  call_conclusion: String
+}
+
+type ProspectEdge {
+  node: Prospect!
+  cursor: String!
+}
+
+enum ProspectOrderByInput {
+  id_ASC
+  id_DESC
+  name_ASC
+  name_DESC
+  lastName_ASC
+  lastName_DESC
+  firstName_ASC
+  firstName_DESC
+  email_ASC
+  email_DESC
+  createdAt_ASC
+  createdAt_DESC
+  call_length_ASC
+  call_length_DESC
+  description_ASC
+  description_DESC
+  updatedAt_ASC
+  updatedAt_DESC
+  mobile_ASC
+  mobile_DESC
+  profile_image_ASC
+  profile_image_DESC
+  lead_source_ASC
+  lead_source_DESC
+  refferalBonus_ASC
+  refferalBonus_DESC
+  profession_ASC
+  profession_DESC
+  outcome_ASC
+  outcome_DESC
+  recording_ASC
+  recording_DESC
+  my_emotions_ASC
+  my_emotions_DESC
+  call_conclusion_ASC
+  call_conclusion_DESC
+}
+
+type ProspectPreviousValues {
+  id: ID!
+  name: String!
+  lastName: String
+  firstName: String
+  email: String!
+  createdAt: DateTime!
+  call_length: String
+  description: String
+  updatedAt: DateTime
+  mobile: String
+  profile_image: String
+  lead_source: String
+  refferalBonus: String
+  profession: String
+  outcome: String
+  recording: Boolean
+  my_emotions: String
+  call_conclusion: String
+}
+
+type ProspectSubscriptionPayload {
+  mutation: MutationType!
+  node: Prospect
+  updatedFields: [String!]
+  previousValues: ProspectPreviousValues
+}
+
+input ProspectSubscriptionWhereInput {
+  mutation_in: [MutationType!]
+  updatedFields_contains: String
+  updatedFields_contains_every: [String!]
+  updatedFields_contains_some: [String!]
+  node: ProspectWhereInput
+  AND: [ProspectSubscriptionWhereInput!]
+  OR: [ProspectSubscriptionWhereInput!]
+  NOT: [ProspectSubscriptionWhereInput!]
+}
+
+input ProspectUpdateInput {
+  name: String
+  lastName: String
+  firstName: String
+  email: String
+  call_length: String
+  description: String
+  mobile: String
+  profile_image: String
+  lead_source: String
+  refferalBonus: String
+  profession: String
+  outcome: String
+  recording: Boolean
+  my_emotions: String
+  call_conclusion: String
+}
+
+input ProspectUpdateManyMutationInput {
+  name: String
+  lastName: String
+  firstName: String
+  email: String
+  call_length: String
+  description: String
+  mobile: String
+  profile_image: String
+  lead_source: String
+  refferalBonus: String
+  profession: String
+  outcome: String
+  recording: Boolean
+  my_emotions: String
+  call_conclusion: String
+}
+
+input ProspectWhereInput {
+  id: ID
+  id_not: ID
+  id_in: [ID!]
+  id_not_in: [ID!]
+  id_lt: ID
+  id_lte: ID
+  id_gt: ID
+  id_gte: ID
+  id_contains: ID
+  id_not_contains: ID
+  id_starts_with: ID
+  id_not_starts_with: ID
+  id_ends_with: ID
+  id_not_ends_with: ID
+  name: String
+  name_not: String
+  name_in: [String!]
+  name_not_in: [String!]
+  name_lt: String
+  name_lte: String
+  name_gt: String
+  name_gte: String
+  name_contains: String
+  name_not_contains: String
+  name_starts_with: String
+  name_not_starts_with: String
+  name_ends_with: String
+  name_not_ends_with: String
+  lastName: String
+  lastName_not: String
+  lastName_in: [String!]
+  lastName_not_in: [String!]
+  lastName_lt: String
+  lastName_lte: String
+  lastName_gt: String
+  lastName_gte: String
+  lastName_contains: String
+  lastName_not_contains: String
+  lastName_starts_with: String
+  lastName_not_starts_with: String
+  lastName_ends_with: String
+  lastName_not_ends_with: String
+  firstName: String
+  firstName_not: String
+  firstName_in: [String!]
+  firstName_not_in: [String!]
+  firstName_lt: String
+  firstName_lte: String
+  firstName_gt: String
+  firstName_gte: String
+  firstName_contains: String
+  firstName_not_contains: String
+  firstName_starts_with: String
+  firstName_not_starts_with: String
+  firstName_ends_with: String
+  firstName_not_ends_with: String
+  email: String
+  email_not: String
+  email_in: [String!]
+  email_not_in: [String!]
+  email_lt: String
+  email_lte: String
+  email_gt: String
+  email_gte: String
+  email_contains: String
+  email_not_contains: String
+  email_starts_with: String
+  email_not_starts_with: String
+  email_ends_with: String
+  email_not_ends_with: String
+  createdAt: DateTime
+  createdAt_not: DateTime
+  createdAt_in: [DateTime!]
+  createdAt_not_in: [DateTime!]
+  createdAt_lt: DateTime
+  createdAt_lte: DateTime
+  createdAt_gt: DateTime
+  createdAt_gte: DateTime
+  call_length: String
+  call_length_not: String
+  call_length_in: [String!]
+  call_length_not_in: [String!]
+  call_length_lt: String
+  call_length_lte: String
+  call_length_gt: String
+  call_length_gte: String
+  call_length_contains: String
+  call_length_not_contains: String
+  call_length_starts_with: String
+  call_length_not_starts_with: String
+  call_length_ends_with: String
+  call_length_not_ends_with: String
+  description: String
+  description_not: String
+  description_in: [String!]
+  description_not_in: [String!]
+  description_lt: String
+  description_lte: String
+  description_gt: String
+  description_gte: String
+  description_contains: String
+  description_not_contains: String
+  description_starts_with: String
+  description_not_starts_with: String
+  description_ends_with: String
+  description_not_ends_with: String
+  updatedAt: DateTime
+  updatedAt_not: DateTime
+  updatedAt_in: [DateTime!]
+  updatedAt_not_in: [DateTime!]
+  updatedAt_lt: DateTime
+  updatedAt_lte: DateTime
+  updatedAt_gt: DateTime
+  updatedAt_gte: DateTime
+  mobile: String
+  mobile_not: String
+  mobile_in: [String!]
+  mobile_not_in: [String!]
+  mobile_lt: String
+  mobile_lte: String
+  mobile_gt: String
+  mobile_gte: String
+  mobile_contains: String
+  mobile_not_contains: String
+  mobile_starts_with: String
+  mobile_not_starts_with: String
+  mobile_ends_with: String
+  mobile_not_ends_with: String
+  profile_image: String
+  profile_image_not: String
+  profile_image_in: [String!]
+  profile_image_not_in: [String!]
+  profile_image_lt: String
+  profile_image_lte: String
+  profile_image_gt: String
+  profile_image_gte: String
+  profile_image_contains: String
+  profile_image_not_contains: String
+  profile_image_starts_with: String
+  profile_image_not_starts_with: String
+  profile_image_ends_with: String
+  profile_image_not_ends_with: String
+  lead_source: String
+  lead_source_not: String
+  lead_source_in: [String!]
+  lead_source_not_in: [String!]
+  lead_source_lt: String
+  lead_source_lte: String
+  lead_source_gt: String
+  lead_source_gte: String
+  lead_source_contains: String
+  lead_source_not_contains: String
+  lead_source_starts_with: String
+  lead_source_not_starts_with: String
+  lead_source_ends_with: String
+  lead_source_not_ends_with: String
+  refferalBonus: String
+  refferalBonus_not: String
+  refferalBonus_in: [String!]
+  refferalBonus_not_in: [String!]
+  refferalBonus_lt: String
+  refferalBonus_lte: String
+  refferalBonus_gt: String
+  refferalBonus_gte: String
+  refferalBonus_contains: String
+  refferalBonus_not_contains: String
+  refferalBonus_starts_with: String
+  refferalBonus_not_starts_with: String
+  refferalBonus_ends_with: String
+  refferalBonus_not_ends_with: String
+  profession: String
+  profession_not: String
+  profession_in: [String!]
+  profession_not_in: [String!]
+  profession_lt: String
+  profession_lte: String
+  profession_gt: String
+  profession_gte: String
+  profession_contains: String
+  profession_not_contains: String
+  profession_starts_with: String
+  profession_not_starts_with: String
+  profession_ends_with: String
+  profession_not_ends_with: String
+  outcome: String
+  outcome_not: String
+  outcome_in: [String!]
+  outcome_not_in: [String!]
+  outcome_lt: String
+  outcome_lte: String
+  outcome_gt: String
+  outcome_gte: String
+  outcome_contains: String
+  outcome_not_contains: String
+  outcome_starts_with: String
+  outcome_not_starts_with: String
+  outcome_ends_with: String
+  outcome_not_ends_with: String
+  recording: Boolean
+  recording_not: Boolean
+  my_emotions: String
+  my_emotions_not: String
+  my_emotions_in: [String!]
+  my_emotions_not_in: [String!]
+  my_emotions_lt: String
+  my_emotions_lte: String
+  my_emotions_gt: String
+  my_emotions_gte: String
+  my_emotions_contains: String
+  my_emotions_not_contains: String
+  my_emotions_starts_with: String
+  my_emotions_not_starts_with: String
+  my_emotions_ends_with: String
+  my_emotions_not_ends_with: String
+  call_conclusion: String
+  call_conclusion_not: String
+  call_conclusion_in: [String!]
+  call_conclusion_not_in: [String!]
+  call_conclusion_lt: String
+  call_conclusion_lte: String
+  call_conclusion_gt: String
+  call_conclusion_gte: String
+  call_conclusion_contains: String
+  call_conclusion_not_contains: String
+  call_conclusion_starts_with: String
+  call_conclusion_not_starts_with: String
+  call_conclusion_ends_with: String
+  call_conclusion_not_ends_with: String
+  AND: [ProspectWhereInput!]
+  OR: [ProspectWhereInput!]
+  NOT: [ProspectWhereInput!]
+}
+
+input ProspectWhereUniqueInput {
+  id: ID
+  email: String
 }
 
 type Query {
-  booking(where: BookingWhereUniqueInput!): Booking
-  bookings(where: BookingWhereInput, orderBy: BookingOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Booking]!
-  bookingsConnection(where: BookingWhereInput, orderBy: BookingOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): BookingConnection!
-  cancelReason(where: CancelReasonWhereUniqueInput!): CancelReason
-  cancelReasons(where: CancelReasonWhereInput, orderBy: CancelReasonOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [CancelReason]!
-  cancelReasonsConnection(where: CancelReasonWhereInput, orderBy: CancelReasonOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): CancelReasonConnection!
-  carType(where: CarTypeWhereUniqueInput!): CarType
-  carTypes(where: CarTypeWhereInput, orderBy: CarTypeOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [CarType]!
-  carTypesConnection(where: CarTypeWhereInput, orderBy: CarTypeOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): CarTypeConnection!
-  offer(where: OfferWhereUniqueInput!): Offer
-  offers(where: OfferWhereInput, orderBy: OfferOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Offer]!
-  offersConnection(where: OfferWhereInput, orderBy: OfferOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): OfferConnection!
+  applicant(where: ApplicantWhereUniqueInput!): Applicant
+  applicants(where: ApplicantWhereInput, orderBy: ApplicantOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Applicant]!
+  applicantsConnection(where: ApplicantWhereInput, orderBy: ApplicantOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): ApplicantConnection!
+  partner(where: PartnerWhereUniqueInput!): Partner
+  partners(where: PartnerWhereInput, orderBy: PartnerOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Partner]!
+  partnersConnection(where: PartnerWhereInput, orderBy: PartnerOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): PartnerConnection!
+  prospect(where: ProspectWhereUniqueInput!): Prospect
+  prospects(where: ProspectWhereInput, orderBy: ProspectOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Prospect]!
+  prospectsConnection(where: ProspectWhereInput, orderBy: ProspectOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): ProspectConnection!
   user(where: UserWhereUniqueInput!): User
   users(where: UserWhereInput, orderBy: UserOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [User]!
   usersConnection(where: UserWhereInput, orderBy: UserOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): UserConnection!
@@ -1170,10 +1300,9 @@ type Query {
 }
 
 type Subscription {
-  booking(where: BookingSubscriptionWhereInput): BookingSubscriptionPayload
-  cancelReason(where: CancelReasonSubscriptionWhereInput): CancelReasonSubscriptionPayload
-  carType(where: CarTypeSubscriptionWhereInput): CarTypeSubscriptionPayload
-  offer(where: OfferSubscriptionWhereInput): OfferSubscriptionPayload
+  applicant(where: ApplicantSubscriptionWhereInput): ApplicantSubscriptionPayload
+  partner(where: PartnerSubscriptionWhereInput): PartnerSubscriptionPayload
+  prospect(where: ProspectSubscriptionWhereInput): ProspectSubscriptionPayload
   user(where: UserSubscriptionWhereInput): UserSubscriptionPayload
 }
 

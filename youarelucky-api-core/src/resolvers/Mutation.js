@@ -60,108 +60,6 @@ function postUser(parent, args, context, info) {
   });
 }
 
-function postBooking(parent, args, context, info) {
-  return context.prisma.createBooking({
-    carType: args.carType,
-    customer_name: args.customer_name,
-    vehicle_number: args.vehicle_number,
-    driver_number: args.driver_number,
-    passenger_number: args.passenger_number,
-    kilometer_number: args.kilometer_number,
-    hour_number: args.hour_number,
-    day_number: args.day_number,
-    pickupAddress: args.pickupAddress,
-    pickupCity: args.pickupCity,
-    dropAddress: args.dropAddress,
-    dropCity: args.dropCity,
-    driver_name: args.driver_name,
-    status: args.status,
-    trip_cost: args.trip_cost,
-    discount: args.discount,
-    payment_status: args.payment_status,
-    comment: args.comment
-  });
-}
-
-function updateBooking(parent, args, context, info) {
-  return context.prisma.updateBooking({
-    where: { id: args.id },
-
-    data: {
-      tripdate: args.tripdate,
-      trip_start_time: args.trip_start_time,
-      trip_end_time: args.trip_end_time,
-      customer_name: args.customer_name,
-      carType: args.carType,
-      vehicle_number: args.vehicle_number,
-      driver_number: args.driver_number,
-      passenger_number: args.passenger_number,
-      kilometer_number: args.kilometer_number,
-      hour_number: args.hour_number,
-      day_number: args.day_number,
-      pickupAddress: args.pickupAddress,
-      pickupCity: args.pickupCity,
-      dropAddress: args.dropAddress,
-      dropCity: args.dropCity,
-      driver_name: args.driver_name,
-      status: args.status,
-      discount: args.discount,
-      payment_status: args.payment_status,
-      createdAt: args.createdAt,
-      comment: args.comment
-    }
-  });
-}
-
-function deleteBooking(parent, args, context, info) {
-  return context.prisma.deleteBooking({ id: args.id });
-}
-
-function postCancelReason(parent, args, context, info) {
-  const userId = getUserId(context);
-  return context.prisma.createCancelReason({
-    value: args.value,
-    label: args.label
-  });
-}
-
-function postOffer(parent, args, context, info) {
-  const userId = getUserId(context);
-  return context.prisma.createOffer({
-    max_promo_discount_value: args.max_promo_discount_value,
-    min_order: args.min_order,
-    promo_description: args.promo_description,
-    promo_discount_type: args.promo_discount_type,
-    promo_discount_value: args.promo_discount_value,
-    promo_name: args.promo_name,
-    promo_start: args.promo_start,
-    promo_usage_limit: args.promo_usage_limit,
-    promo_validity: args.promo_validity
-  });
-}
-
-function postCarType(parent, args, context, info) {
-  const userId = getUserId(context);
-  return context.prisma.createCarType({
-    convenience_fees: args.convenience_fees,
-    image: args.image,
-    name: args.name,
-    rate_per_hour: args.rate_per_hour,
-    rate_per_kilometer: args.rate_per_kilometer,
-    updatedAt: args.updatedAt
-  });
-}
-
-function postReward(parent, args, context, info) {
-  const userId = getUserId(context);
-  return context.prisma.createReward({
-    id: args.id,
-    amount: args.amount,
-    key: args.key,
-    updatedAt: args.updatedAt
-  });
-}
-
 async function updateUser(parent, args, context, info) {
   // First check if there is a user with that email
   const user = await context.prisma.user({ email: args.email });
@@ -191,62 +89,6 @@ async function updateUser(parent, args, context, info) {
   return updatedUser;
 }
 
-function updateCancelReason(parent, args, context, info) {
-  return context.prisma.updateCancelReason({
-    where: { id: args.id },
-
-    data: {
-      value: args.value,
-      label: args.label
-    }
-  });
-}
-
-function updateOffer(parent, args, context, info) {
-  return context.prisma.updateOffer({
-    where: { id: args.id },
-
-    data: {
-      max_promo_discount_value: args.max_promo_discount_value,
-      min_order: args.min_order,
-      promo_description: args.promo_description,
-      promo_discount_type: args.promo_discount_type,
-      promo_discount_value: args.promo_discount_value,
-      promo_name: args.promo_name,
-      promo_start: args.promo_start,
-      promo_usage_limit: args.promo_usage_limit,
-      promo_validity: args.promo_validity
-    }
-  });
-}
-
-function updateCarType(parent, args, context, info) {
-  return context.prisma.updateCarType({
-    where: { id: args.id },
-
-    data: {
-      convenience_fees: args.convenience_fees,
-      image: args.image,
-      name: args.name,
-      rate_per_hour: args.rate_per_hour,
-      rate_per_kilometer: args.rate_per_kilometer,
-      updatedAt: args.updatedAt
-    }
-  });
-}
-
-function updateReward(parent, args, context, info) {
-  return context.prisma.updateReward({
-    where: { id: args.id },
-
-    data: {
-      amount: args.amount,
-      key: args.key,
-      updatedAt: args.updatedAt
-    }
-  });
-}
-
 async function deleteUser(parent, args, context, info) {
   // First check if there is a user with that email
   const user = await context.prisma.user({ email: args.email });
@@ -258,41 +100,10 @@ async function deleteUser(parent, args, context, info) {
   return deletedUser;
 }
 
-function deleteCancelReason(parent, args, context, info) {
-  return context.prisma.deleteCancelReason({ id: args.id });
-}
-
-function deleteOffer(parent, args, context, info) {
-  return context.prisma.deleteOffer({ id: args.id });
-}
-
-function deleteCarType(parent, args, context, info) {
-  return context.prisma.deleteCarType({ id: args.id });
-}
-
-function deleteReward(parent, args, context, info) {
-  return context.prisma.deleteReward({ id: args.id });
-}
-
 module.exports = {
   signup,
   login,
   postUser,
-  postBooking,
-  updateBooking,
-  deleteBooking,
-  postCancelReason,
-  postOffer,
-  postCarType,
-  postReward,
   updateUser,
-  updateCancelReason,
-  updateOffer,
-  updateCarType,
-  updateReward,
-  deleteUser,
-  deleteCancelReason,
-  deleteOffer,
-  deleteCarType,
-  deleteReward
+  deleteUser
 };
