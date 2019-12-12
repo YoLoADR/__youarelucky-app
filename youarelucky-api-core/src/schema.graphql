@@ -87,7 +87,6 @@ type Mutation {
     email: String!
     lastName: String
     firstName: String
-    createdAt: DateTime!
     description: String
     mobile: String
     profile_image: String
@@ -126,7 +125,6 @@ type Mutation {
     email: String!
     lastName: String
     firstName: String
-    createdAt: DateTime!
     description: String
     mobile: String
     profile_image: String
@@ -165,7 +163,6 @@ type Mutation {
     email: String!
     lastName: String
     firstName: String
-    createdAt: DateTime!
     description: String
     mobile: String
     profile_image: String
@@ -204,7 +201,6 @@ type Mutation {
     email: String!
     lastName: String
     firstName: String
-    createdAt: DateTime!
     description: String
     mobile: String
     profile_image: String
@@ -322,7 +318,6 @@ type Applicant {
   mobile: String
   profile_image: String
   lead_source: String
-  refferalBonus: String
   profession: String
   refferalBonus: String
   outcome: String
@@ -343,7 +338,6 @@ type Partner {
   mobile: String
   profile_image: String
   lead_source: String
-  refferalBonus: String
   profession: String
   refferalBonus: String
   outcome: String
@@ -364,7 +358,6 @@ type Customer {
   mobile: String
   profile_image: String
   lead_source: String
-  refferalBonus: String
   profession: String
   refferalBonus: String
   outcome: String

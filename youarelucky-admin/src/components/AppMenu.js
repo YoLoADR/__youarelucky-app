@@ -16,6 +16,7 @@ import ListIcon from "@material-ui/icons/ListAlt";
 import ExitIcon from "@material-ui/icons/ExitToApp";
 import OfferIcon from "@material-ui/icons/LocalOffer";
 import PeopleIcon from "@material-ui/icons/People";
+import AssignmentInd from "@material-ui/icons/AssignmentInd";
 import MoneyIcon from "@material-ui/icons/AttachMoney";
 import { useHistory } from "react-router-dom";
 import { AUTH_TOKEN } from "../config/dev";
@@ -62,6 +63,12 @@ function AppMenu() {
             <PeopleIcon />
           </ListItemIcon>
           <Typography variant="inherit">Users</Typography>
+        </MenuItem>
+        <MenuItem component={Link} to="/prospects">
+          <ListItemIcon>
+            <AssignmentInd />
+          </ListItemIcon>
+          <Typography variant="inherit">Prospects</Typography>
         </MenuItem>
         <MenuItem component={Link} to="/cartypes">
           <ListItemIcon>
