@@ -19,6 +19,7 @@ import AuthLoading from "./components/AuthLoading";
 import Connexion from "./views/Connexion";
 import UsersGQL from "./views/UsersGQL";
 import Inscription from "./views/Inscription";
+import Prospects from "./views/Prospects";
 
 function App() {
   //store.dispatch(fetchUser());
@@ -34,6 +35,7 @@ function App() {
             <ProtectedRoute exact component={Users} path="/drivers" />
             <ProtectedRoute exact component={Referral} path="/referral" />
             <ProtectedRoute exact component={UsersGQL} path="/users" />
+            <ProtectedRoute exact component={Prospects} path="/prospects" />
             <Route component={Article} path="/Article" />
             <Route component={SignUp} path="/signUp" />
             <Route component={Login} path="/login" />

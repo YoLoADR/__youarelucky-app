@@ -32,24 +32,24 @@ async function getProspects(parent, args, context, info) {
     ? {
         OR: [
           { description_contains: args.filter },
-          { url_contains: args.filter }
+          { lastName_contains: args.filter }
         ]
       }
     : {};
-  const prospect = await context.prisma.prospect({
+  const prospects = await context.prisma.prospects({
     where,
     skip: args.skip,
     first: args.first,
     orderBy: args.orderBy
   });
   const count = await context.prisma
-    .prospectConnection({
+    .prospectsConnection({
       where
     })
     .aggregate()
     .count();
   return {
-    prospect,
+    prospects,
     count
   };
 }
