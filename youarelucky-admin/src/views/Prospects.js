@@ -4,7 +4,7 @@ import CircularLoading from "../components/CircularLoading";
 import { Query } from "react-apollo";
 import { useMutation } from "@apollo/react-hooks";
 import gql from "graphql-tag";
-import { ADD_PROSPECT } from "../schema/prospectSchema";
+import { ADD_PROSPECT, UPDATE_PROSPECT } from "../schema/prospectSchema";
 
 const PROSPECT_QUERY = gql`
   {
@@ -34,6 +34,11 @@ const PROSPECT_QUERY = gql`
 
 export default function Prospects() {
   const [postProspect, { addData }] = useMutation(ADD_PROSPECT);
+  const [updateProspect, { updateata }] = useMutation(UPDATE_PROSPECT);
+
+  const updateProspectRecord = async input => {
+    const res = await updateProspect({ variables: input });
+  };
 
   const columns = [
     { title: "First Name", field: "firstName" },
@@ -90,9 +95,8 @@ export default function Prospects() {
                 onRowUpdate: (newData, oldData) =>
                   new Promise(resolve => {
                     setTimeout(() => {
+                      updateProspectRecord(newData);
                       resolve();
-                      console.log("newData", newData);
-                      console.log("oldData", oldData);
                     }, 600);
                   })
               }}

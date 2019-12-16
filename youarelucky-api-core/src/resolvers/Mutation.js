@@ -122,7 +122,7 @@ function postProspect(parent, args, context, info) {
 
 async function updateProspect(parent, args, context, info) {
   // First check if there is a user with that email
-  const Prospect = await context.prisma.prospect({ email: args.email });
+  const prospect = await context.prisma.prospect({ email: args.email });
 
   if (!prospect) {
     throw new Error("No such Prospect found");
