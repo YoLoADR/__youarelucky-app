@@ -1,9 +1,10 @@
 import React, { useState, useEffect } from "react";
-// useEffect Similaire à componentDidMount et componentDidUpdate
 import MaterialTable from "material-table";
 import CircularLoading from "../components/CircularLoading";
 import { Query } from "react-apollo";
+import { useMutation } from "@apollo/react-hooks";
 import gql from "graphql-tag";
+import { ADD_PROSPECT } from "../schema/prospectSchema";
 
 const PROSPECT_QUERY = gql`
   {
@@ -32,10 +33,13 @@ const PROSPECT_QUERY = gql`
 `;
 
 export default function Prospects() {
+  const [postProspect, { addData }] = useMutation(ADD_PROSPECT);
+
   const columns = [
     { title: "First Name", field: "firstName" },
     { title: "Last Name", field: "lastName" },
-    { title: "Email", field: "email", editable: "never" },
+    { title: "Pseudo", field: "name" },
+    { title: "Email", field: "email" },
     { title: "Create at", field: "createdAt", editable: "never" },
     {
       title: "Profile Image",
@@ -77,7 +81,9 @@ export default function Prospects() {
                   new Promise(resolve => {
                     setTimeout(() => {
                       resolve();
-                      console.log("newData", newData);
+                      const tblData = prospects;
+                      tblData.push(newData);
+                      postProspect({ variables: newData });
                     }, 600);
                   }),
 
