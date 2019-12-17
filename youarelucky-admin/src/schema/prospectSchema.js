@@ -94,3 +94,13 @@ export const UPDATE_PROSPECT = gql`
         ) ${Prospect}
       }
 `;
+
+export const DELETE_PROSPECT = gql`
+    mutation deleteProspect(
+      $email: String!,
+      ) {
+        deleteProspect (
+        email: $email,
+        ) ${Prospect}
+      }
+`;
