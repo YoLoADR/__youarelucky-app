@@ -70,24 +70,6 @@ function AppMenu() {
           </ListItemIcon>
           <Typography variant="inherit">Prospects</Typography>
         </MenuItem>
-        <MenuItem component={Link} to="/cartypes">
-          <ListItemIcon>
-            <CarIcon />
-          </ListItemIcon>
-          <Typography variant="inherit">Car Types</Typography>
-        </MenuItem>
-        <MenuItem component={Link} to="/bookings">
-          <ListItemIcon>
-            <ListIcon />
-          </ListItemIcon>
-          <Typography variant="inherit">Booking History</Typography>
-        </MenuItem>
-        <MenuItem component={Link} to="/promos">
-          <ListItemIcon>
-            <OfferIcon />
-          </ListItemIcon>
-          <Typography variant="inherit">Promos</Typography>
-        </MenuItem>
         <MenuItem component={Link} to="/referral">
           <ListItemIcon>
             <MoneyIcon />
