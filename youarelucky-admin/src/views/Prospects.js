@@ -37,8 +37,8 @@ const PROSPECT_QUERY = gql`
 `;
 
 export default function Prospects() {
-  const [postProspect, { addData }] = useMutation(ADD_PROSPECT);
-  const [updateProspect, { updateata }] = useMutation(UPDATE_PROSPECT);
+  const [postProspect] = useMutation(ADD_PROSPECT);
+  const [updateProspect] = useMutation(UPDATE_PROSPECT);
   const [deleteProspect] = useMutation(DELETE_PROSPECT);
 
   const updateProspectRecord = async input => {
@@ -100,6 +100,8 @@ export default function Prospects() {
                 onRowUpdate: (newData, oldData) =>
                   new Promise(resolve => {
                     setTimeout(() => {
+                      const tblData = prospects;
+                      tblData[tblData.indexOf(oldData)] = newData;
                       updateProspectRecord(newData);
                       resolve();
                     }, 600);
