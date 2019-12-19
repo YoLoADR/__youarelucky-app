@@ -60,24 +60,26 @@ async function getApplicants(parent, args, context, info) {
     ? {
         OR: [
           { description_contains: args.filter },
-          { url_contains: args.filter }
+          { lastName_contains: args.filter },
+          { firstName_contains: args.filter },
+          { email_contains: args.filter }
         ]
       }
     : {};
-  const applicant = await context.prisma.applicant({
+  const applicants = await context.prisma.applicants({
     where,
     skip: args.skip,
     first: args.first,
     orderBy: args.orderBy
   });
   const count = await context.prisma
-    .applicantConnection({
+    .applicantsConnection({
       where
     })
     .aggregate()
     .count();
   return {
-    applicant,
+    applicants,
     count
   };
 }
@@ -88,24 +90,26 @@ async function getPartners(parent, args, context, info) {
     ? {
         OR: [
           { description_contains: args.filter },
-          { url_contains: args.filter }
+          { lastName_contains: args.filter },
+          { firstName_contains: args.filter },
+          { email_contains: args.filter }
         ]
       }
     : {};
-  const partner = await context.prisma.partner({
+  const partners = await context.prisma.partners({
     where,
     skip: args.skip,
     first: args.first,
     orderBy: args.orderBy
   });
   const count = await context.prisma
-    .partnerConnection({
+    .partnersConnection({
       where
     })
     .aggregate()
     .count();
   return {
-    partner,
+    partners,
     count
   };
 }
@@ -116,24 +120,26 @@ async function getCustomers(parent, args, context, info) {
     ? {
         OR: [
           { description_contains: args.filter },
-          { url_contains: args.filter }
+          { lastName_contains: args.filter },
+          { firstName_contains: args.filter },
+          { email_contains: args.filter }
         ]
       }
     : {};
-  const customer = await context.prisma.customer({
+  const customers = await context.prisma.customers({
     where,
     skip: args.skip,
     first: args.first,
     orderBy: args.orderBy
   });
   const count = await context.prisma
-    .customerConnection({
+    .customersConnection({
       where
     })
     .aggregate()
     .count();
   return {
-    customer,
+    customers,
     count
   };
 }

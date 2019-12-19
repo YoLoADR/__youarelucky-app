@@ -384,8 +384,6 @@ export type ProspectOrderByInput =
   | "email_DESC"
   | "createdAt_ASC"
   | "createdAt_DESC"
-  | "call_length_ASC"
-  | "call_length_DESC"
   | "description_ASC"
   | "description_DESC"
   | "updatedAt_ASC"
@@ -404,6 +402,8 @@ export type ProspectOrderByInput =
   | "outcome_DESC"
   | "recording_ASC"
   | "recording_DESC"
+  | "call_length_ASC"
+  | "call_length_DESC"
   | "my_emotions_ASC"
   | "my_emotions_DESC"
   | "call_conclusion_ASC"
@@ -884,7 +884,6 @@ export interface ProspectCreateInput {
   lastName?: Maybe<String>;
   firstName?: Maybe<String>;
   email: String;
-  call_length?: Maybe<String>;
   description?: Maybe<String>;
   mobile?: Maybe<String>;
   profile_image?: Maybe<String>;
@@ -893,6 +892,7 @@ export interface ProspectCreateInput {
   profession?: Maybe<String>;
   outcome?: Maybe<String>;
   recording?: Maybe<Boolean>;
+  call_length?: Maybe<String>;
   my_emotions?: Maybe<String>;
   call_conclusion?: Maybe<String>;
 }
@@ -1368,20 +1368,6 @@ export interface ProspectWhereInput {
   createdAt_lte?: Maybe<DateTimeInput>;
   createdAt_gt?: Maybe<DateTimeInput>;
   createdAt_gte?: Maybe<DateTimeInput>;
-  call_length?: Maybe<String>;
-  call_length_not?: Maybe<String>;
-  call_length_in?: Maybe<String[] | String>;
-  call_length_not_in?: Maybe<String[] | String>;
-  call_length_lt?: Maybe<String>;
-  call_length_lte?: Maybe<String>;
-  call_length_gt?: Maybe<String>;
-  call_length_gte?: Maybe<String>;
-  call_length_contains?: Maybe<String>;
-  call_length_not_contains?: Maybe<String>;
-  call_length_starts_with?: Maybe<String>;
-  call_length_not_starts_with?: Maybe<String>;
-  call_length_ends_with?: Maybe<String>;
-  call_length_not_ends_with?: Maybe<String>;
   description?: Maybe<String>;
   description_not?: Maybe<String>;
   description_in?: Maybe<String[] | String>;
@@ -1490,6 +1476,20 @@ export interface ProspectWhereInput {
   outcome_not_ends_with?: Maybe<String>;
   recording?: Maybe<Boolean>;
   recording_not?: Maybe<Boolean>;
+  call_length?: Maybe<String>;
+  call_length_not?: Maybe<String>;
+  call_length_in?: Maybe<String[] | String>;
+  call_length_not_in?: Maybe<String[] | String>;
+  call_length_lt?: Maybe<String>;
+  call_length_lte?: Maybe<String>;
+  call_length_gt?: Maybe<String>;
+  call_length_gte?: Maybe<String>;
+  call_length_contains?: Maybe<String>;
+  call_length_not_contains?: Maybe<String>;
+  call_length_starts_with?: Maybe<String>;
+  call_length_not_starts_with?: Maybe<String>;
+  call_length_ends_with?: Maybe<String>;
+  call_length_not_ends_with?: Maybe<String>;
   my_emotions?: Maybe<String>;
   my_emotions_not?: Maybe<String>;
   my_emotions_in?: Maybe<String[] | String>;
@@ -1662,7 +1662,6 @@ export interface ProspectUpdateManyMutationInput {
   lastName?: Maybe<String>;
   firstName?: Maybe<String>;
   email?: Maybe<String>;
-  call_length?: Maybe<String>;
   description?: Maybe<String>;
   mobile?: Maybe<String>;
   profile_image?: Maybe<String>;
@@ -1671,6 +1670,7 @@ export interface ProspectUpdateManyMutationInput {
   profession?: Maybe<String>;
   outcome?: Maybe<String>;
   recording?: Maybe<Boolean>;
+  call_length?: Maybe<String>;
   my_emotions?: Maybe<String>;
   call_conclusion?: Maybe<String>;
 }
@@ -1925,7 +1925,6 @@ export interface ProspectUpdateInput {
   lastName?: Maybe<String>;
   firstName?: Maybe<String>;
   email?: Maybe<String>;
-  call_length?: Maybe<String>;
   description?: Maybe<String>;
   mobile?: Maybe<String>;
   profile_image?: Maybe<String>;
@@ -1934,6 +1933,7 @@ export interface ProspectUpdateInput {
   profession?: Maybe<String>;
   outcome?: Maybe<String>;
   recording?: Maybe<Boolean>;
+  call_length?: Maybe<String>;
   my_emotions?: Maybe<String>;
   call_conclusion?: Maybe<String>;
 }
@@ -2429,7 +2429,6 @@ export interface ProspectPreviousValues {
   firstName?: String;
   email: String;
   createdAt: DateTimeOutput;
-  call_length?: String;
   description?: String;
   updatedAt?: DateTimeOutput;
   mobile?: String;
@@ -2439,6 +2438,7 @@ export interface ProspectPreviousValues {
   profession?: String;
   outcome?: String;
   recording?: Boolean;
+  call_length?: String;
   my_emotions?: String;
   call_conclusion?: String;
 }
@@ -2452,7 +2452,6 @@ export interface ProspectPreviousValuesPromise
   firstName: () => Promise<String>;
   email: () => Promise<String>;
   createdAt: () => Promise<DateTimeOutput>;
-  call_length: () => Promise<String>;
   description: () => Promise<String>;
   updatedAt: () => Promise<DateTimeOutput>;
   mobile: () => Promise<String>;
@@ -2462,6 +2461,7 @@ export interface ProspectPreviousValuesPromise
   profession: () => Promise<String>;
   outcome: () => Promise<String>;
   recording: () => Promise<Boolean>;
+  call_length: () => Promise<String>;
   my_emotions: () => Promise<String>;
   call_conclusion: () => Promise<String>;
 }
@@ -2475,7 +2475,6 @@ export interface ProspectPreviousValuesSubscription
   firstName: () => Promise<AsyncIterator<String>>;
   email: () => Promise<AsyncIterator<String>>;
   createdAt: () => Promise<AsyncIterator<DateTimeOutput>>;
-  call_length: () => Promise<AsyncIterator<String>>;
   description: () => Promise<AsyncIterator<String>>;
   updatedAt: () => Promise<AsyncIterator<DateTimeOutput>>;
   mobile: () => Promise<AsyncIterator<String>>;
@@ -2485,6 +2484,7 @@ export interface ProspectPreviousValuesSubscription
   profession: () => Promise<AsyncIterator<String>>;
   outcome: () => Promise<AsyncIterator<String>>;
   recording: () => Promise<AsyncIterator<Boolean>>;
+  call_length: () => Promise<AsyncIterator<String>>;
   my_emotions: () => Promise<AsyncIterator<String>>;
   call_conclusion: () => Promise<AsyncIterator<String>>;
 }
@@ -3030,7 +3030,6 @@ export interface Prospect {
   firstName?: String;
   email: String;
   createdAt: DateTimeOutput;
-  call_length?: String;
   description?: String;
   updatedAt?: DateTimeOutput;
   mobile?: String;
@@ -3040,6 +3039,7 @@ export interface Prospect {
   profession?: String;
   outcome?: String;
   recording?: Boolean;
+  call_length?: String;
   my_emotions?: String;
   call_conclusion?: String;
 }
@@ -3051,7 +3051,6 @@ export interface ProspectPromise extends Promise<Prospect>, Fragmentable {
   firstName: () => Promise<String>;
   email: () => Promise<String>;
   createdAt: () => Promise<DateTimeOutput>;
-  call_length: () => Promise<String>;
   description: () => Promise<String>;
   updatedAt: () => Promise<DateTimeOutput>;
   mobile: () => Promise<String>;
@@ -3061,6 +3060,7 @@ export interface ProspectPromise extends Promise<Prospect>, Fragmentable {
   profession: () => Promise<String>;
   outcome: () => Promise<String>;
   recording: () => Promise<Boolean>;
+  call_length: () => Promise<String>;
   my_emotions: () => Promise<String>;
   call_conclusion: () => Promise<String>;
 }
@@ -3074,7 +3074,6 @@ export interface ProspectSubscription
   firstName: () => Promise<AsyncIterator<String>>;
   email: () => Promise<AsyncIterator<String>>;
   createdAt: () => Promise<AsyncIterator<DateTimeOutput>>;
-  call_length: () => Promise<AsyncIterator<String>>;
   description: () => Promise<AsyncIterator<String>>;
   updatedAt: () => Promise<AsyncIterator<DateTimeOutput>>;
   mobile: () => Promise<AsyncIterator<String>>;
@@ -3084,6 +3083,7 @@ export interface ProspectSubscription
   profession: () => Promise<AsyncIterator<String>>;
   outcome: () => Promise<AsyncIterator<String>>;
   recording: () => Promise<AsyncIterator<Boolean>>;
+  call_length: () => Promise<AsyncIterator<String>>;
   my_emotions: () => Promise<AsyncIterator<String>>;
   call_conclusion: () => Promise<AsyncIterator<String>>;
 }
@@ -3097,7 +3097,6 @@ export interface ProspectNullablePromise
   firstName: () => Promise<String>;
   email: () => Promise<String>;
   createdAt: () => Promise<DateTimeOutput>;
-  call_length: () => Promise<String>;
   description: () => Promise<String>;
   updatedAt: () => Promise<DateTimeOutput>;
   mobile: () => Promise<String>;
@@ -3107,6 +3106,7 @@ export interface ProspectNullablePromise
   profession: () => Promise<String>;
   outcome: () => Promise<String>;
   recording: () => Promise<Boolean>;
+  call_length: () => Promise<String>;
   my_emotions: () => Promise<String>;
   call_conclusion: () => Promise<String>;
 }
