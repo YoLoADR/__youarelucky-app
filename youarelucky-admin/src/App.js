@@ -10,6 +10,7 @@ import AuthLoading from "./components/AuthLoading";
 import Connexion from "./views/Connexion";
 import Inscription from "./views/Inscription";
 import Prospects from "./views/Prospects";
+import Applicants from "./views/Applicants";
 
 function App() {
   return (
@@ -21,6 +22,7 @@ function App() {
             <ProtectedRoute exact component={Users} path="/users" />
             <ProtectedRoute exact component={Referral} path="/referral" />
             <ProtectedRoute exact component={Prospects} path="/prospects" />
+            <ProtectedRoute exact component={Applicants} path="/applicants" />
             <Route exact path="/connexion" component={Connexion} />
             <Route exact path="/inscription" component={Inscription} />
           </Switch>

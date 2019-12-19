@@ -18,6 +18,7 @@ import OfferIcon from "@material-ui/icons/LocalOffer";
 import PeopleIcon from "@material-ui/icons/People";
 import AssignmentInd from "@material-ui/icons/AssignmentInd";
 import MoneyIcon from "@material-ui/icons/AttachMoney";
+import ThumbsUpDown from "@material-ui/icons/ThumbsUpDown";
 import { useHistory } from "react-router-dom";
 import { AUTH_TOKEN } from "../config/dev";
 import { signOut } from "../actions/authactions";
@@ -58,15 +59,21 @@ function AppMenu() {
           </ListItemIcon>
           <Typography variant="inherit">Dashboard</Typography>
         </MenuItem>
-        <MenuItem component={Link} to="/drivers">
+        <MenuItem component={Link} to="/users">
           <ListItemIcon>
             <PeopleIcon />
           </ListItemIcon>
           <Typography variant="inherit">Users</Typography>
         </MenuItem>
-        <MenuItem component={Link} to="/prospects">
+        <MenuItem component={Link} to="/applicants">
           <ListItemIcon>
             <AssignmentInd />
+          </ListItemIcon>
+          <Typography variant="inherit">Applicants</Typography>
+        </MenuItem>
+        <MenuItem component={Link} to="/prospects">
+          <ListItemIcon>
+            <ThumbsUpDown />
           </ListItemIcon>
           <Typography variant="inherit">Prospects</Typography>
         </MenuItem>
