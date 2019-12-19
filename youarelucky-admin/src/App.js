@@ -11,6 +11,7 @@ import Connexion from "./views/Connexion";
 import Inscription from "./views/Inscription";
 import Prospects from "./views/Prospects";
 import Applicants from "./views/Applicants";
+import Partners from "./views/Partners";
 
 function App() {
   return (
@@ -20,9 +21,10 @@ function App() {
           <Switch>
             <ProtectedRoute exact component={Dashboard} path="/" />
             <ProtectedRoute exact component={Users} path="/users" />
-            <ProtectedRoute exact component={Referral} path="/referral" />
-            <ProtectedRoute exact component={Prospects} path="/prospects" />
             <ProtectedRoute exact component={Applicants} path="/applicants" />
+            <ProtectedRoute exact component={Prospects} path="/prospects" />
+            <ProtectedRoute exact component={Partners} path="/partners" />
+            <ProtectedRoute exact component={Referral} path="/referral" />
             <Route exact path="/connexion" component={Connexion} />
             <Route exact path="/inscription" component={Inscription} />
           </Switch>

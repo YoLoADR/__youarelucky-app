@@ -19,6 +19,7 @@ import PeopleIcon from "@material-ui/icons/People";
 import AssignmentInd from "@material-ui/icons/AssignmentInd";
 import MoneyIcon from "@material-ui/icons/AttachMoney";
 import ThumbsUpDown from "@material-ui/icons/ThumbsUpDown";
+import ContactPhone from "@material-ui/icons/ContactPhone";
 import { useHistory } from "react-router-dom";
 import { AUTH_TOKEN } from "../config/dev";
 import { signOut } from "../actions/authactions";
@@ -76,6 +77,12 @@ function AppMenu() {
             <ThumbsUpDown />
           </ListItemIcon>
           <Typography variant="inherit">Prospects</Typography>
+        </MenuItem>
+        <MenuItem component={Link} to="/partners">
+          <ListItemIcon>
+            <ContactPhone />
+          </ListItemIcon>
+          <Typography variant="inherit">Partners</Typography>
         </MenuItem>
         <MenuItem component={Link} to="/referral">
           <ListItemIcon>
