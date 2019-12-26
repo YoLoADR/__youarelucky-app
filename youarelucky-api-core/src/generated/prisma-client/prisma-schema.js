@@ -1300,7 +1300,6 @@ type Prospect {
   firstName: String
   email: String!
   createdAt: DateTime!
-  call_length: String
   description: String
   updatedAt: DateTime
   mobile: String
@@ -1310,6 +1309,7 @@ type Prospect {
   profession: String
   outcome: String
   recording: Boolean
+  call_length: String
   my_emotions: String
   call_conclusion: String
 }
@@ -1326,7 +1326,6 @@ input ProspectCreateInput {
   lastName: String
   firstName: String
   email: String!
-  call_length: String
   description: String
   mobile: String
   profile_image: String
@@ -1335,6 +1334,7 @@ input ProspectCreateInput {
   profession: String
   outcome: String
   recording: Boolean
+  call_length: String
   my_emotions: String
   call_conclusion: String
 }
@@ -1357,8 +1357,6 @@ enum ProspectOrderByInput {
   email_DESC
   createdAt_ASC
   createdAt_DESC
-  call_length_ASC
-  call_length_DESC
   description_ASC
   description_DESC
   updatedAt_ASC
@@ -1377,6 +1375,8 @@ enum ProspectOrderByInput {
   outcome_DESC
   recording_ASC
   recording_DESC
+  call_length_ASC
+  call_length_DESC
   my_emotions_ASC
   my_emotions_DESC
   call_conclusion_ASC
@@ -1390,7 +1390,6 @@ type ProspectPreviousValues {
   firstName: String
   email: String!
   createdAt: DateTime!
-  call_length: String
   description: String
   updatedAt: DateTime
   mobile: String
@@ -1400,6 +1399,7 @@ type ProspectPreviousValues {
   profession: String
   outcome: String
   recording: Boolean
+  call_length: String
   my_emotions: String
   call_conclusion: String
 }
@@ -1427,7 +1427,6 @@ input ProspectUpdateInput {
   lastName: String
   firstName: String
   email: String
-  call_length: String
   description: String
   mobile: String
   profile_image: String
@@ -1436,6 +1435,7 @@ input ProspectUpdateInput {
   profession: String
   outcome: String
   recording: Boolean
+  call_length: String
   my_emotions: String
   call_conclusion: String
 }
@@ -1445,7 +1445,6 @@ input ProspectUpdateManyMutationInput {
   lastName: String
   firstName: String
   email: String
-  call_length: String
   description: String
   mobile: String
   profile_image: String
@@ -1454,6 +1453,7 @@ input ProspectUpdateManyMutationInput {
   profession: String
   outcome: String
   recording: Boolean
+  call_length: String
   my_emotions: String
   call_conclusion: String
 }
@@ -1537,20 +1537,6 @@ input ProspectWhereInput {
   createdAt_lte: DateTime
   createdAt_gt: DateTime
   createdAt_gte: DateTime
-  call_length: String
-  call_length_not: String
-  call_length_in: [String!]
-  call_length_not_in: [String!]
-  call_length_lt: String
-  call_length_lte: String
-  call_length_gt: String
-  call_length_gte: String
-  call_length_contains: String
-  call_length_not_contains: String
-  call_length_starts_with: String
-  call_length_not_starts_with: String
-  call_length_ends_with: String
-  call_length_not_ends_with: String
   description: String
   description_not: String
   description_in: [String!]
@@ -1659,6 +1645,20 @@ input ProspectWhereInput {
   outcome_not_ends_with: String
   recording: Boolean
   recording_not: Boolean
+  call_length: String
+  call_length_not: String
+  call_length_in: [String!]
+  call_length_not_in: [String!]
+  call_length_lt: String
+  call_length_lte: String
+  call_length_gt: String
+  call_length_gte: String
+  call_length_contains: String
+  call_length_not_contains: String
+  call_length_starts_with: String
+  call_length_not_starts_with: String
+  call_length_ends_with: String
+  call_length_not_ends_with: String
   my_emotions: String
   my_emotions_not: String
   my_emotions_in: [String!]
