@@ -12,6 +12,7 @@ import Inscription from "./views/Inscription";
 import Prospects from "./views/Prospects";
 import Applicants from "./views/Applicants";
 import Partners from "./views/Partners";
+import Customers from "./views/Customers";
 
 function App() {
   return (
@@ -24,6 +25,7 @@ function App() {
             <ProtectedRoute exact component={Applicants} path="/applicants" />
             <ProtectedRoute exact component={Prospects} path="/prospects" />
             <ProtectedRoute exact component={Partners} path="/partners" />
+            <ProtectedRoute exact component={Customers} path="/customers" />
             <ProtectedRoute exact component={Referral} path="/referral" />
             <Route exact path="/connexion" component={Connexion} />
             <Route exact path="/inscription" component={Inscription} />

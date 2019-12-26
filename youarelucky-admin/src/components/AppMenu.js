@@ -11,7 +11,6 @@ import { useDispatch } from "react-redux";
 
 import logo from "../assets/youarelucky-logo_1.png";
 import DashboardIcon from "@material-ui/icons/Dashboard";
-import CarIcon from "@material-ui/icons/DirectionsCar";
 import ListIcon from "@material-ui/icons/ListAlt";
 import ExitIcon from "@material-ui/icons/ExitToApp";
 import OfferIcon from "@material-ui/icons/LocalOffer";
@@ -20,6 +19,7 @@ import AssignmentInd from "@material-ui/icons/AssignmentInd";
 import MoneyIcon from "@material-ui/icons/AttachMoney";
 import ThumbsUpDown from "@material-ui/icons/ThumbsUpDown";
 import ContactPhone from "@material-ui/icons/ContactPhone";
+import HowToReg from "@material-ui/icons/HowToReg";
 import { useHistory } from "react-router-dom";
 import { AUTH_TOKEN } from "../config/dev";
 import { signOut } from "../actions/authactions";
@@ -83,6 +83,12 @@ function AppMenu() {
             <ContactPhone />
           </ListItemIcon>
           <Typography variant="inherit">Partners</Typography>
+        </MenuItem>
+        <MenuItem component={Link} to="/customers">
+          <ListItemIcon>
+            <HowToReg />
+          </ListItemIcon>
+          <Typography variant="inherit">Customers</Typography>
         </MenuItem>
         <MenuItem component={Link} to="/referral">
           <ListItemIcon>
