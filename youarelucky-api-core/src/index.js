@@ -12,7 +12,6 @@ const resolvers = {
   Query,
   Mutation
 };
-
 //Cela indique au serveur quelles opérations d'API sont acceptées et comment elles doivent être résolues.
 
 // (2) Traduire les opérations GraphQL de l'API Prisma en fonctions JavaScript
