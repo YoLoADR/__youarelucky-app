@@ -16,6 +16,8 @@ const insertUpdateCustomerIfNotExists = (customerData) => {
         },
         create: customerData,
         update: customerData
+    }).catch((err) => {
+        console.log('err', err)
     });
 }
 const documentId = '18B-y7IiDvmXqSZiAdk5gv3gQDxmwUxTfH05d2zSjqtY';
